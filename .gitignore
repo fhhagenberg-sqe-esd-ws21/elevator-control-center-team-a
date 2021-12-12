@@ -131,12 +131,6 @@ fabric.properties
 hs_err_pid*
 
 ### Maven ###
-# target/
-target/generated-sources
-target/generated-test-sources
-target/javadoc-bundle-options
-target/maven-status
-target/surefire-reports
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
