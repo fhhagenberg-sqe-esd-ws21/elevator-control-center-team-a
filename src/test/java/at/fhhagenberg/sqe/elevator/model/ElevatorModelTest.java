@@ -112,6 +112,8 @@ public class ElevatorModelTest
 	/***************************
 		Test section ECC-Class 
 	 ***************************/
+	int eccTestelevator	= 5;
+	int eccTestnext		= 7;
 	
 	@Test
 	void eccCtorTest()
@@ -119,8 +121,50 @@ public class ElevatorModelTest
 		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
 		assertNotEquals(null, ecc);
 	}
-		
 	
+	@Test
+	void  getElevatorsTest()
+	{	IElevatorWrapper server = new IElevatorWrapper();
+		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
+		List<Elevator> eleList = ecc.getElevators();
+	//		assertEquals(, );
+	}
+	
+	@Test
+	void  getFloorsTest()
+	{	IElevatorWrapper server = new IElevatorWrapper();
+		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
+
+		List<Floor> floorList = ecc.getFloors();
+	//		assertEquals(, );
+	}
+	
+	@Test
+	void  setNextTest()
+	{	IElevatorWrapper server = new IElevatorWrapper();
+		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
+		ecc.setNext(eccTestelevator, eccTestnext);
+	//		assertEquals(, );
+	}
+		
+
+
+	
+	@Test
+	void  autoTest()
+	{	IElevatorWrapper server = new IElevatorWrapper();
+		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
+		ecc.setAuto(ElevatorControlCenter.AUTO);
+		assertEquals(ElevatorControlCenter.AUTO, ecc.getAuto());
+	}
+
+	@Test
+	void  updateTest()
+	{	IElevatorWrapper server = new IElevatorWrapper();
+		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
+		ecc.update();
+//		assertEquals(, );
+	}
 	
 	
 	/***************************
