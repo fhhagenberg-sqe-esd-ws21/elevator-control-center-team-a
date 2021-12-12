@@ -131,6 +131,13 @@ fabric.properties
 hs_err_pid*
 
 ### Maven ###
+# target/
+target/classes/
+target/generated-sources/
+target/generated-test-sources/
+target/javadoc-bundle-options/
+target/maven-status/
+target/surefire-reports/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -145,4 +152,4 @@ buildNumber.properties
 .idea/*
 
 # End of https://www.gitignore.io/api/java,maven,eclipse,intellij
-/target/
+# /target/
