@@ -52,7 +52,7 @@ public class ElevatorControlCenterTest
 	{	ElevatorWrapper server = new ElevatorWrapper();
 		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
 		ecc.setAuto(ElevatorControlCenter.AUTO);
-		assertEquals(ElevatorControlCenter.AUTO, ecc.getAuto());
+		assertEquals(ElevatorControlCenter.AUTO, ecc.getOpMode());
 	}
 
 	@Test

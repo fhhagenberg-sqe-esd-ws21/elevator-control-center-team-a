@@ -73,7 +73,7 @@ public class ElevatorControlCenter {
      *
      * @return boolean - auto = ElevatorControlCenter.AUTO, MANUAL = ElevatorControlCenter.MANUAL
      */
-	public boolean getAuto()
+	public boolean getOpMode()
 	{
 		return operatingMode;
 	}
@@ -108,6 +108,7 @@ public class ElevatorControlCenter {
 			for(int i = 0; i < floors.size(); i++)
 				elevator.addElevatorButton(elevatorServer.getElevatorButton(num, i));
 		}
+
 		for(var floor : floors)
 		{
 			int num = floor.getNum();

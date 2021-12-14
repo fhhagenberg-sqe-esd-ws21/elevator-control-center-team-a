@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -178,6 +179,31 @@ public class IElevatorMockTest {
         verify(mockedIElevator).getElevatorButton(0, 0);
 
         assertEquals(1, eleList.get(0).getElevatorButton().size());
+    }
+
+    @Test
+    public void testUpdateFloors(){
+
+        when(mockedIElevator.getElevatorNum()).thenReturn(1);
+        when(mockedIElevator.getFloorNum()).thenReturn(2);
+
+        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+
+        ArrayList<Floor> floorList = ecc.getFloors();
+        ecc.update();
+
+        verify(mockedIElevator).getFloorNum();
+        assertEquals(2, floorList.size());
+    }
+
+    @Test
+    public void testOperatingMode(){
+
+        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+
+        ecc.setAuto(ElevatorControlCenter.AUTO);
+        assertEquals(ElevatorControlCenter.AUTO, ecc.getOpMode());
+
     }
 
 }
