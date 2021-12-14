@@ -3,9 +3,13 @@ package at.fhhagenberg.sqe.elevator.backend;
 import sqelevator.IElevator;
 import java.rmi.RemoteException;
 
+import at.fhhagenberg.sqe.elevator.model.Elevator;
+
 public class IElevatorWrapper{
 
     private IElevator elevatorRemote;
+    
+    public static int CONNECTION_ERROR = -1;
 
     // TODO: uncomment code after IElevator implementation exists
 
@@ -16,7 +20,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
         return 0;
     }
@@ -28,23 +32,23 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
     }
 
-    public boolean getElevatorButton(int elevatorNumber, int floor) {
+    public int getElevatorButton(int elevatorNumber, int floor) {
 // TODO:
 //        try {
-//            return elevatorRemote.getElevatorButton(elevatorNumber, floor);
+//            return elevatorRemote.getElevatorButton(elevatorNumber, floor)?1:0;
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
-        return false;
+        return 0;
     }
 
     public int getElevatorDoorStatus(int elevatorNumber) {
@@ -54,7 +58,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -67,7 +71,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -80,7 +84,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -93,7 +97,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -106,7 +110,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -119,7 +123,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -132,7 +136,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -145,7 +149,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return false;
@@ -158,7 +162,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return false;
@@ -171,7 +175,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -184,7 +188,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -197,7 +201,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return false;
@@ -210,7 +214,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;
@@ -223,7 +227,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
     }
 
@@ -234,7 +238,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
     }
 
@@ -245,7 +249,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
     }
 
@@ -256,7 +260,7 @@ public class IElevatorWrapper{
 //        }
 //        catch (RemoteException ex) {
 //            System.out.println(ex.getMessage());
-//            return -1;
+//            return CONNECTION_ERROR;
 //        }
 
         return 0;

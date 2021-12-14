@@ -1,5 +1,6 @@
 package at.fhhagenberg.sqe.elevator.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import at.fhhagenberg.sqe.elevator.model.Elevator;
@@ -24,8 +25,20 @@ public class ElevatorControlCenter {
 	{
 		elevatorServer = server;
 		autoMode = AUTO;
-		// TODO connect and prepare data
+		int size = elevatorServer.getElevatorNum();
+		elevators = Collections.<Elevator>emptyList();
+		floors = Collections.<Floor>emptyList();
+		for(int i = 0; i < size; i++)
+		{
+			elevators.add(new Elevator(i));
+		}
+		size = elevatorServer.getFloorNum();
+		for(int i = 0; i < size; i++)
+		{
+			floors.add(new Floor(elevatorServer.getFloorHeight(), i));
+		}
 	}
+	
 	
 	/**
      * getElevators - Provides a list of all elevators of the building
@@ -86,6 +99,26 @@ public class ElevatorControlCenter {
      */
 	public void update()
 	{
-		// TODO update values
+		if(elevators.size() == 0)
+			return;
+		for(var elevator : elevators)
+		{
+			int num = elevator.getElevatorNum();
+			elevator.setCommittedDirection(elevatorServer.getCommittedDirection(num));
+			elevator.setElevatorAccel(elevatorServer.getElevatorAccel(num));
+			elevator.setElevatorDoorStatus(elevatorServer.getElevatorDoorStatus(num));
+			elevator.setElevatorFloor(elevatorServer.getElevatorFloor(num));
+			elevator.setElevatorPosition(elevatorServer.getElevatorPosition(num));
+			elevator.setElevatorSpeed(elevatorServer.getElevatorPosition(num));
+			for(int i = 0; i < floors.size(); i++)
+				elevator.addElevatorButton(elevatorServer.getElevatorButton(num, i));
+		}
+		for(var floor : floors)
+		{
+			int num = floor.getNum();
+			floor.setButtonDown(elevatorServer.getFloorButtonDown(num));
+			floor.setButtonUp(elevatorServer.getFloorButtonUp(num));
+		}
+
 	}
 }
