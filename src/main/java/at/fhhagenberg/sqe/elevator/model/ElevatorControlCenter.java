@@ -35,7 +35,7 @@ public class ElevatorControlCenter {
 			floors.add(new Floor(elevatorServer.getFloorHeight(), i));
 		}
 	}
-	
+
 	/**
      * getElevators - Provides a list of all elevators of the building
      *
@@ -45,7 +45,7 @@ public class ElevatorControlCenter {
 	{
 		return elevators;
 	}
-	
+
 	/**
      * getFloors - Provides a list of all floors of the building
      *
@@ -55,7 +55,7 @@ public class ElevatorControlCenter {
 	{
 		return floors;
 	}
-	
+
 	/**
      * setNext - Sets next floor of specified Elevator if in MANUAL mode
      *
@@ -67,7 +67,7 @@ public class ElevatorControlCenter {
 		if(operatingMode == MANUAL && elevator < elevators.size())
 				elevators.get(elevator).setCommittedDirection(next);
 	}
-	
+
 	/**
      * getAuto - Provides status of the actual mode (auto/MANUAL)
      *
@@ -77,7 +77,7 @@ public class ElevatorControlCenter {
 	{
 		return operatingMode;
 	}
-	
+
 	/**
      * setAuto - Sets status of the actual mode (auto/MANUAL)
      *
@@ -87,7 +87,7 @@ public class ElevatorControlCenter {
 	{
 		operatingMode = auto;
 	}
-	
+
 	/**
      * update - updates all values
      *
@@ -95,7 +95,7 @@ public class ElevatorControlCenter {
 	public void update()
 	{
 		if(elevators.size() == 0)
-			InitElevatorAndFloors();
+			return;
 		for(var elevator : elevators)
 		{
 			int num = elevator.getElevatorNum();
