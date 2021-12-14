@@ -25,9 +25,15 @@ public class ElevatorControlCenter {
 	{
 		elevatorServer = server;
 		autoMode = AUTO;
-		int size = elevatorServer.getElevatorNum();
 		elevators = Collections.<Elevator>emptyList();
 		floors = Collections.<Floor>emptyList();
+		InitElevatorAndFloors();
+	}
+	
+	private void InitElevatorAndFloors()
+	{
+		int size = elevatorServer.getElevatorNum();
+		
 		for(int i = 0; i < size; i++)
 		{
 			elevators.add(new Elevator(i));
@@ -38,7 +44,6 @@ public class ElevatorControlCenter {
 			floors.add(new Floor(elevatorServer.getFloorHeight(), i));
 		}
 	}
-	
 	
 	/**
      * getElevators - Provides a list of all elevators of the building
@@ -100,7 +105,7 @@ public class ElevatorControlCenter {
 	public void update()
 	{
 		if(elevators.size() == 0)
-			return;
+			InitElevatorAndFloors();
 		for(var elevator : elevators)
 		{
 			int num = elevator.getElevatorNum();
