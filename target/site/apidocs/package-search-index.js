@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"at.fhhagenberg.sqe"},{"l":"at.fhhagenberg.sqe.elevator.backend"},{"l":"at.fhhagenberg.sqe.elevator.model"},{"l":"sqelevator"}];updateSearchResults();

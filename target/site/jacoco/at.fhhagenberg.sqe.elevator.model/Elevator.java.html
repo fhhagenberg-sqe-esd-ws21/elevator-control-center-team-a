@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Elevator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ecc-team-a</a> &gt; <a href="index.source.html" class="el_package">at.fhhagenberg.sqe.elevator.model</a> &gt; <span class="el_source">Elevator.java</span></div><h1>Elevator.java</h1><pre class="source lang-java linenums">package at.fhhagenberg.sqe.elevator.model;
+
+import java.util.List;
+
+public class Elevator {
+	private int commitedDirection;
+	private int elevatorAccel;
+	private List&lt;Integer&gt; elevatorButtons;
+	private int elevatorDoorStatus;
+	private int elevatorFloor;
+	private int elevatorNum;
+	private int elevatorPos;
+	private int elevatorSpeed;
+	private int elevatorWeigth;
+
+<span class="fc" id="L16">	public static int OPEN = 1;</span>
+<span class="fc" id="L17">	public static int CLOSED = 0;</span>
+<span class="fc" id="L18">	public static int UP = 1;</span>
+<span class="fc" id="L19">	public static int DOWN = 2;</span>
+<span class="fc" id="L20">	public static int UNCOMMITTED = 3;</span>
+	
+	/**
+     * Constructor - creates new Elevator
+     *
+     * @param num    - number of the elevator.
+     * @param weight - weight of the floor.
+     */
+	public Elevator(int num, int weight)
+<span class="fc" id="L29">	{</span>
+<span class="fc" id="L30">		elevatorNum = num;</span>
+<span class="fc" id="L31">		elevatorWeigth = weight;</span>
+<span class="fc" id="L32">	}</span>
+	
+	/**
+     * getCommittedDirection - Retrieves the committed direction of the elevator (up / down / uncommitted)
+     *
+     * @return int - UP = Elevator.UP, DOWN = Elevator.DOWN, UNCOMMITED = Elevator.UNCOMMITTED
+     */
+	int getCommittedDirection()
+	{
+<span class="fc" id="L41">		return commitedDirection;</span>
+	}
+	
+	/**
+     * getElevatorAccel - Provides the current acceleration of the elevator in feet per sec^2
+     *
+     * @return int - acceleration in feet per sec^2
+     */
+	int getElevatorAccel()
+	{
+<span class="fc" id="L51">		return elevatorAccel;</span>
+	}
+	
+	/**
+     * getElevatorButton - Provides the current pressed Buttons of the elevator as list
+     *
+     * @return List&lt;Integer&gt; - list of all pressed Buttons; empty List when no Button pressed
+     */
+	List&lt;Integer&gt; getElevatorButton()
+	{
+<span class="nc" id="L61">		return elevatorButtons;</span>
+	}
+	
+	/**
+     * getElevatorDoorStatus - Provides the current status of the doors of the specified elevator (open/closed)
+     *
+     * @return int - open = Elevator.OPEN, closed = Elevator.CLOSED
+     */
+	int getElevatorDoorStatus()
+	{
+<span class="fc" id="L71">		return elevatorDoorStatus;</span>
+	}
+	
+	/**
+     * getElevatorFloor - Provides the current location of the elevator to the nearest floor
+     *
+     * @return int - nearest floor of the elevator
+     */
+	int getElevatorFloor()
+	{
+<span class="fc" id="L81">		return elevatorFloor;</span>
+	}
+	
+	/**
+     * getElevatorNum - Retrieves the number of the elevator
+     *
+     * @return int - number of the elevator
+     */
+	int getElevatorNum()
+	{
+<span class="fc" id="L91">		return elevatorNum;</span>
+	}
+	
+	/**
+     * getElevatorPosition - Provides the current location of the elevator in feet from the bottom of the building
+     *
+     * @return int - location in feet from the bottom of the building
+     */
+	int getElevatorPosition(int elevatorNumber)
+	{
+<span class="fc" id="L101">		return elevatorPos;</span>
+	}
+	
+	/**
+     * getElevatorSpeed - Provides the current speed of the elevator in feet per sec
+     *
+     * @return int - speed in feet per sec
+     */
+	int getElevatorSpeed()
+	{
+<span class="fc" id="L111">		return elevatorSpeed;</span>
+	}
+	
+	/**
+     * getElevatorWeight - Retrieves the weight of passengers on the elevator
+     *
+     * @return int - weight of passengers
+     */
+	int getElevatorWeight(int elevatorNumber)
+	{
+<span class="fc" id="L121">		return elevatorWeigth;</span>
+	}
+	
+	/**
+     * setCommittedDirection - Sets the committed direction of the elevator (up / down / uncommitted)
+     *
+     * @param direction - UP = Elevator.UP, DOWN = Elevator.DOWN, UNCOMMITED = Elevator.UNCOMMITTED
+     */
+	void setCommittedDirection(int direction)
+	{
+<span class="fc" id="L131">		commitedDirection = direction;</span>
+<span class="fc" id="L132">	}</span>
+	
+	/**
+     * setElevatorAccel - Sets the current acceleration of the elevator in feet per sec^2
+     *
+     * @param accel - acceleration in feet per sec^2
+     */
+	void setElevatorAccel(int accel)
+	{
+<span class="fc" id="L141">		elevatorAccel = accel;</span>
+<span class="fc" id="L142">	}</span>
+	
+	/**
+     * addElevatorButton - Adds a button to list of current pressed Buttons of the elevator
+     *
+     * @param button - pressed Button
+     */
+	void addElevatorButton(int button)
+	{
+<span class="nc bnc" id="L151" title="All 2 branches missed.">		if (!elevatorButtons.contains(button))</span>
+<span class="nc" id="L152">			elevatorButtons.add(button);</span>
+<span class="nc" id="L153">	}</span>
+	
+	/**
+     * setElevatorDoorStatus - Sets the current status of the doors of the specified elevator (open/closed)
+     *
+     * @param status - open = Elevator.OPEN, closed = Elevator.CLOSED
+     */
+	void setElevatorDoorStatus(int status)
+	{
+<span class="fc" id="L162">		elevatorDoorStatus = status;</span>
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">		if(status == OPEN)</span>
+<span class="nc" id="L164">			elevatorButtons.remove(elevatorButtons.indexOf(elevatorFloor));</span>
+<span class="fc" id="L165">	}</span>
+	
+	/**
+     * setElevatorFloor - Sets the current location of the elevator to the nearest floor
+     *
+     * @param floor - nearest floor of the elevator
+     */
+	void setElevatorFloor(int floor)
+	{
+<span class="fc" id="L174">		elevatorFloor = floor;</span>
+<span class="fc" id="L175">	}</span>
+	
+	/**
+     * setElevatorPosition - Sets the current location of the elevator in feet from the bottom of the building
+     *
+     * @param pos - location in feet from the bottom of the building
+     */
+	void setElevatorPosition(int pos)
+	{
+<span class="fc" id="L184">		elevatorPos = pos;</span>
+<span class="fc" id="L185">	}</span>
+	
+	/**
+     * setElevatorSpeed - Sets the current speed of the elevator in feet per sec
+     *
+     * @param speed - speed in feet per sec
+     */
+	void setElevatorSpeed(int speed)
+	{
+<span class="fc" id="L194">		elevatorSpeed = speed;</span>
+<span class="fc" id="L195">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
