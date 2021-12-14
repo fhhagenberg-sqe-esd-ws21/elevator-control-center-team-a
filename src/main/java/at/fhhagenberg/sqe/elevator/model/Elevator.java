@@ -25,10 +25,9 @@ public class Elevator {
      * @param num    - number of the elevator.
      * @param weight - weight of the floor.
      */
-	public Elevator(int num, int weight)
+	public Elevator(int num)
 	{
 		elevatorNum = num;
-		elevatorWeigth = weight;
 	}
 	
 	/**
@@ -192,5 +191,15 @@ public class Elevator {
 	void setElevatorSpeed(int speed)
 	{
 		elevatorSpeed = speed;
+	}
+	
+	/**
+     * setElevatorWeight - Sets the weight of passengers on the elevator
+     *
+     * @param weight - weight of passengers
+     */
+	void setElevatorWeight(int weight)
+	{
+		elevatorWeigth = weight;
 	}
 }

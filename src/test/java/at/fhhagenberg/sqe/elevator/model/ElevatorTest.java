@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 // import static org.junit.jupiter.api.Assertions.*;
 // import static org.junit.jupiter.api.Assertions.assertEquals;
 // import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.List;
-import at.fhhagenberg.sqe.elevator.backend.IElevatorWrapper;
+// import java.util.List;
+// import at.fhhagenberg.sqe.elevator.backend.IElevatorWrapper;
 
 
 public class ElevatorTest 
@@ -29,14 +29,14 @@ public class ElevatorTest
 	
 	@Test
 	void elevatorCtortest() 
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum);
 		assertNotEquals(null, e);
 	}
 	
 	
 	@Test
 	void committedDirectionTest()
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum);
 		e.setCommittedDirection(Elevator.UP);
 		assertEquals(Elevator.UP, e.getCommittedDirection());
 
@@ -44,26 +44,27 @@ public class ElevatorTest
 	@Test
 
 	void getElevatorWeightTest()
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum);
+		e.setElevatorWeight(eleTestWeight);
 		assertEquals(eleTestWeight, e.getElevatorWeight(eleTestNum));
 	}
 
 	@Test
 	void elevatorSpeedTest() 
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum);
 		e.setElevatorSpeed(eleTestSpeed);
 		assertEquals(eleTestSpeed, e.getElevatorSpeed());
 	}
 
 	@Test
 	void getElevatorNumTest() 
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum	);
 		assertEquals(eleTestNum, e.getElevatorNum());
 	}
 
 	@Test
 	void elevatorDoorStatusTest() 
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum	);
 		//		e.setElevatorDoorStatus(Elevator.OPEN);
 		//		assertEquals(Elevator.OPEN, e.getElevatorDoorStatus());
 		e.setElevatorDoorStatus(Elevator.CLOSED);
@@ -73,28 +74,28 @@ public class ElevatorTest
 
 	@Test
 	void elevatorFloorTest() 
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum	);
 		e.setElevatorFloor(eleTestFloor);
 		assertEquals(eleTestFloor, e.getElevatorFloor());
 	}
 
 	@Test
 	void elevatorAccelTest() 
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum	);
 		e.setElevatorAccel(eleTestAccel);
 		assertEquals(eleTestAccel, e.getElevatorAccel());
 	}
 
 	@Test
 	void elevatorPositionTest()
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight);
+	{	Elevator e = new Elevator(eleTestNum);
 		e.setElevatorPosition(eleTestPos);
 		assertEquals(eleTestPos, e.getElevatorPosition(eleTestNum));
 	}
 
 	@Test
 	void elevatorButtonTest() 
-	{	Elevator e = new Elevator(eleTestNum, eleTestWeight	);
+	{	Elevator e = new Elevator(eleTestNum	);
 	//		e.addElevatorButton(eleTestButton);
 	//		List<Integer> btnList = e.getElevatorButton();
 	//		assertEquals(eleTestButton, btnList.get(0)	);
