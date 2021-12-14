@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import sqelevator.IElevator;
 
 import java.util.ArrayList;
 
@@ -15,22 +16,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class IElevatorMockTest {
-
-    /** State variable for elevator doors open.	 */
-    public final static int ELEVATOR_DOORS_OPEN = 1;
-    /** State variable for elevator doors closed. */
-    public final static int ELEVATOR_DOORS_CLOSED = 2;
-    /** State variable for elevator doors opening. */
-    public final static int ELEVATOR_DOORS_OPENING = 3;
-    /** State variable for elevator doors closing. */
-    public final static int ELEVATOR_DOORS_CLOSING = 4;
-
-    /** State variable for elevator status when going up */
-    public final static int ELEVATOR_DIRECTION_UP = 0;
-    /** State variable for elevator status when going down. */
-    public final static int ELEVATOR_DIRECTION_DOWN = 1;
-    /** State variables for elevator status stopped and uncommitted. */
-    public final static int ELEVATOR_DIRECTION_UNCOMMITTED = 2;
 
     @Mock
     private ElevatorWrapper mockedIElevator = mock(ElevatorWrapper.class);
@@ -99,7 +84,7 @@ public class IElevatorMockTest {
     public void testUpdateDirectionElevatorDn(){
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
-        when(mockedIElevator.getCommittedDirection(0)).thenReturn(ELEVATOR_DIRECTION_DOWN);
+        when(mockedIElevator.getCommittedDirection(0)).thenReturn(IElevator.ELEVATOR_DIRECTION_DOWN);
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
 
@@ -109,14 +94,14 @@ public class IElevatorMockTest {
         verify(mockedIElevator).getElevatorNum();
         verify(mockedIElevator).getCommittedDirection(0);
 
-        assertEquals(ELEVATOR_DIRECTION_DOWN, eleList.get(0).getCommittedDirection());
+        assertEquals(IElevator.ELEVATOR_DIRECTION_DOWN, eleList.get(0).getCommittedDirection());
     }
 
     @Test
     public void testUpdateDirectionElevatorUp(){
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
-        when(mockedIElevator.getCommittedDirection(0)).thenReturn(ELEVATOR_DIRECTION_UP);
+        when(mockedIElevator.getCommittedDirection(0)).thenReturn(IElevator.ELEVATOR_DIRECTION_UP);
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
 
@@ -126,7 +111,7 @@ public class IElevatorMockTest {
         verify(mockedIElevator).getElevatorNum();
         verify(mockedIElevator).getCommittedDirection(0);
 
-        assertEquals(ELEVATOR_DIRECTION_UP, eleList.get(0).getCommittedDirection());
+        assertEquals(IElevator.ELEVATOR_DIRECTION_UP, eleList.get(0).getCommittedDirection());
     }
 
     @Test
