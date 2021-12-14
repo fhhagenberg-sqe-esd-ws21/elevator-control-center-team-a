@@ -181,7 +181,7 @@ public class IElevatorMockTest {
         assertEquals(1, eleList.get(0).getElevatorButton().size());
     }
 
-    @Test
+    @Disabled
     public void testUpdateFloors(){
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
