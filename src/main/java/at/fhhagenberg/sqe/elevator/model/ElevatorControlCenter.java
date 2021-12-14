@@ -1,33 +1,30 @@
 package at.fhhagenberg.sqe.elevator.model;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.ArrayList;
 
-import at.fhhagenberg.sqe.elevator.model.Elevator;
-import at.fhhagenberg.sqe.elevator.model.Floor;
-import at.fhhagenberg.sqe.elevator.backend.IElevatorWrapper;
+import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 
 public class ElevatorControlCenter {
-	private IElevatorWrapper elevatorServer;
-	private List<Elevator> elevators;
-	private List<Floor> floors;
-	private boolean autoMode;
+	private ElevatorWrapper elevatorServer;
+	private ArrayList<Elevator> elevators;
+	private ArrayList<Floor> floors;
+	private boolean operatingMode;
 	
 	public static boolean AUTO = true;
-	public static boolean MANUEL = false;
+	public static boolean MANUAL = false;
 
 	/**
      * Constructor - creates new ElevatorControlCenter
      *
      * @param server - server interface of the elevator system
      */
-	public ElevatorControlCenter(IElevatorWrapper server)
+	public ElevatorControlCenter(ElevatorWrapper server)
 	{
 		elevatorServer = server;
-		autoMode = AUTO;
+		operatingMode = AUTO;
 		int size = elevatorServer.getElevatorNum();
-		elevators = Collections.<Elevator>emptyList();
-		floors = Collections.<Floor>emptyList();
+		elevators = new ArrayList<>();
+		floors = new ArrayList<>();
 		for(int i = 0; i < size; i++)
 		{
 			elevators.add(new Elevator(i));
@@ -38,14 +35,13 @@ public class ElevatorControlCenter {
 			floors.add(new Floor(elevatorServer.getFloorHeight(), i));
 		}
 	}
-	
-	
+
 	/**
      * getElevators - Provides a list of all elevators of the building
      *
      * @return List<Elevator> - list of all elevators
      */
-	public List<Elevator> getElevators()
+	public ArrayList<Elevator> getElevators()
 	{
 		return elevators;
 	}
@@ -55,42 +51,41 @@ public class ElevatorControlCenter {
      *
      * @return List<Floor> - list of all floors
      */
-	public List<Floor> getFloors()
+	public ArrayList<Floor> getFloors()
 	{
 		return floors;
 	}
 	
 	/**
-     * setNext - Sets next floor of specified Elevator if in MANUEL mode
+     * setNext - Sets next floor of specified Elevator if in MANUAL mode
      *
      * @param elevator - number of the elevator
      * @param next     - floor to be next
      */
 	public void setNext(int elevator, int next)
 	{
-		if(autoMode == MANUEL)
-			if(elevator < elevators.size())
+		if(operatingMode == MANUAL && elevator < elevators.size())
 				elevators.get(elevator).setCommittedDirection(next);
 	}
 	
 	/**
-     * getAuto - Provides status of the actual mode (auto/manuel)
+     * getAuto - Provides status of the actual mode (auto/MANUAL)
      *
-     * @return boolean - auto = ElevatorControlCenter.AUTO, manuel = ElevatorControlCenter.MANUEL
+     * @return boolean - auto = ElevatorControlCenter.AUTO, MANUAL = ElevatorControlCenter.MANUAL
      */
 	public boolean getAuto()
 	{
-		return autoMode;
+		return operatingMode;
 	}
 	
 	/**
-     * setAuto - Sets status of the actual mode (auto/manuel)
+     * setAuto - Sets status of the actual mode (auto/MANUAL)
      *
-     * @param auto - auto = ElevatorControlCenter.AUTO, manuel = ElevatorControlCenter.MANUEL
+     * @param auto - auto = ElevatorControlCenter.AUTO, MANUAL = ElevatorControlCenter.MANUAL
      */
 	public void setAuto(boolean auto)
 	{
-		autoMode = auto;
+		operatingMode = auto;
 	}
 	
 	/**

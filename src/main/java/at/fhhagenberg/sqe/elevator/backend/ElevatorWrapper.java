@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 import at.fhhagenberg.sqe.elevator.model.Elevator;
 
-public class IElevatorWrapper{
+public class ElevatorWrapper {
 
     private IElevator elevatorRemote;
     
@@ -39,7 +39,7 @@ public class IElevatorWrapper{
     }
 
     public int getElevatorButton(int elevatorNumber, int floor) {
-// TODO:
+// TODO: return is boolean value
 //        try {
 //            return elevatorRemote.getElevatorButton(elevatorNumber, floor)?1:0;
 //        }
@@ -87,7 +87,7 @@ public class IElevatorWrapper{
 //            return CONNECTION_ERROR;
 //        }
 
-        return 0;
+        return 1;
     }
 
     public int getElevatorPosition(int elevatorNumber) {

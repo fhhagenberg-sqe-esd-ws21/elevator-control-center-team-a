@@ -74,7 +74,7 @@ public class Floor {
 	/**
      * setButtonDown - Sets the status of the Up button on the floor (on/off)
      *
-     * @param down - status of Up button (On = Floor.ON, Off = Floor.OFF)
+     * @param up - status of Up button (On = Floor.ON, Off = Floor.OFF)
      */
 	void setButtonUp(boolean up)
 	{

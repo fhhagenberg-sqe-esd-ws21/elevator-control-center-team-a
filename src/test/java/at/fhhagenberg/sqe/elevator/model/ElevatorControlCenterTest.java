@@ -7,16 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import at.fhhagenberg.sqe.elevator.backend.IElevatorWrapper;
-
-// import org.junit.jupiter.params.ParameterizedTest;
-// import org.junit.jupiter.params.provider.CsvSource;
-// import org.junit.jupiter.params.provider.ValueSource;
-// import static org.junit.jupiter.api.Assertions.*;
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertThrows;
-// import java.util.List;
-// import at.fhhagenberg.sqe.elevator.backend.IElevatorWrapper;
+import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 
 
 public class ElevatorControlCenterTest 
@@ -26,14 +17,14 @@ public class ElevatorControlCenterTest
 	
 	@Test
 	void eccCtorTest()
-	{	IElevatorWrapper server = new IElevatorWrapper();
+	{	ElevatorWrapper server = new ElevatorWrapper();
 		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
 		assertNotEquals(null, ecc);
 	}
 	
 	@Test
 	void  getElevatorsTest()
-	{	IElevatorWrapper server = new IElevatorWrapper();
+	{	ElevatorWrapper server = new ElevatorWrapper();
 		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
 		List<Elevator> eleList = ecc.getElevators();
 	//		assertEquals(, );
@@ -41,7 +32,7 @@ public class ElevatorControlCenterTest
 	
 	@Test
 	void  getFloorsTest()
-	{	IElevatorWrapper server = new IElevatorWrapper();
+	{	ElevatorWrapper server = new ElevatorWrapper();
 		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
 
 		List<Floor> floorList = ecc.getFloors();
@@ -50,7 +41,7 @@ public class ElevatorControlCenterTest
 	
 	@Test
 	void  setNextTest()
-	{	IElevatorWrapper server = new IElevatorWrapper();
+	{	ElevatorWrapper server = new ElevatorWrapper();
 		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
 		ecc.setNext(eccTestelevator, eccTestnext);
 	//		assertEquals(, );
@@ -58,7 +49,7 @@ public class ElevatorControlCenterTest
 		
 	@Test
 	void  autoTest()
-	{	IElevatorWrapper server = new IElevatorWrapper();
+	{	ElevatorWrapper server = new ElevatorWrapper();
 		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
 		ecc.setAuto(ElevatorControlCenter.AUTO);
 		assertEquals(ElevatorControlCenter.AUTO, ecc.getAuto());
@@ -66,7 +57,7 @@ public class ElevatorControlCenterTest
 
 	@Test
 	void  updateTest()
-	{	IElevatorWrapper server = new IElevatorWrapper();
+	{	ElevatorWrapper server = new ElevatorWrapper();
 		ElevatorControlCenter ecc = new ElevatorControlCenter(server);
 		ecc.update();
 	//		assertEquals(, );

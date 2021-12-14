@@ -6,15 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
-// import org.junit.jupiter.params.ParameterizedTest;
-// import org.junit.jupiter.params.provider.CsvSource;
-// import org.junit.jupiter.params.provider.ValueSource;
-// import static org.junit.jupiter.api.Assertions.*;
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertThrows;
-// import java.util.List;
-// import at.fhhagenberg.sqe.elevator.backend.IElevatorWrapper;
-
 
 public class ElevatorTest 
 {
@@ -32,8 +23,7 @@ public class ElevatorTest
 	{	Elevator e = new Elevator(eleTestNum);
 		assertNotEquals(null, e);
 	}
-	
-	
+
 	@Test
 	void committedDirectionTest()
 	{	Elevator e = new Elevator(eleTestNum);

@@ -1,17 +1,18 @@
 package at.fhhagenberg.sqe.elevator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Elevator {
 	private int commitedDirection;
 	private int elevatorAccel;
-	private List<Integer> elevatorButtons;
+	private ArrayList<Integer> elevatorButtons;
 	private int elevatorDoorStatus;
 	private int elevatorFloor;
 	private int elevatorNum;
 	private int elevatorPos;
 	private int elevatorSpeed;
-	private int elevatorWeigth;
+	private int elevatorWeight;
 
 	public static int OPEN = 1;
 	public static int CLOSED = 0;
@@ -23,7 +24,6 @@ public class Elevator {
      * Constructor - creates new Elevator
      *
      * @param num    - number of the elevator.
-     * @param weight - weight of the floor.
      */
 	public Elevator(int num)
 	{
@@ -55,7 +55,7 @@ public class Elevator {
      *
      * @return List<Integer> - list of all pressed Buttons; empty List when no Button pressed
      */
-	List<Integer> getElevatorButton()
+	ArrayList<Integer> getElevatorButton()
 	{
 		return elevatorButtons;
 	}
@@ -117,7 +117,7 @@ public class Elevator {
      */
 	int getElevatorWeight(int elevatorNumber)
 	{
-		return elevatorWeigth;
+		return elevatorWeight;
 	}
 	
 	/**
@@ -200,6 +200,6 @@ public class Elevator {
      */
 	void setElevatorWeight(int weight)
 	{
-		elevatorWeigth = weight;
+		elevatorWeight = weight;
 	}
 }
