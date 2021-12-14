@@ -35,7 +35,7 @@ public class ElevatorControlCenter {
 			floors.add(new Floor(elevatorServer.getFloorHeight(), i));
 		}
 	}
-
+	
 	/**
      * getElevators - Provides a list of all elevators of the building
      *
@@ -95,7 +95,7 @@ public class ElevatorControlCenter {
 	public void update()
 	{
 		if(elevators.size() == 0)
-			return;
+			InitElevatorAndFloors();
 		for(var elevator : elevators)
 		{
 			int num = elevator.getElevatorNum();
