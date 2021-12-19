@@ -1,7 +1,5 @@
 package at.fhhagenberg.sqe;
 
-import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
-import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -33,7 +31,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
 
-        ElevatorControlCenter elContr = new ElevatorControlCenter(new ElevatorWrapper());
+//        ElevatorControlCenter elContr = new ElevatorControlCenter(new ElevatorWrapper());
         launch();
     }
 

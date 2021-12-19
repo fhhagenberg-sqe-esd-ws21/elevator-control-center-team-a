@@ -8,85 +8,94 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import sqelevator.IElevator;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class IElevatorMockTest {
 
+    private static ElevatorWrapper wrappedElevator;
+
     @Mock
-    private ElevatorWrapper mockedIElevator = mock(ElevatorWrapper.class);
+    private static IElevator mockedIElevator = mock(IElevator.class);
 
     @Test
-    public void testGetElevatorNumEmpty(){
+    public void testGetElevatorNumEmpty() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(0);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         verify(mockedIElevator).getElevatorNum();
         assertEquals(0, ecc.getElevators().size());
     }
 
     @Test
-    public void testGetElevatorNumOneEntry(){
+    public void testGetElevatorNumOneEntry() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         verify(mockedIElevator).getElevatorNum();
         assertEquals(1, ecc.getElevators().size());
     }
 
     @Test
-    public void testGetElevatorNumTenEntries(){
+    public void testGetElevatorNumTenEntries() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(10);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         verify(mockedIElevator).getElevatorNum();
         assertEquals(10, ecc.getElevators().size());
     }
 
     @Test
-    public void testGetFloorNumEmpty(){
+    public void testGetFloorNumEmpty() throws RemoteException {
 
         when(mockedIElevator.getFloorNum()).thenReturn(0);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         verify(mockedIElevator).getFloorNum();
         assertEquals(0, ecc.getFloors().size());
     }
 
     @Test
-    public void testGetFloorNumOneEntry(){
+    public void testGetFloorNumOneEntry() throws RemoteException {
 
         when(mockedIElevator.getFloorNum()).thenReturn(1);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         verify(mockedIElevator).getFloorNum();
         assertEquals(1, ecc.getFloors().size());
     }
 
     @Test
-    public void testGetFloorNumTenEntries(){
+    public void testGetFloorNumTenEntries() throws RemoteException {
 
         when(mockedIElevator.getFloorNum()).thenReturn(10);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         verify(mockedIElevator).getFloorNum();
         assertEquals(10, ecc.getFloors().size());
     }
 
     @Test
-    public void testUpdateDirectionElevatorDn(){
+    public void testUpdateDirectionElevatorDn() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
         when(mockedIElevator.getCommittedDirection(0)).thenReturn(IElevator.ELEVATOR_DIRECTION_DOWN);
 
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         ArrayList<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -98,12 +107,13 @@ public class IElevatorMockTest {
     }
 
     @Test
-    public void testUpdateDirectionElevatorUp(){
+    public void testUpdateDirectionElevatorUp() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
         when(mockedIElevator.getCommittedDirection(0)).thenReturn(IElevator.ELEVATOR_DIRECTION_UP);
 
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         ArrayList<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -115,12 +125,13 @@ public class IElevatorMockTest {
     }
 
     @Test
-    public void testUpdateSetAccelElevator(){
+    public void testUpdateSetAccelElevator() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
         when(mockedIElevator.getElevatorAccel(0)).thenReturn(1);
 
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         ArrayList<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -132,12 +143,13 @@ public class IElevatorMockTest {
     }
 
     @Test
-    public void testUpdateSetAccelElevatorNegative(){
+    public void testUpdateSetAccelElevatorNegative() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
         when(mockedIElevator.getElevatorAccel(0)).thenReturn(-1);
 
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         ArrayList<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -148,14 +160,16 @@ public class IElevatorMockTest {
         assertEquals(-1, eleList.get(0).getElevatorAccel());
     }
 
+    @Test
     @Disabled
-    public void testUpdateAddElevatorButton(){
+    public void testUpdateAddElevatorButton() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
         when(mockedIElevator.getFloorNum()).thenReturn(1);
-        when(mockedIElevator.getElevatorButton(0,0)).thenReturn(1);
+        when(mockedIElevator.getElevatorButton(0,0)).thenReturn(true);
 
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         ArrayList<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -166,13 +180,15 @@ public class IElevatorMockTest {
         assertEquals(1, eleList.get(0).getElevatorButton().size());
     }
 
+    @Test
     @Disabled
-    public void testUpdateFloors(){
+    public void testUpdateFloors() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
         when(mockedIElevator.getFloorNum()).thenReturn(2);
 
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         ArrayList<Floor> floorList = ecc.getFloors();
         ecc.update();
@@ -184,7 +200,8 @@ public class IElevatorMockTest {
     @Test
     public void testOperatingMode(){
 
-        ElevatorControlCenter ecc = new ElevatorControlCenter(mockedIElevator);
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
         ecc.setAuto(ElevatorControlCenter.AUTO);
         assertEquals(ElevatorControlCenter.AUTO, ecc.getOpMode());
