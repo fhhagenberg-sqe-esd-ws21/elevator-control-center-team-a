@@ -1,8 +1,8 @@
 package at.fhhagenberg.sqe.elevator.model;
 
-import java.util.ArrayList;
-
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
+
+import java.util.ArrayList;
 
 public class ElevatorControlCenter {
 	private ElevatorWrapper elevatorServer;
