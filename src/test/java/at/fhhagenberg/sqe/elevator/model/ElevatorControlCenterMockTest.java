@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import sqelevator.IElevator;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -97,7 +97,7 @@ public class ElevatorControlCenterMockTest {
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
-        ArrayList<Elevator> eleList = ecc.getElevators();
+        List<Elevator> eleList = ecc.getElevators();
         ecc.update();
 
         verify(mockedIElevator).getElevatorNum();
@@ -115,7 +115,7 @@ public class ElevatorControlCenterMockTest {
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
-        ArrayList<Elevator> eleList = ecc.getElevators();
+        List<Elevator> eleList = ecc.getElevators();
         ecc.update();
 
         verify(mockedIElevator).getElevatorNum();
@@ -133,7 +133,7 @@ public class ElevatorControlCenterMockTest {
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
-        ArrayList<Elevator> eleList = ecc.getElevators();
+        List<Elevator> eleList = ecc.getElevators();
         ecc.update();
 
         verify(mockedIElevator).getElevatorNum();
@@ -151,7 +151,7 @@ public class ElevatorControlCenterMockTest {
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
-        ArrayList<Elevator> eleList = ecc.getElevators();
+        List<Elevator> eleList = ecc.getElevators();
         ecc.update();
 
         verify(mockedIElevator).getElevatorNum();
@@ -171,7 +171,7 @@ public class ElevatorControlCenterMockTest {
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
-        ArrayList<Elevator> eleList = ecc.getElevators();
+        List<Elevator> eleList = ecc.getElevators();
         ecc.update();
 
         verify(mockedIElevator).getElevatorNum();
@@ -190,7 +190,7 @@ public class ElevatorControlCenterMockTest {
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
 
-        ArrayList<Floor> floorList = ecc.getFloors();
+        List<Floor> floorList = ecc.getFloors();
         ecc.update();
 
         verify(mockedIElevator).getFloorNum();
