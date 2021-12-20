@@ -28,7 +28,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getElevatorNum()).thenReturn(0);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
-        ecc.InitElevatorAndFloors();
+        ecc.update();
 
         verify(mockedIElevator).getElevatorNum();
         assertEquals(0, ecc.getElevators().size());
@@ -171,7 +171,6 @@ public class ElevatorControlCenterMockTest {
     }
 
     @Test
-    @Disabled
     public void testUpdateAddElevatorButton() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
@@ -192,7 +191,6 @@ public class ElevatorControlCenterMockTest {
     }
 
     @Test
-    @Disabled
     public void testUpdateFloors() throws RemoteException {
 
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
@@ -207,6 +205,53 @@ public class ElevatorControlCenterMockTest {
 
         verify(mockedIElevator).getFloorNum();
         assertEquals(2, floorList.size());
+    }
+    
+    @Test
+    public void testSetNext() throws RemoteException {
+
+        when(mockedIElevator.getElevatorNum()).thenReturn(1);
+        when(mockedIElevator.getFloorNum()).thenReturn(2);
+
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
+        ecc.setAuto(ecc.MANUAL);
+        ecc.setNext(0, 2);
+        List<Elevator> elevators = ecc.getElevators();
+        verify(mockedIElevator).setTarget(0, 2);
+        when(mockedIElevator.getTarget(0)).thenReturn(2);
+        ecc.update();
+
+        assertEquals(2, elevators.get(0).getElevatorTarget());
+    }
+    
+    @Test
+    public void testSetNextAuto() throws RemoteException {
+
+        when(mockedIElevator.getElevatorNum()).thenReturn(1);
+        when(mockedIElevator.getFloorNum()).thenReturn(2);
+
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
+        ecc.setAuto(ecc.AUTO);
+        ecc.setNext(0, 2);
+        verify(mockedIElevator, never()).setTarget(0, 2);
+    }
+    
+    @Test
+    public void testSetNextOutMaxElevator() throws RemoteException {
+
+        when(mockedIElevator.getElevatorNum()).thenReturn(1);
+        when(mockedIElevator.getFloorNum()).thenReturn(2);
+
+        wrappedElevator = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
+        ecc.setAuto(ecc.MANUAL);
+        ecc.setNext(1, 2);
+        verify(mockedIElevator, never()).setTarget(0, 2);
     }
 
     @Test

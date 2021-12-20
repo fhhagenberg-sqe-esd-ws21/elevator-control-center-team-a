@@ -13,6 +13,7 @@ public class Elevator {
 	private int elevatorPos;
 	private int elevatorSpeed;
 	private int elevatorWeight;
+	private int elevatorTarget;
 
 	public static int OPEN = 1;
 	public static int CLOSED = 0;
@@ -28,6 +29,7 @@ public class Elevator {
 	public Elevator(int num)
 	{
 		elevatorNum = num;
+		elevatorButtons = new ArrayList<Integer>();
 	}
 	
 	/**
@@ -121,6 +123,26 @@ public class Elevator {
 	}
 	
 	/**
+     * getElevatorTarget - Retrieves the next target of the elevator
+     *
+     * @return int - weight of passengers
+     */
+	int getElevatorTarget()
+	{
+		return elevatorTarget;
+	}
+	
+	/**
+     * setElevatorTarget - Sets the next target of the elevator
+     *
+     * @param direction - UP = Elevator.UP, DOWN = Elevator.DOWN, UNCOMMITED = Elevator.UNCOMMITTED
+     */
+	void setElevatorTarget(int target)
+	{
+		elevatorTarget = target;
+	}
+	
+	/**
      * setCommittedDirection - Sets the committed direction of the elevator (up / down / uncommitted)
      *
      * @param direction - UP = Elevator.UP, DOWN = Elevator.DOWN, UNCOMMITED = Elevator.UNCOMMITTED
@@ -151,6 +173,11 @@ public class Elevator {
 			elevatorButtons.add(button);
 	}
 	
+	void clearElevatorButton()
+	{
+		elevatorButtons.clear();
+	}
+	
 	/**
      * setElevatorDoorStatus - Sets the current status of the doors of the specified elevator (open/closed)
      *
@@ -159,8 +186,6 @@ public class Elevator {
 	void setElevatorDoorStatus(int status)
 	{
 		elevatorDoorStatus = status;
-		if(status == OPEN)
-			elevatorButtons.remove(elevatorButtons.indexOf(elevatorFloor));
 	}
 	
 	/**
