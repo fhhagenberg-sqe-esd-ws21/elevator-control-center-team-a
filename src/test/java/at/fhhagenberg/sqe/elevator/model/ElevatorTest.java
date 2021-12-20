@@ -36,7 +36,7 @@ public class ElevatorTest
 	void getElevatorWeightTest()
 	{	Elevator e = new Elevator(eleTestNum);
 		e.setElevatorWeight(eleTestWeight);
-		assertEquals(eleTestWeight, e.getElevatorWeight(eleTestNum));
+		assertEquals(eleTestWeight, e.getElevatorWeight());
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class ElevatorTest
 	void elevatorPositionTest()
 	{	Elevator e = new Elevator(eleTestNum);
 		e.setElevatorPosition(eleTestPos);
-		assertEquals(eleTestPos, e.getElevatorPosition(eleTestNum));
+		assertEquals(eleTestPos, e.getElevatorPosition());
 	}
 
 	@Test
