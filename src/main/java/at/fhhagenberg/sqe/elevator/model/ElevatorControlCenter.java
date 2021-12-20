@@ -70,7 +70,7 @@ public class ElevatorControlCenter {
 	public void setNext(int elevator, int next)
 	{
 		if(operatingMode == MANUAL && elevator < elevators.size())
-				elevators.get(elevator).setCommittedDirection(next);
+				elevatorServer.setTarget(elevator, next);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class ElevatorControlCenter {
      */
 	public void update()
 	{
-		if(elevators.size() == 0) {
+		if(elevators.size() <= 0) {
 			InitElevatorAndFloors();
 			return;
 		}
@@ -112,6 +112,8 @@ public class ElevatorControlCenter {
 			elevator.setElevatorFloor(elevatorServer.getElevatorFloor(num));
 			elevator.setElevatorPosition(elevatorServer.getElevatorPosition(num));
 			elevator.setElevatorSpeed(elevatorServer.getElevatorPosition(num));
+			elevator.setElevatorTarget(elevatorServer.getTarget(num));
+			elevator.clearElevatorButton();
 			for(int i = 0; i < floors.size(); i++)
 				elevator.addElevatorButton(elevatorServer.getElevatorButton(num, i));
 		}
