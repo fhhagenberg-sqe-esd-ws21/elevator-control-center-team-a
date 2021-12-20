@@ -2,12 +2,13 @@ package at.fhhagenberg.sqe.elevator.model;
 
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
 
 public class ElevatorControlCenter {
 	private ElevatorWrapper elevatorServer;
-	private ArrayList<Elevator> elevators;
-	private ArrayList<Floor> floors;
+	private List<Elevator> elevators;
+	private List<Floor> floors;
 	private boolean operatingMode;
 	
 	public static boolean AUTO = true;
@@ -22,9 +23,13 @@ public class ElevatorControlCenter {
 	{
 		elevatorServer = server;
 		operatingMode = AUTO;
+		elevators = Collections.<Elevator>emptyList();
+		floors = Collections.<Floor>emptyList();
+	}
+	
+	public void InitElevatorAndFloors()
+	{
 		int size = elevatorServer.getElevatorNum();
-		elevators = new ArrayList<>();
-		floors = new ArrayList<>();
 		for(int i = 0; i < size; i++)
 		{
 			elevators.add(new Elevator(i));
@@ -41,7 +46,7 @@ public class ElevatorControlCenter {
      *
      * @return List<Elevator> - list of all elevators
      */
-	public ArrayList<Elevator> getElevators()
+	public List<Elevator> getElevators()
 	{
 		return elevators;
 	}
@@ -51,7 +56,7 @@ public class ElevatorControlCenter {
      *
      * @return List<Floor> - list of all floors
      */
-	public ArrayList<Floor> getFloors()
+	public List<Floor> getFloors()
 	{
 		return floors;
 	}
@@ -94,8 +99,10 @@ public class ElevatorControlCenter {
      */
 	public void update()
 	{
-		if(elevators.size() == 0)
+		if(elevators.size() == 0) {
+			InitElevatorAndFloors();
 			return;
+		}
 		for(var elevator : elevators)
 		{
 			int num = elevator.getElevatorNum();
