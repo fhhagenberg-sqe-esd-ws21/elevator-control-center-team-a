@@ -35,7 +35,7 @@ public class AppTest {
     /**
      * @param robot - Will be injected by the test runner.
      */
-    @Test
+    // @Test
     public void testButtonClick(FxRobot robot) 
     {
         // when:
