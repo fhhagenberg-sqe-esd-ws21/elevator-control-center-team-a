@@ -3,7 +3,7 @@ package at.fhhagenberg.sqe.elevator.model;
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 
 import java.util.List;
-import java.util.Collections;
+import java.util.ArrayList;
 
 public class ElevatorControlCenter {
 	private ElevatorWrapper elevatorServer;
@@ -23,8 +23,8 @@ public class ElevatorControlCenter {
 	{
 		elevatorServer = server;
 		operatingMode = AUTO;
-		elevators = Collections.<Elevator>emptyList();
-		floors = Collections.<Floor>emptyList();
+		elevators = new ArrayList<Elevator>();
+		floors = new ArrayList<Floor>();
 	}
 	
 	public void InitElevatorAndFloors()
