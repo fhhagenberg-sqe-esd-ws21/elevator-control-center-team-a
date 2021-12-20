@@ -95,7 +95,7 @@ public class Elevator {
      *
      * @return int - location in feet from the bottom of the building
      */
-	public int getElevatorPosition(int elevatorNumber)
+	public int getElevatorPosition()
 	{
 		return elevatorPos;
 	}
@@ -115,7 +115,7 @@ public class Elevator {
      *
      * @return int - weight of passengers
      */
-	public int getElevatorWeight(int elevatorNumber)
+	public int getElevatorWeight()
 	{
 		return elevatorWeight;
 	}
