@@ -22,6 +22,12 @@ public class ElevatorControlCenter {
 	{
 		elevatorServer = server;
 		operatingMode = AUTO;
+		elevators = Collections.<Elevator>emptyList();
+		floors = Collections.<Floor>emptyList();
+	}
+	
+	public void InitElevatorAndFloors()
+	{
 		int size = elevatorServer.getElevatorNum();
 		elevators = new ArrayList<>();
 		floors = new ArrayList<>();
@@ -94,8 +100,10 @@ public class ElevatorControlCenter {
      */
 	public void update()
 	{
-		if(elevators.size() == 0)
+		if(elevators.size() == 0) {
+			InitElevatorAndFloors();
 			return;
+		}
 		for(var elevator : elevators)
 		{
 			int num = elevator.getElevatorNum();
