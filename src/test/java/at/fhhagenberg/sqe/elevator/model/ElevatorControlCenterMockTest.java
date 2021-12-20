@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class IElevatorMockTest {
+public class ElevatorControlCenterMockTest {
 
     private static ElevatorWrapper wrappedElevator;
 
