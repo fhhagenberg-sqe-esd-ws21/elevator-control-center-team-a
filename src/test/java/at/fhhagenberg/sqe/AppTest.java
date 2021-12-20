@@ -27,7 +27,8 @@ public class AppTest {
      * @param robot - Will be injected by the test runner.
      */
     // @Test
-    public void testButtonWithText(FxRobot robot) {
+    public void testButtonWithText(FxRobot robot) 
+    {
         FxAssert.verifyThat(".button", LabeledMatchers.hasText("Click me!"));
     }
 
@@ -35,7 +36,8 @@ public class AppTest {
      * @param robot - Will be injected by the test runner.
      */
     // @Test
-    public void testButtonClick(FxRobot robot) {
+    public void testButtonClick(FxRobot robot) 
+    {
         // when:
         robot.clickOn(".button");
 
