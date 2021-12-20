@@ -28,6 +28,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getElevatorNum()).thenReturn(0);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         verify(mockedIElevator).getElevatorNum();
         assertEquals(0, ecc.getElevators().size());
@@ -39,6 +40,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getElevatorNum()).thenReturn(1);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         verify(mockedIElevator).getElevatorNum();
         assertEquals(1, ecc.getElevators().size());
@@ -50,6 +52,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getElevatorNum()).thenReturn(10);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         verify(mockedIElevator).getElevatorNum();
         assertEquals(10, ecc.getElevators().size());
@@ -61,6 +64,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getFloorNum()).thenReturn(0);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         verify(mockedIElevator).getFloorNum();
         assertEquals(0, ecc.getFloors().size());
@@ -72,6 +76,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getFloorNum()).thenReturn(1);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         verify(mockedIElevator).getFloorNum();
         assertEquals(1, ecc.getFloors().size());
@@ -83,7 +88,8 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getFloorNum()).thenReturn(10);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
-
+        ecc.InitElevatorAndFloors();
+        
         verify(mockedIElevator).getFloorNum();
         assertEquals(10, ecc.getFloors().size());
     }
@@ -96,6 +102,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getCommittedDirection(0)).thenReturn(IElevator.ELEVATOR_DIRECTION_DOWN);
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         List<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -114,6 +121,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getCommittedDirection(0)).thenReturn(IElevator.ELEVATOR_DIRECTION_UP);
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         List<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -132,6 +140,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getElevatorAccel(0)).thenReturn(1);
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         List<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -150,6 +159,7 @@ public class ElevatorControlCenterMockTest {
         when(mockedIElevator.getElevatorAccel(0)).thenReturn(-1);
 
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         List<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -170,6 +180,7 @@ public class ElevatorControlCenterMockTest {
 
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         List<Elevator> eleList = ecc.getElevators();
         ecc.update();
@@ -189,6 +200,7 @@ public class ElevatorControlCenterMockTest {
 
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         List<Floor> floorList = ecc.getFloors();
         ecc.update();
@@ -202,6 +214,7 @@ public class ElevatorControlCenterMockTest {
 
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
+        ecc.InitElevatorAndFloors();
 
         ecc.setAuto(ElevatorControlCenter.AUTO);
         assertEquals(ElevatorControlCenter.AUTO, ecc.getOpMode());
