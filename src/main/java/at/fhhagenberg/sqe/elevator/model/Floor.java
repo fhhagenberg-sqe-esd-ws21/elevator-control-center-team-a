@@ -26,7 +26,7 @@ public class Floor {
      *
      * @return boolean - On = Floor.ON, Off = Floor.OFF
      */
-	boolean getButtonDown()
+	public boolean getButtonDown()
 	{
 		return buttonDown;
 	}
@@ -36,7 +36,7 @@ public class Floor {
      *
      * @return boolean - On = Floor.ON, Off = Floor.OFF
      */
-	boolean getButtonUp()
+	public boolean getButtonUp()
 	{
 		return buttonUp;
 	}
@@ -46,7 +46,7 @@ public class Floor {
      *
      * @return int - height of the floor
      */
-	int getHeight()
+	public int getHeight()
 	{
 		return floorHeight;
 	}
@@ -56,7 +56,7 @@ public class Floor {
      *
      * @return int - number of the floor
      */
-	int getNum()
+	public int getNum()
 	{
 		return floorNum;
 	}
@@ -66,7 +66,7 @@ public class Floor {
      *
      * @param down - status of Down button (On = Floor.ON, Off = Floor.OFF)
      */
-	void setButtonDown(boolean down)
+	public void setButtonDown(boolean down)
 	{
 		buttonDown = down;
 	}
@@ -76,7 +76,7 @@ public class Floor {
      *
      * @param up - status of Up button (On = Floor.ON, Off = Floor.OFF)
      */
-	void setButtonUp(boolean up)
+	public void setButtonUp(boolean up)
 	{
 		buttonUp = up;
 	} 

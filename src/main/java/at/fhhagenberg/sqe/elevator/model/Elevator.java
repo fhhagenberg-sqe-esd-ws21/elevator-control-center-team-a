@@ -35,7 +35,7 @@ public class Elevator {
      *
      * @return int - UP = Elevator.UP, DOWN = Elevator.DOWN, UNCOMMITED = Elevator.UNCOMMITTED
      */
-	int getCommittedDirection()
+	public int getCommittedDirection()
 	{
 		return commitedDirection;
 	}
@@ -45,7 +45,7 @@ public class Elevator {
      *
      * @return int - acceleration in feet per sec^2
      */
-	int getElevatorAccel()
+	public int getElevatorAccel()
 	{
 		return elevatorAccel;
 	}
@@ -55,7 +55,7 @@ public class Elevator {
      *
      * @return List<Integer> - list of all pressed Buttons; empty List when no Button pressed
      */
-	ArrayList<Integer> getElevatorButton()
+	public ArrayList<Integer> getElevatorButton()
 	{
 		return elevatorButtons;
 	}
@@ -65,7 +65,7 @@ public class Elevator {
      *
      * @return int - open = Elevator.OPEN, closed = Elevator.CLOSED
      */
-	int getElevatorDoorStatus()
+	public int getElevatorDoorStatus()
 	{
 		return elevatorDoorStatus;
 	}
@@ -75,7 +75,7 @@ public class Elevator {
      *
      * @return int - nearest floor of the elevator
      */
-	int getElevatorFloor()
+	public int getElevatorFloor()
 	{
 		return elevatorFloor;
 	}
@@ -85,7 +85,7 @@ public class Elevator {
      *
      * @return int - number of the elevator
      */
-	int getElevatorNum()
+	public int getElevatorNum()
 	{
 		return elevatorNum;
 	}
@@ -95,7 +95,7 @@ public class Elevator {
      *
      * @return int - location in feet from the bottom of the building
      */
-	int getElevatorPosition(int elevatorNumber)
+	public int getElevatorPosition(int elevatorNumber)
 	{
 		return elevatorPos;
 	}
@@ -105,7 +105,7 @@ public class Elevator {
      *
      * @return int - speed in feet per sec
      */
-	int getElevatorSpeed()
+	public int getElevatorSpeed()
 	{
 		return elevatorSpeed;
 	}
@@ -115,7 +115,7 @@ public class Elevator {
      *
      * @return int - weight of passengers
      */
-	int getElevatorWeight(int elevatorNumber)
+	public int getElevatorWeight(int elevatorNumber)
 	{
 		return elevatorWeight;
 	}
@@ -125,7 +125,7 @@ public class Elevator {
      *
      * @param direction - UP = Elevator.UP, DOWN = Elevator.DOWN, UNCOMMITED = Elevator.UNCOMMITTED
      */
-	void setCommittedDirection(int direction)
+	public void setCommittedDirection(int direction)
 	{
 		commitedDirection = direction;
 	}
@@ -135,7 +135,7 @@ public class Elevator {
      *
      * @param accel - acceleration in feet per sec^2
      */
-	void setElevatorAccel(int accel)
+	public void setElevatorAccel(int accel)
 	{
 		elevatorAccel = accel;
 	}
@@ -145,7 +145,7 @@ public class Elevator {
      *
      * @param button - pressed Button
      */
-	void addElevatorButton(int button)
+	public void addElevatorButton(int button)
 	{
 		if (!elevatorButtons.contains(button))
 			elevatorButtons.add(button);
@@ -156,7 +156,7 @@ public class Elevator {
      *
      * @param status - open = Elevator.OPEN, closed = Elevator.CLOSED
      */
-	void setElevatorDoorStatus(int status)
+	public void setElevatorDoorStatus(int status)
 	{
 		elevatorDoorStatus = status;
 		if(status == OPEN)
@@ -168,7 +168,7 @@ public class Elevator {
      *
      * @param floor - nearest floor of the elevator
      */
-	void setElevatorFloor(int floor)
+	public void setElevatorFloor(int floor)
 	{
 		elevatorFloor = floor;
 	}
@@ -178,7 +178,7 @@ public class Elevator {
      *
      * @param pos - location in feet from the bottom of the building
      */
-	void setElevatorPosition(int pos)
+	public void setElevatorPosition(int pos)
 	{
 		elevatorPos = pos;
 	}
@@ -188,7 +188,7 @@ public class Elevator {
      *
      * @param speed - speed in feet per sec
      */
-	void setElevatorSpeed(int speed)
+	public void setElevatorSpeed(int speed)
 	{
 		elevatorSpeed = speed;
 	}
@@ -198,7 +198,7 @@ public class Elevator {
      *
      * @param weight - weight of passengers
      */
-	void setElevatorWeight(int weight)
+	public void setElevatorWeight(int weight)
 	{
 		elevatorWeight = weight;
 	}
