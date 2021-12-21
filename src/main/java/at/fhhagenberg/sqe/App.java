@@ -4,9 +4,6 @@ import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 import at.fhhagenberg.sqe.elevator.backend.MockInitialiser;
 import at.fhhagenberg.sqe.elevator.frontend.eccGUI;
 
-// import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
-// import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
-
 import at.fhhagenberg.sqe.elevator.model.Elevator;
 import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
 import at.fhhagenberg.sqe.elevator.model.Floor;

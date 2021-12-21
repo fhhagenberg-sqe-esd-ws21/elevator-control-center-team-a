@@ -112,10 +112,16 @@ public class ElevatorControlCenter {
 			elevator.setElevatorFloor(elevatorServer.getElevatorFloor(num));
 			elevator.setElevatorPosition(elevatorServer.getElevatorPosition(num));
 			elevator.setElevatorSpeed(elevatorServer.getElevatorPosition(num));
+			elevator.setElevatorWeight(elevatorServer.getElevatorWeight(num));
 			elevator.setElevatorTarget(elevatorServer.getTarget(num));
 			elevator.clearElevatorButton();
-			for(int i = 0; i < floors.size(); i++)
-				elevator.addElevatorButton(elevatorServer.getElevatorButton(num, i));
+
+			
+            for(int i = 0; i < floors.size(); i++) 
+            {   if(elevatorServer.getElevatorButton(num, i) == 1)
+                    elevator.addElevatorButton(i);
+            }
+			
 		}
 
 		for(var floor : floors)

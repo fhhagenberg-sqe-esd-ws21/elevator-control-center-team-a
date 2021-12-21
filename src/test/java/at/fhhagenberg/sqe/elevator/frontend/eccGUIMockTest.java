@@ -50,12 +50,45 @@ public class eccGUIMockTest {
         var app = new App();
         app.gui = new eccGUI(ecc, 1280, 960);
         app.start(stage);
+        
     }
     
     @Test
     public void testDefaultGui(FxRobot robot) throws RemoteException {
     	robot.clickOn("#bMode");
-        //FxAssert.verifyThat("#bMode", TextInputControlMatchers.hasText("set to Automatic"));
+
+    	//FxAssert.verifyThat("#bMode", TextInputControlMatchers.hasText("set to Automatic"));
+
+    	robot.clickOn("#bMode");
+
     }
 
+    @Test
+    public void testGuiDropDown(FxRobot robot) throws RemoteException 
+    {
+    	mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
+    	robot.clickOn("#cbNextPoses0");
+    	robot.clickOn("#cbNextPoses1");
+
+    	//FxAssert.verifyThat("#tNextPos", TextInputControlMatchers.hasText("next pos."));
+    }
+
+    @Test
+    public void testGuiUpdate(FxRobot robot) throws RemoteException 
+    {
+    	mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 7, mockInit.setButton(1, 3));;
+    	
+
+    }
+    
+    @Test
+    public void testGuiFloorUP(FxRobot robot) throws RemoteException, InterruptedException 
+    {
+    	mockInit.initMockFloor(0, true, true, 0);
+    	robot.clickOn("#cbNextPoses0");
+    	robot.clickOn("#cbNextPoses1");
+    	
+    	Thread.sleep(14);
+    	//FxAssert.verifyThat("#tNextPos", TextInputControlMatchers.hasText("next pos."));
+    }
 }

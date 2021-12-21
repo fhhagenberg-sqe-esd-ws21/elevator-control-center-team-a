@@ -83,7 +83,6 @@ public class eccGUI {
     Text[] floorUpArrows;
     Text[] floorDownArrows;
 
-
     /**
      * Contstructor of GUI
      *
@@ -252,7 +251,7 @@ public class eccGUI {
             tNextPoses[idxElevs] = new Text("");
             tNextPoses[idxElevs].setLayoutX(xElevs + 200);
             tNextPoses[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
-            tNextPoses[idxElevs].setId("cbNextPoses" + idxElevs);
+            tNextPoses[idxElevs].setId("tNextPoses" + idxElevs);
             layout.getChildren().add(tNextPoses[idxElevs]);
 
             tPresseds[idxElevs] = new Text("");
@@ -377,10 +376,10 @@ public class eccGUI {
     public void update() 
     {
         /* GUI, General Elements */
-    	
+    	System.out.println("Update called");
     	try 
     	{	elevatorCtrl.update();
-    		// System.out.println("updateted");
+ 
     	}
     	catch (RuntimeException e)
     	{	System.out.println("Error in callback: " + e);
@@ -411,32 +410,35 @@ public class eccGUI {
     	
         /* GUI, Elevator-wise Elements      */
         for(int idxElevs = 0; idxElevs < nElevators; idxElevs++)
-       	{	Elevator elev = elevatorCtrl.getElevators().get(idxElevs);
+       	{	Elevator elev = elevatorCtrl.getElevators().get(idxElevs);		// Elev-Number
         	
-        	tPositions [idxElevs].setText( "" + elev.getElevatorFloor());
+        	tPositions[idxElevs].setText( "" + elev.getElevatorFloor());	// closest Floor
 	    
-        	ArrayList<Integer> lpressedBts = elev.getElevatorButton();
+        	tNextPoses[idxElevs].setText("" + elev.getElevatorTarget());	// next target      	
+        	
+        	ArrayList<Integer> lpressedBts = elev.getElevatorButton();		// next targets
         	String pressedBts = "";
         	for(int idx = 0; idx < lpressedBts.size(); idx++)
-        			pressedBts.concat( lpressedBts.get(idx) + ", ");
-        	tNextPoses [idxElevs].setText( "" + pressedBts); 
-	
-        	if(elev.getElevatorDoorStatus() == Elevator.UP )
+        	{
+        			pressedBts +=  lpressedBts.get(idx) + ", ";
+        	}
+   			tPresseds [idxElevs].setText(pressedBts); 
+        	
+        	if(elev.getCommittedDirection() == Elevator.UP )				// Direction				
 	        	tDirections[idxElevs].setText( "up" );  
-	        else if(elev.getElevatorDoorStatus() == Elevator.DOWN )
+	        else if(elev.getCommittedDirection() == Elevator.DOWN )
 	        	tDirections[idxElevs].setText( "down" );  
-	        else if(elev.getElevatorDoorStatus() == Elevator.UNCOMMITTED )
+	        else if(elev.getCommittedDirection() == Elevator.UNCOMMITTED )
 	        	tDirections[idxElevs].setText( "none" );  
 	        			
-        	tPayloads [idxElevs].setText( "" + elev.getElevatorWeight()); 
+        	tPayloads [idxElevs].setText( "" + elev.getElevatorWeight());	// weight/payload
 
-        	tSpeeds [idxElevs].setText( "" + elev.getElevatorSpeed());
-	        if(elev.getElevatorDoorStatus() == Elevator.CLOSED)
+        	tSpeeds [idxElevs].setText( "" + elev.getElevatorSpeed());		// Speed
+
+        	if(elev.getElevatorDoorStatus() == Elevator.CLOSED)				// Door Status
 	        	tDoors [idxElevs].setText( "closed" );
 	        else if(elev.getElevatorDoorStatus() == Elevator.OPEN)
 	        	tDoors [idxElevs].setText( "open" );
-	        else
-	        	tDoors [idxElevs].setText( "oops" );
        	}
     }
 
@@ -445,7 +447,8 @@ public class eccGUI {
      * 		 sets Dropdown-items for 'next Position' passive/active
      * */
     public void actionbMode() 
-    {   if (state) 
+    {   this.update();
+    	if (state) 
         {   elevatorCtrl.setAuto(true);
         } else {
         	elevatorCtrl.setAuto(false);
@@ -481,9 +484,8 @@ public class eccGUI {
             {   int next = Integer.parseInt(buff);
                 elevatorCtrl.setNext(idxElevs, next);
             }
-            // System.out.println("actionNextPos, " + idxElevs + ": " + buff);
         }
-        // System.out.println(" ");
+
         this.update();
     }
 }

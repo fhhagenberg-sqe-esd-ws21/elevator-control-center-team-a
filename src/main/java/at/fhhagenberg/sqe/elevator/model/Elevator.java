@@ -127,7 +127,7 @@ public class Elevator {
      *
      * @return int - weight of passengers
      */
-	int getElevatorTarget()
+	public int getElevatorTarget()
 	{
 		return elevatorTarget;
 	}
@@ -137,7 +137,7 @@ public class Elevator {
      *
      * @param direction - UP = Elevator.UP, DOWN = Elevator.DOWN, UNCOMMITED = Elevator.UNCOMMITTED
      */
-	void setElevatorTarget(int target)
+	public void setElevatorTarget(int target)
 	{
 		elevatorTarget = target;
 	}

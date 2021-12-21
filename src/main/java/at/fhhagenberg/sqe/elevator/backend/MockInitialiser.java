@@ -9,6 +9,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 public class MockInitialiser {
@@ -20,12 +22,12 @@ public class MockInitialiser {
         _mockedIElevator = mockedIElevator;
     }
 
-    private void initMockNums(int elevators, int floors) throws RemoteException {
+    public void initMockNums(int elevators, int floors) throws RemoteException {
         when(_mockedIElevator.getElevatorNum()).thenReturn(elevators);
         when(_mockedIElevator.getFloorNum()).thenReturn(floors);
     }
 
-    private void initMockElevator(int elevator, int direction, int accel, int capacity, int doorStatus,
+    public void initMockElevator(int elevator, int direction, int accel, int capacity, int doorStatus,
                                   int floor, int pos, int speed, int weight,
                                   int target, List<Integer> buttons) throws RemoteException {
         when(_mockedIElevator.getCommittedDirection(elevator)).thenReturn(direction);
@@ -38,17 +40,17 @@ public class MockInitialiser {
         when(_mockedIElevator.getElevatorWeight(elevator)).thenReturn(weight);
         when(_mockedIElevator.getTarget(elevator)).thenReturn(target);
         for(var button : buttons ) {
-            when(_mockedIElevator.getElevatorButton(elevator, button)).thenReturn(Floor.ON);
+            lenient().when(_mockedIElevator.getElevatorButton(elevator, button)).thenReturn(Floor.ON);
         }
     }
 
-    private void initMockFloor(int floor, boolean buttonUp, boolean buttonDown, int height) throws RemoteException {
+    public void initMockFloor(int floor, boolean buttonUp, boolean buttonDown, int height) throws RemoteException {
         when(_mockedIElevator.getFloorButtonDown(floor)).thenReturn(buttonUp);
         when(_mockedIElevator.getFloorButtonUp(floor)).thenReturn(buttonDown);
         when(_mockedIElevator.getFloorHeight()).thenReturn(height);
     }
 
-    private List<Integer> setButton(int min, int max) {
+    public List<Integer> setButton(int min, int max) {
         ArrayList<Integer> buttons = new ArrayList();
         for(int i = min; i <= max; i++)
             buttons.add(i);
@@ -56,14 +58,14 @@ public class MockInitialiser {
     }
 
     public void defaultMockSetup() throws RemoteException {
-        defaultMockSetup(3,8);
+        defaultMockSetup(5,8);
     }
 
-    private void defaultMockSetup(int elevators, int floors) throws RemoteException {
+    public void defaultMockSetup(int elevators, int floors) throws RemoteException {
         initMockNums(elevators, floors);
         for(int i = 0; i < elevators; i++)
-            initMockElevator(i, Elevator.UP, 5, 100, Elevator.CLOSED, 1, 100,
-                    10, 100, 5, setButton(3, 4));
+            initMockElevator(i, Elevator.UP, 5, 101, Elevator.CLOSED, 1, 102,
+                    10, 103, 4, setButton(3, 6));
         for(int i = 0; i < floors; i++)
             initMockFloor(i, false, false, 100);
     }
