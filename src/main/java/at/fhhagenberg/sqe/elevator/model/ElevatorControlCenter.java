@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ElevatorControlCenter {
-	private ElevatorWrapper elevatorServer;
-	private List<Elevator> elevators;
-	private List<Floor> floors;
+	private final ElevatorWrapper elevatorServer;
+	private final List<Elevator> elevators;
+	private final List<Floor> floors;
 	private boolean operatingMode;
 	
 	public static boolean AUTO = true;
