@@ -58,4 +58,12 @@ public class eccGUIMockTest {
         //FxAssert.verifyThat("#bMode", TextInputControlMatchers.hasText("set to Automatic"));
     }
 
+    @Test
+    public void testGuiDropDown(FxRobot robot) throws RemoteException 
+    {
+    	robot.clickOn("#cbNextPoses0");
+    	
+        //FxAssert.verifyThat("#bMode", TextInputControlMatchers.hasText("set to Automatic"));
+    }
+
 }

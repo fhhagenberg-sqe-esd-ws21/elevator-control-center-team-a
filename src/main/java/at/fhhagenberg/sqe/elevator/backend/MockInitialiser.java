@@ -56,14 +56,14 @@ public class MockInitialiser {
     }
 
     public void defaultMockSetup() throws RemoteException {
-        defaultMockSetup(3,8);
+        defaultMockSetup(5,8);
     }
 
     private void defaultMockSetup(int elevators, int floors) throws RemoteException {
         initMockNums(elevators, floors);
         for(int i = 0; i < elevators; i++)
-            initMockElevator(i, Elevator.UP, 5, 100, Elevator.CLOSED, 1, 100,
-                    10, 100, 5, setButton(3, 4));
+            initMockElevator(i, Elevator.UP, 5, 101, Elevator.CLOSED, 1, 102,
+                    10, 103, 4, setButton(3, 6));
         for(int i = 0; i < floors; i++)
             initMockFloor(i, false, false, 100);
     }
