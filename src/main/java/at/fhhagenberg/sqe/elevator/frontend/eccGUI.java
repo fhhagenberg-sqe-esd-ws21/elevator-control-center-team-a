@@ -251,7 +251,7 @@ public class eccGUI {
             tNextPoses[idxElevs] = new Text("");
             tNextPoses[idxElevs].setLayoutX(xElevs + 200);
             tNextPoses[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
-            tNextPoses[idxElevs].setId("cbNextPoses" + idxElevs);
+            tNextPoses[idxElevs].setId("tNextPoses" + idxElevs);
             layout.getChildren().add(tNextPoses[idxElevs]);
 
             tPresseds[idxElevs] = new Text("");
