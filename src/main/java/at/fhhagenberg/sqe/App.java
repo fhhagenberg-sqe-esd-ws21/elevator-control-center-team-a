@@ -1,26 +1,47 @@
 package at.fhhagenberg.sqe;
 
-import java.util.ResourceBundle;
-
-import at.fhhagenberg.sqe.elevator.eccGUI;
-import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
+import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
+import at.fhhagenberg.sqe.elevator.backend.MockInitialiser;
+import at.fhhagenberg.sqe.elevator.frontend.eccGUI;
 
 // import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 // import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
 
+import at.fhhagenberg.sqe.elevator.model.Elevator;
+import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
+import at.fhhagenberg.sqe.elevator.model.Floor;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import sqelevator.IElevator;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * JavaFX App
  */
+@ExtendWith(MockitoExtension.class)
 public class App extends Application 
 {
-
-    
     public static eccGUI gui;
-    
+    private static ElevatorControlCenter elContr;
+    private static ElevatorWrapper eleWrap;
+
+    private static ElevatorWrapper wrappedElevator;
+    private static ElevatorControlCenter ecc;
+
+    @Mock
+    private static IElevator mockedIElevator = mock(IElevator.class);
+
+    private static MockInitialiser mockInit;
+
     @Override
     public void start(Stage stage) 
     {	
@@ -28,22 +49,14 @@ public class App extends Application
     	gui.start(stage);
     }
 
+    public static void main(String[] args) throws RemoteException {
 
-    public static void main(String[] args) 
-    {
-        //	var app = new App();
-        //	app.start(stage);
+        mockInit = new MockInitialiser(mockedIElevator);
+        mockInit.defaultMockSetup();
 
-    //  ElevatorControlCenter elContr = new ElevatorControlCenter(new ElevatorWrapper());
-        // TODO: GUI kriegt ein ecc übergeben und incepted daraus die GUI, liest im update 
-        //			alle Stati aus, ruft setNext und setAuto auf
-        
-    	//gui = new eccGUI(3 , 12, 1280, 960);        
-    	// gui = new eccGUI(elContr , 1280, 960);        
-        
-        
-        
-
+        eleWrap = new ElevatorWrapper(mockedIElevator);
+        elContr = new ElevatorControlCenter(eleWrap);
+    	gui = new eccGUI(elContr, 1280, 960);
         launch();
     }
 
