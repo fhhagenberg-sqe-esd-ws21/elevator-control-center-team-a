@@ -19,7 +19,7 @@ public class App extends Application
 {
 
     
-    static eccGUI gui;
+    public static eccGUI gui;
     
     @Override
     public void start(Stage stage) 
@@ -38,7 +38,7 @@ public class App extends Application
         // TODO: GUI kriegt ein ecc übergeben und incepted daraus die GUI, liest im update 
         //			alle Stati aus, ruft setNext und setAuto auf
         
-    	gui = new eccGUI(3 , 12, 1280, 960);        
+    	//gui = new eccGUI(3 , 12, 1280, 960);        
     	// gui = new eccGUI(elContr , 1280, 960);        
         
         
