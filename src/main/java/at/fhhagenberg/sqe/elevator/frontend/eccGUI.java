@@ -84,14 +84,6 @@ public class eccGUI {
     Text[] floorDownArrows;
 
 
-    public eccGUI(int Elevators, int Floors, int width, int height) 
-    {    // this.ecc = new ElevatorControlCenter( new ElevatorWrapper(null) );
-        nElevators = Elevators;
-        nFloors = Floors;
-        wScene = width;
-        hScene = height;
-    }
-
     /**
      * Contstructor of GUI
      *
