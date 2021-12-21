@@ -449,7 +449,8 @@ public class eccGUI {
      * 		 sets Dropdown-items for 'next Position' passive/active
      * */
     public void actionbMode() 
-    {   if (state) 
+    {   this.update();
+    	if (state) 
         {   elevatorCtrl.setAuto(true);
         } else {
         	elevatorCtrl.setAuto(false);
