@@ -331,16 +331,16 @@ public class eccGUI {
 
             floorUpArrows[idxFloors] = new Text("•");
             floorUpArrows[idxFloors].setLayoutX(xFloors + 40);
-            floorUpArrows[idxFloors].setLayoutY(yFloors + idxFloors * 30);
-            floorUpArrows[idxFloors].setStyle("-fx-font: 24 arial;");
+            floorUpArrows[idxFloors].setLayoutY(yFloors + idxFloors * 30 + 5);
+            floorUpArrows[idxFloors].setStyle("-fx-font: 32 arial;");
             floorUpArrows[idxFloors].setFill(Color.RED);
             floorUpArrows[idxFloors].setId("floorUpArrows+idxFloors");
             layout.getChildren().add(floorUpArrows[idxFloors]);
 
             floorDownArrows[idxFloors] = new Text("•");
             floorDownArrows[idxFloors].setLayoutX(xFloors + 60);
-            floorDownArrows[idxFloors].setLayoutY(yFloors + idxFloors * 30);
-            floorDownArrows[idxFloors].setStyle("-fx-font: 24 arial;");
+            floorDownArrows[idxFloors].setLayoutY(yFloors + idxFloors * 30 + 5);
+            floorDownArrows[idxFloors].setStyle("-fx-font: 32 arial;");
             floorDownArrows[idxFloors].setFill(Color.GREEN);
             floorDownArrows[idxFloors].setId("floorDownArrows+idxFloors");
             layout.getChildren().add(floorDownArrows[idxFloors]);
@@ -406,12 +406,12 @@ public class eccGUI {
         	if(floor.getButtonDown())
         	{   floorDownArrows[idxFloors].setFill(Color.GREEN);
         	}else {
-        		floorDownArrows[idxFloors].setFill(Color.GREEN);
+        		floorDownArrows[idxFloors].setFill(Color.RED);
         	}
         	if(floor.getButtonUp())
         	{   floorUpArrows[idxFloors].setFill(Color.GREEN);
         	}else {
-        		floorUpArrows[idxFloors].setFill(Color.GREEN);
+        		floorUpArrows[idxFloors].setFill(Color.RED);
         	}
        	}
     	
