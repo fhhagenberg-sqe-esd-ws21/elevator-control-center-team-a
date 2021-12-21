@@ -13,10 +13,18 @@ import javafx.stage.Stage;
 
 import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
 
+import java.util.ArrayList;
+
+import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
+import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
+import at.fhhagenberg.sqe.elevator.model.Floor;
+import at.fhhagenberg.sqe.elevator.model.Elevator;
+
+
 public class eccGUI {
 
-    // TODO: floors und elevetors als Listen aus ECC übernehmen und davon GUI-ekemtne ableiten
-    // TODO: GUI Element für jeden Elevator: welche Stockrke wurden innen gedrückt, als ZahleListe oder als beleuchtete Balken (ähnlich Audio-Pegelanzeige)
+    // DONE: floors und elevetors als Listen aus ECC übernehmen und davon GUI-ekemtne ableiten
+    // DONE: GUI Element für jeden Elevator: welche Stockwerke wurden innen gedrückt, als Zahlen-Liste
 
     private final int nElevators;
     private final int nFloors;
@@ -76,7 +84,8 @@ public class eccGUI {
     Text[] floorDownArrows;
 
 
-    public eccGUI(int Elevators, int Floors, int width, int height) {    // this.ecc = new ElevatorControlCenter( new ElevatorWrapper(null) );
+    public eccGUI(int Elevators, int Floors, int width, int height) 
+    {    // this.ecc = new ElevatorControlCenter( new ElevatorWrapper(null) );
         nElevators = Elevators;
         nFloors = Floors;
         wScene = width;
@@ -90,8 +99,8 @@ public class eccGUI {
      * @param width  width of scene
      * @param heigth height of scene
      */
-    public eccGUI(ElevatorControlCenter ecc, int width, int heigth) {
-        elevatorCtrl = ecc;
+    public eccGUI(ElevatorControlCenter ecc, int width, int heigth) 
+    {    elevatorCtrl = ecc;
         elevatorCtrl.InitElevatorAndFloors();
         nElevators = elevatorCtrl.getElevators().size();
         nFloors = elevatorCtrl.getFloors().size();
@@ -162,8 +171,8 @@ public class eccGUI {
      * Item-IDs, callbacks and adding them to the layout
      *
      * */
-    public void start(Stage stage) {
-        Pane layout = new Pane();
+    public void start(Stage stage) 
+    {   Pane layout = new Pane();
         layout.setStyle("-fx-border-color: black");
         var scene = new Scene(layout, wScene, hScene);
 
@@ -373,20 +382,27 @@ public class eccGUI {
      * 			from ecc-structure of recent valid states of elevators
      *
      * */
-    public void update() {
+    public void update() 
+    {
         /* GUI, General Elements */
-
-        // ecc.getOpMode();
-        if (true /*ecc.getconnectd()*/) {
-            tConnState.setFill(Color.GREEN);
-        } else {
-            tConnState.setFill(Color.RED);
-        }
-
     	
-    	/* GUI, Floor-wise Elements 
+    	try 
+    	{	elevatorCtrl.update();
+    		// System.out.println("updateted");
+    	}
+    	catch (RuntimeException e)
+    	{	System.out.println("Error in callback: " + e);
+    		tConnState.setFill(Color.RED);
+    		return;
+    	}
+    	
+    	tConnState.setFill(Color.GREEN);
+    	
+        // elevatorCtrl.getOpMode();
+    	
+    	/* GUI, Floor-wise Elements  */
         for(int idxFloors = 0; idxFloors< nFloors; idxFloors++)
-       	{	Floor floor = ecc.getFloors().get(idxFloors);
+       	{	Floor floor = elevatorCtrl.getFloors().get(idxFloors);
         	if(floor.getButtonDown())
         	{   floorDownArrows[idxFloors].setFill(Color.GREEN);
         	}else {
@@ -398,13 +414,12 @@ public class eccGUI {
         		floorUpArrows[idxFloors].setFill(Color.GREEN);
         	}
        	}
-    	 */
     	
     	
-        /* GUI, Elevator-wise Elements      
+    	
+        /* GUI, Elevator-wise Elements      */
         for(int idxElevs = 0; idxElevs < nElevators; idxElevs++)
-       	{
-        	Elevator elev = ecc.getElevators().get(idxElevs);
+       	{	Elevator elev = elevatorCtrl.getElevators().get(idxElevs);
         	
         	tPositions [idxElevs].setText( "" + elev.getElevatorFloor());
 	    
@@ -421,7 +436,7 @@ public class eccGUI {
 	        else if(elev.getElevatorDoorStatus() == Elevator.UNCOMMITTED )
 	        	tDirections[idxElevs].setText( "none" );  
 	        			
-	        tPayloads [idxElevs].setText( "" + elev.getElevatorWeight(idxElevs)); 
+        	tPayloads [idxElevs].setText( "" + elev.getElevatorWeight()); 
 
         	tSpeeds [idxElevs].setText( "" + elev.getElevatorSpeed());
 	        if(elev.getElevatorDoorStatus() == Elevator.CLOSED)
@@ -431,36 +446,35 @@ public class eccGUI {
 	        else
 	        	tDoors [idxElevs].setText( "oops" );
        	}
-       	*/
     }
 
     /*
      * brief callback for the Mode-Button switching between Auto/Manual
      * 		 sets Dropdown-items for 'next Position' passive/active
      * */
-    public void actionbMode() {
-        if (state) {    // ecc.setAuto(true);
-        } else {    // ecc.setAuto(false);
+    public void actionbMode() 
+    {   if (state) 
+        {   elevatorCtrl.setAuto(true);
+        } else {
+        	elevatorCtrl.setAuto(false);
         }
-        state = !state;
 
-        //    if(ecc.getOpMode() == 	ElevatorControlCenter.AUTO)
-        {
-            tMode.setText("Operational Mode: Automatic");
+        if(elevatorCtrl.getOpMode() == 	ElevatorControlCenter.AUTO)
+        {   tMode.setText("Operational Mode: Automatic");
             bMode.setText("set to Manual");
             for (int idxElevs = 0; idxElevs < nElevators; idxElevs++) {
                 cbNextPoses[idxElevs].setDisable(true);
             }
         }
 
-        //    if(ecc.getOpMode() == 	ElevatorControlCenter.MANUAL)
-        {
-            tMode.setText("Operational Mode: Manual");
+        if(elevatorCtrl.getOpMode() == 	ElevatorControlCenter.MANUAL)
+        {   tMode.setText("Operational Mode: Manual");
             bMode.setText("set to Automatic");
             for (int idxElevs = 0; idxElevs < nElevators; idxElevs++) {
                 cbNextPoses[idxElevs].setDisable(false);
             }
         }
+        state = !state;
 
     }
 
@@ -468,16 +482,16 @@ public class eccGUI {
      * brief callback for the NextPos-Dropdown
      * reads every elevators chosen next-position and sends it to console/God-Object
      * */
-    public void actionNextPos(int cbNextPosID) {
-        for (int idxElevs = 0; idxElevs < nElevators; idxElevs++) {
-            String buff = (String) cbNextPoses[idxElevs].getValue();
-            System.out.println("actionNextPos " + buff);
-
-            if (cbNextPoses[idxElevs].getValue() != null) {
-                int next = Integer.parseInt((String) cbNextPoses[idxElevs].getValue());
-                //	ecc.setNext(idxElevs, next);
+    public void actionNextPos(int cbNextPosID) 
+    {   for (int idxElevs = 0; idxElevs < nElevators; idxElevs++) 
+    	{   String buff = (String) cbNextPoses[idxElevs].getValue();
+            if (cbNextPoses[idxElevs].getValue() != null) 
+            {   int next = Integer.parseInt(buff);
+                elevatorCtrl.setNext(idxElevs, next);
             }
+            // System.out.println("actionNextPos, " + idxElevs + ": " + buff);
         }
-        System.out.println(" ");
+        // System.out.println(" ");
+        this.update();
     }
 }
