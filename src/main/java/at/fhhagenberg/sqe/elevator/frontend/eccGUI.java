@@ -376,7 +376,7 @@ public class eccGUI {
     public void update() 
     {
         /* GUI, General Elements */
-    	
+    	System.out.println("Update called");
     	try 
     	{	elevatorCtrl.update();
  
@@ -439,8 +439,6 @@ public class eccGUI {
 	        	tDoors [idxElevs].setText( "closed" );
 	        else if(elev.getElevatorDoorStatus() == Elevator.OPEN)
 	        	tDoors [idxElevs].setText( "open" );
-	        else
-	        	tDoors [idxElevs].setText( "oops" );
        	}
     }
 
