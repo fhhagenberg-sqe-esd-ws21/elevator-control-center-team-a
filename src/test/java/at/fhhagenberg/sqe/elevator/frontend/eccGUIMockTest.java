@@ -47,8 +47,16 @@ public class eccGUIMockTest {
     	wrappedElevator = new ElevatorWrapper(mockedIElevator);
     	ecc = new ElevatorControlCenter(wrappedElevator);
 
-        var app = new App();
-        app.gui = new eccGUI(ecc, 1280, 960);
+    	// TODO: konkrete Klasse ableiten
+    	
+        var app = new App() {
+        	@Override
+        	protected eccGUI createGUI() throws RemoteException {
+        		
+        		return new eccGUI(ecc, 1280, 960);
+        	}
+        };
+        
         app.start(stage);
         
     }

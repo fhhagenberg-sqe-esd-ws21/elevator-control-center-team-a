@@ -27,33 +27,55 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class App extends Application 
 {
-    public static eccGUI gui;
-    private static ElevatorControlCenter elContr;
-    private static ElevatorWrapper eleWrap;
-
-    private static ElevatorWrapper wrappedElevator;
-    private static ElevatorControlCenter ecc;
-
+    private eccGUI gui;
+//    private static ElevatorControlCenter elContr;
+//    private static ElevatorWrapper eleWrap;
+//
+//    private static ElevatorWrapper wrappedElevator;
+//    private static ElevatorControlCenter ecc;
+//
     @Mock
     private static IElevator mockedIElevator = mock(IElevator.class);
+//
+//    private static MockInitialiser mockInit;
 
-    private static MockInitialiser mockInit;
+    protected eccGUI createGUI() throws RemoteException 
+    {
+    	
+        MockInitialiser mockInit = new MockInitialiser(mockedIElevator);
+        mockInit.defaultMockSetup();
 
+        ElevatorWrapper eleWrap = new ElevatorWrapper(mockedIElevator);
+        ElevatorControlCenter elContr = new ElevatorControlCenter(eleWrap);
+    	
+    	return new eccGUI(elContr, 1280, 960); 
+    	
+    }
+    
     @Override
     public void start(Stage stage) 
     {	
+
+    	try {
+			this.gui = createGUI();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	gui.init();
     	gui.start(stage);
     }
 
     public static void main(String[] args) throws RemoteException {
-
-        mockInit = new MockInitialiser(mockedIElevator);
-        mockInit.defaultMockSetup();
-
-        eleWrap = new ElevatorWrapper(mockedIElevator);
-        elContr = new ElevatorControlCenter(eleWrap);
-    	gui = new eccGUI(elContr, 1280, 960);
+//
+//        mockInit = new MockInitialiser(mockedIElevator);
+//        mockInit.defaultMockSetup();
+//
+//        eleWrap = new ElevatorWrapper(mockedIElevator);
+//        elContr = new ElevatorControlCenter(eleWrap);
+//    	gui = new eccGUI(elContr, 1280, 960);
+    	
+    	
         launch();
     }
 
