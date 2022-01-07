@@ -95,7 +95,7 @@ public class eccGUI {
     	try {
     		elevatorCtrl.InitElevatorAndFloors();
     	} catch(Exception e) {
-    		System.out.print("Not connected on GUI init!");
+    		System.out.println("Not connected on GUI init!");
     	}
     	if(elevatorCtrl.getElevators() == null)
     		nElevators = 0;
@@ -388,7 +388,7 @@ public class eccGUI {
     public void update() 
     {
         /* GUI, General Elements */
-    	System.out.println("Update called");
+    	// System.out.println("Update called");
     	
         // elevatorCtrl.getOpMode();
     	

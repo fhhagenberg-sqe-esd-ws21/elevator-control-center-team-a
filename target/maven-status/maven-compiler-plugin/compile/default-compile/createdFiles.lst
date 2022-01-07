@@ -1,9 +1,11 @@
 at\fhhagenberg\sqe\SystemInfo.class
 at\fhhagenberg\sqe\elevator\frontend\eccGUI.class
+sqelevator\ElevatorExample.class
 at\fhhagenberg\sqe\elevator\backend\MockInitialiser.class
 at\fhhagenberg\sqe\App.class
 at\fhhagenberg\sqe\elevator\model\Elevator.class
 sqelevator\IElevator.class
+at\fhhagenberg\sqe\App$1.class
 at\fhhagenberg\sqe\elevator\backend\ElevatorWrapper.class
 at\fhhagenberg\sqe\elevator\model\Floor.class
 at\fhhagenberg\sqe\elevator\model\ElevatorControlCenter.class
