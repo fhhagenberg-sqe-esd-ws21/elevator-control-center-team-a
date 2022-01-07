@@ -67,12 +67,10 @@ public class App extends Application
     @Override
     public void start(Stage stage)
     {	
-	try{
-		this.gui = createGUI();
-		gui.init();
-		}
-
-		catch (RemoteException ex) { }
+	try{	this.gui = createGUI();
+           }catch (RemoteException ex) { ex.printStackTrace(); }
+	gui.init();
+		
     	// background task
         Task<Void> task = new Task<Void>() {
             @Override
@@ -85,7 +83,8 @@ public class App extends Application
                 			Thread.sleep(3000);
                 			connected = true;
                 			Platform.runLater(() -> {
-                				gui = createGUI();
+					try{	gui = createGUI();
+		                           }catch (RemoteException ex) { ex.printStackTrace(); }
                 				gui.init();
                 				gui.setConnState(true);
                 		    	gui.start(stage);
