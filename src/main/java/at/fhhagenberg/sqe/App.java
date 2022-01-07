@@ -53,6 +53,7 @@ public class App extends Application
 			elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			e.printStackTrace();
+			throw new RemoteException("RemoteException");
 		}
 
 
