@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ElevatorControlCenter {
-	private final ElevatorWrapper elevatorServer;
+	private ElevatorWrapper elevatorServer;
 	private final List<Elevator> elevators;
 	private final List<Floor> floors;
 	private boolean operatingMode;
@@ -25,6 +25,11 @@ public class ElevatorControlCenter {
 		operatingMode = AUTO;
 		elevators = new ArrayList<Elevator>();
 		floors = new ArrayList<Floor>();
+	}
+	
+	public void setServer(ElevatorWrapper server)
+	{
+		elevatorServer = server;
 	}
 	
 	public void InitElevatorAndFloors()
