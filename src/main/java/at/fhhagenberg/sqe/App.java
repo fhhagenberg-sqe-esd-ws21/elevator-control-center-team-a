@@ -8,6 +8,8 @@ import at.fhhagenberg.sqe.elevator.model.Elevator;
 import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
 import at.fhhagenberg.sqe.elevator.model.Floor;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -17,9 +19,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
+//import static org.mockito.Mockito.mock;
+//import static org.mockito.Mockito.when;
 
 /**
  * JavaFX App
@@ -28,45 +34,71 @@ import static org.mockito.Mockito.when;
 public class App extends Application 
 {
     private eccGUI gui;
+    private ElevatorControlCenter elContr;
 //    private static ElevatorControlCenter elContr;
 //    private static ElevatorWrapper eleWrap;
 //
 //    private static ElevatorWrapper wrappedElevator;
 //    private static ElevatorControlCenter ecc;
 //
-    @Mock
-    private static IElevator mockedIElevator = mock(IElevator.class);
+//    @Mock
+    private static IElevator elevator;// = mock(IElevator.class);
 //
 //    private static MockInitialiser mockInit;
 
-    protected eccGUI createGUI() throws RemoteException 
+    protected eccGUI createGUI()
     {
-    	
-        MockInitialiser mockInit = new MockInitialiser(mockedIElevator);
-        mockInit.defaultMockSetup();
+    	try {
+			elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			e.printStackTrace();
+		}
 
-        ElevatorWrapper eleWrap = new ElevatorWrapper(mockedIElevator);
-        ElevatorControlCenter elContr = new ElevatorControlCenter(eleWrap);
+
+        ElevatorWrapper eleWrap = new ElevatorWrapper(elevator);
+        elContr = new ElevatorControlCenter(eleWrap);
     	
     	return new eccGUI(elContr, 1280, 960); 
     	
     }
     
     @Override
-    public void start(Stage stage) 
+    public void start(Stage stage)
     {	
-
-    	try {
-			this.gui = createGUI();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	gui.init();
+		this.gui = createGUI();
+		gui.init();
+    	// background task
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+            	boolean connected = true;
+                while (true) {
+                    Thread.sleep(30);
+                	try {
+                		if(!connected)
+                			elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
+                		elContr.update();
+                        Platform.runLater(() -> {
+                            gui.update();
+                        });
+            		} catch (RuntimeException e) {
+            			// TODO Auto-generated catch block
+            			//e.printStackTrace();
+            			Platform.runLater(() -> {
+            				gui.setConnState(false);
+                        });
+            			connected = false;
+            		} catch (Exception e) {
+            			//System.out.print(e.getMessage());
+            		}
+                }
+            }
+        };
+        new Thread(task).start();
     	gui.start(stage);
     }
 
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) {
 //
 //        mockInit = new MockInitialiser(mockedIElevator);
 //        mockInit.defaultMockSetup();

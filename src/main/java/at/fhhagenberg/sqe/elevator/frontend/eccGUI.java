@@ -92,11 +92,22 @@ public class eccGUI {
      */
     public eccGUI(ElevatorControlCenter ecc, int width, int heigth) 
     {    elevatorCtrl = ecc;
-        elevatorCtrl.InitElevatorAndFloors();
-        nElevators = elevatorCtrl.getElevators().size();
-        nFloors = elevatorCtrl.getFloors().size();
+    	try {
+    		elevatorCtrl.InitElevatorAndFloors();
+    	} catch(Exception e) {
+    		System.out.print("Not connected on GUI init!");
+    	}
+    	if(elevatorCtrl.getElevators() == null)
+    		nElevators = 0;
+    	else
+    		nElevators = elevatorCtrl.getElevators().size();
+    	if(elevatorCtrl.getFloors() == null)
+    		nFloors = 0;
+    	else
+    		nFloors = elevatorCtrl.getFloors().size();
         wScene = width;
         hScene = heigth;
+
     }
 
     public void init() {
@@ -121,8 +132,8 @@ public class eccGUI {
 
         /* GUI, General Elements */
         label = new Label("Elevator Control Center");
-        bMode = new Button("set to Auto");
-        tMode = new Text("Operational Mode: Manual");
+        bMode = new Button("set to Manual");
+        tMode = new Text("Operational Mode: Automatic");
         tConn = new Text("Connected: ");
         tConnState = new Text("•");    // https://unicode-table.com/de/2022/
 
@@ -263,11 +274,12 @@ public class eccGUI {
             cbNextPoses[idxElevs] = new ChoiceBox();
             cbNextPoses[idxElevs].setOnAction(action -> actionNextPos(-1));
             for (int idxFloors = 0; idxFloors < nFloors; idxFloors++) {
-                cbNextPoses[idxElevs].getItems().add("" + (nFloors - idxFloors));
+                cbNextPoses[idxElevs].getItems().add("" + (nFloors-1 - idxFloors));
             }
             cbNextPoses[idxElevs].setLayoutX(xElevs + 400);
             cbNextPoses[idxElevs].setLayoutY(yElevs + 12 + 30 * (idxElevs));
             cbNextPoses[idxElevs].setId("cbNextPoses" + idxElevs);
+            cbNextPoses[idxElevs].setDisable(true);
             layout.getChildren().add(cbNextPoses[idxElevs]);
 
             tDirections[idxElevs] = new Text("up");
@@ -314,7 +326,7 @@ public class eccGUI {
         yFloors += 40;
 
         for (int idxFloors = 0; idxFloors < nFloors; idxFloors++) {
-            floorLabels[idxFloors] = new Text("" + (nFloors - idxFloors));
+            floorLabels[idxFloors] = new Text("" + (nFloors-1 - idxFloors));
             floorLabels[idxFloors].setLayoutX(xFloors);
             floorLabels[idxFloors].setLayoutY(yFloors + idxFloors * 30);
             floorLabels[idxFloors].setId("floorLabels" + idxFloors);
@@ -354,7 +366,7 @@ public class eccGUI {
         layout.getChildren().add(tConn);
 
         tConnState.setStyle("-fx-font: 48 arial;");
-        tConnState.setFill(Color.RED);
+        tConnState.setFill(Color.GREEN);
         tConnState.setId("tConnState");
         tConnState.setLayoutX(xElevs + wElevs - 120);
         tConnState.setLayoutY(yElevs + hElevs + 60);
@@ -377,17 +389,6 @@ public class eccGUI {
     {
         /* GUI, General Elements */
     	System.out.println("Update called");
-    	try 
-    	{	elevatorCtrl.update();
- 
-    	}
-    	catch (RuntimeException e)
-    	{	System.out.println("Error in callback: " + e);
-    		tConnState.setFill(Color.RED);
-    		return;
-    	}
-    	
-    	tConnState.setFill(Color.GREEN);
     	
         // elevatorCtrl.getOpMode();
     	
@@ -487,5 +488,12 @@ public class eccGUI {
         }
 
         this.update();
+    }
+    
+    public void setConnState(boolean connected) {
+    	if(connected)
+    		tConnState.setFill(Color.GREEN);
+    	else
+    		tConnState.setFill(Color.RED);
     }
 }
