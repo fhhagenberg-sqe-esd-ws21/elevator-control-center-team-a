@@ -47,7 +47,7 @@ public class App extends Application
 //
 //    private static MockInitialiser mockInit;
 
-    protected eccGUI createGUI()
+    protected eccGUI createGUI() throws RemoteException
     {
     	try {
 			elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
