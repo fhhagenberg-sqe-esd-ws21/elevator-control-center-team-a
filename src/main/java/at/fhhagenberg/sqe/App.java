@@ -77,6 +77,7 @@ public class App extends Application
                     Thread.sleep(30);
                 	try {
                 		if(!connected) {
+                			Thread.sleep(3000);
                 			connected = true;
                 			Platform.runLater(() -> {
                 				gui = createGUI();
