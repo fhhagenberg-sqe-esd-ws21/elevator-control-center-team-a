@@ -53,7 +53,7 @@ public class App extends Application
 			elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			e.printStackTrace();
-			throw new RemoteException("RemoteException");
+			
 		}
 
 
@@ -67,8 +67,12 @@ public class App extends Application
     @Override
     public void start(Stage stage)
     {	
+	try{
 		this.gui = createGUI();
 		gui.init();
+		}
+
+		catch (RemoteException ex) { }
     	// background task
         Task<Void> task = new Task<Void>() {
             @Override
