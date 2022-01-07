@@ -35,6 +35,7 @@ public class App extends Application
 {
     private eccGUI gui;
     private ElevatorControlCenter elContr;
+    private ElevatorWrapper eleWrap;
 //    private static ElevatorControlCenter elContr;
 //    private static ElevatorWrapper eleWrap;
 //
@@ -55,7 +56,7 @@ public class App extends Application
 		}
 
 
-        ElevatorWrapper eleWrap = new ElevatorWrapper(elevator);
+        eleWrap = new ElevatorWrapper(elevator);
         elContr = new ElevatorControlCenter(eleWrap);
     	
     	return new eccGUI(elContr, 1280, 960); 
@@ -75,21 +76,28 @@ public class App extends Application
                 while (true) {
                     Thread.sleep(30);
                 	try {
-                		if(!connected)
-                			elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
+                		if(!connected) {
+                			connected = true;
+                			Platform.runLater(() -> {
+                				gui = createGUI();
+                				gui.init();
+                				gui.setConnState(true);
+                		    	gui.start(stage);
+                            });
+                		}
                 		elContr.update();
                         Platform.runLater(() -> {
                             gui.update();
                         });
             		} catch (RuntimeException e) {
             			// TODO Auto-generated catch block
-            			//e.printStackTrace();
+            			e.printStackTrace();
             			Platform.runLater(() -> {
             				gui.setConnState(false);
                         });
             			connected = false;
             		} catch (Exception e) {
-            			//System.out.print(e.getMessage());
+            			System.out.print(e.getMessage());
             		}
                 }
             }
