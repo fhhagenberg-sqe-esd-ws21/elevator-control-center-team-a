@@ -34,6 +34,8 @@ public class ElevatorControlCenter {
 	
 	public void InitElevatorAndFloors()
 	{
+		elevators.clear();
+		floors.clear();
 		int size = elevatorServer.getElevatorNum();
 		for(int i = 0; i < size; i++)
 		{
