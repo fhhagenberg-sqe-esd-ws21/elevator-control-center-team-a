@@ -26,8 +26,8 @@ public class eccGUI {
     // DONE: floors und elevetors als Listen aus ECC übernehmen und davon GUI-ekemtne ableiten
     // DONE: GUI Element für jeden Elevator: welche Stockwerke wurden innen gedrückt, als Zahlen-Liste
 
-    private final int nElevators;
-    private final int nFloors;
+    private int nElevators;
+    private int nFloors;
 
     private boolean state; // true = Auto, false = manual
     private boolean connected; // true = connected, false = disconnect
@@ -92,11 +92,13 @@ public class eccGUI {
      */
     public eccGUI(ElevatorControlCenter ecc, int width, int heigth) 
     {    elevatorCtrl = ecc;
-    	try {
-    		elevatorCtrl.InitElevatorAndFloors();
-    	} catch(Exception e) {
-    		System.out.println("Not connected on GUI init!");
-    	}
+	    wScene = width;
+	    hScene = heigth;
+    }
+
+    public void init() {
+        state = true; // true = Auto, false = manual
+        connected = false; // true = connected, false = disconnect 
     	if(elevatorCtrl.getElevators() == null)
     		nElevators = 0;
     	else
@@ -105,14 +107,6 @@ public class eccGUI {
     		nFloors = 0;
     	else
     		nFloors = elevatorCtrl.getFloors().size();
-        wScene = width;
-        hScene = heigth;
-
-    }
-
-    public void init() {
-        state = true; // true = Auto, false = manual
-        connected = false; // true = connected, false = disconnect 
 
         // var tA = new Text(labels.getString("tA") );
         // var tB = new Text(labels.getString("tB"));

@@ -47,18 +47,24 @@ public class App extends Application
 //
 //    private static MockInitialiser mockInit;
 
-    protected eccGUI createGUI() throws RemoteException
+    protected eccGUI createGUI() throws RuntimeException
     {
     	try {
 			elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
+	        
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			e.printStackTrace();
-			
+            //throw(new RuntimeException("Error in createGui: " + e.getMessage()));
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
-
-
-        eleWrap = new ElevatorWrapper(elevator);
+    	eleWrap = new ElevatorWrapper(elevator);
         elContr = new ElevatorControlCenter(eleWrap);
+		try {
+        elContr.update();
+		} catch(RuntimeException e){ e.printStackTrace(); }
+
+
     	
     	return new eccGUI(elContr, 1280, 960); 
     	
@@ -67,10 +73,10 @@ public class App extends Application
     @Override
     public void start(Stage stage)
     {	
-	try{	this.gui = createGUI();
-           }catch (RemoteException ex) { ex.printStackTrace(); }
-	gui.init();
-		
+		try{	this.gui = createGUI();
+	           }catch (RuntimeException ex) { ex.printStackTrace(); }
+		gui.init();
+
     	// background task
         Task<Void> task = new Task<Void>() {
             @Override
@@ -82,18 +88,20 @@ public class App extends Application
                 		if(!connected) {
                 			Thread.sleep(3000);
                 			connected = true;
+							elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
+							elContr.setServer(new ElevatorWrapper(elevator));
+							elContr.InitElevatorAndFloors();
                 			Platform.runLater(() -> {
-					try{	gui = createGUI();
-		                           }catch (RemoteException ex) { ex.printStackTrace(); }
-                				gui.init();
-                				gui.setConnState(true);
-                		    	gui.start(stage);
-                            });
+			                				gui.init();
+			                				gui.setConnState(true);
+			                		    	gui.start(stage);
+			                });
+
+                		} else {
+                			elContr.update();
+                			Platform.runLater(() -> { gui.update(); });
                 		}
-                		elContr.update();
-                        Platform.runLater(() -> {
-                            gui.update();
-                        });
+                		
             		} catch (RuntimeException e) {
             			// TODO Auto-generated catch block
             			e.printStackTrace();
