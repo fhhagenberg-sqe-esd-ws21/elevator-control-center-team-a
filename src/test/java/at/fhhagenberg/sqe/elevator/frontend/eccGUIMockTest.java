@@ -59,7 +59,7 @@ public class eccGUIMockTest {
     	
         var app = new App() {
         	@Override
-        	protected eccGUI createGUI() throws RemoteException {
+        	protected eccGUI createGUI() {
 
             //  return new eccGUI(mockedEcc, 1280, 960);
         		return new eccGUI(ecc, 1280, 960);
