@@ -21,8 +21,6 @@ import at.fhhagenberg.sqe.elevator.model.Elevator;
 
 public class eccGUI {
 
-    // DONE: floors und elevetors als Listen aus ECC übernehmen und davon GUI-ekemtne ableiten
-    // DONE: GUI Element für jeden Elevator: welche Stockwerke wurden innen gedrückt, als Zahlen-Liste
 
     private int nElevators;
     private int nFloors;
@@ -41,6 +39,11 @@ public class eccGUI {
     private double hElevs;
     private double wElevs;
 
+    
+    private double 	hFloor;
+    private double 	hOffEelev;
+    private double 	hElev;
+    
     private double xFloors;
     private double yFloors;
     private double wFloors;
@@ -114,21 +117,28 @@ public class eccGUI {
 
         // geometry data
         xElevs = 325;
-        yElevs = 200;
-        hElevs = 90.0 + 30 * (nElevators) + 20;
+        yElevs = 100;
+		hFloor = 25;
+		hOffEelev = 30;
+		hElev  = 60;
+        hElevs = 90 + hElev * (nElevators) + 20;
         wElevs = 875;
         xFloors = 50;
-        yFloors = 200;
+        yFloors = 100;
         wFloors = 250;
-        hFloors = 90.0 + 30 * (nFloors);
+        hFloors = 90 + hFloor * (nFloors);
 
         /* GUI, General Elements */
         label = new Label("Elevator Control Center");
         bMode = new Button("set to Manual");
         tMode = new Text("Operational Mode: Automatic");
-        tConn = new Text("Connected: ");
-        tConnState = new Text("•");    // https://unicode-table.com/de/2022/
+        tConn = new Text("Connection Status: ");
+        tConnState = new Text("disconnected");    // https://unicode-table.com/de/2022/
 
+        label.setStyle("-fx-font: 28 arial;");
+        label.setLayoutX(20);
+        label.setLayoutY(20);
+        
         /* GUI, Floor-wise Elements */
         tFloors = new Text("Floors");
         floorLabels = new Text[nFloors];
@@ -209,12 +219,12 @@ public class eccGUI {
         tNextPos.setId("tNextPos");
         layout.getChildren().add(tNextPos);
 
-        tPressed.setLayoutX(xElevs + 300);
+        tPressed.setLayoutX(xElevs + 400);
         tPressed.setLayoutY(yElevs);
         tPressed.setId("tPressed");
         layout.getChildren().add(tPressed);
 
-        tChooseNextPos.setLayoutX(xElevs + 400);
+        tChooseNextPos.setLayoutX(xElevs + 300);
         tChooseNextPos.setLayoutY(yElevs);
         layout.getChildren().add(tChooseNextPos);
 
@@ -238,28 +248,29 @@ public class eccGUI {
         tDoor.setId("tDoor");
         layout.getChildren().add(tDoor);
 
+
         for (int idxElevs = 0; idxElevs < nElevators; idxElevs++) {
             tNumbers[idxElevs] = new Text("" + idxElevs);
             tNumbers[idxElevs].setLayoutX(xElevs);
-            tNumbers[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
+            tNumbers[idxElevs].setLayoutY(yElevs + hElev * (idxElevs ) + hOffEelev);
             tNumbers[idxElevs].setId("tNumbers" + idxElevs);
             layout.getChildren().add(tNumbers[idxElevs]);
 
             tPositions[idxElevs] = new Text("");
             tPositions[idxElevs].setLayoutX(xElevs + 100);
-            tPositions[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
+            tPositions[idxElevs].setLayoutY(yElevs + hElev * (idxElevs ) + hOffEelev);
             tPositions[idxElevs].setId("tPositions" + idxElevs);
             layout.getChildren().add(tPositions[idxElevs]);
 
             tNextPoses[idxElevs] = new Text("");
             tNextPoses[idxElevs].setLayoutX(xElevs + 200);
-            tNextPoses[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
+            tNextPoses[idxElevs].setLayoutY(yElevs + hElev * (idxElevs ) + hOffEelev);
             tNextPoses[idxElevs].setId("tNextPoses" + idxElevs);
             layout.getChildren().add(tNextPoses[idxElevs]);
 
             tPresseds[idxElevs] = new Text("");
-            tPresseds[idxElevs].setLayoutX(xElevs + 300);
-            tPresseds[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
+            tPresseds[idxElevs].setLayoutX(xElevs + 400);
+            tPresseds[idxElevs].setLayoutY(yElevs + hElev * (idxElevs + 0.5) + hOffEelev);
             tPresseds[idxElevs].setId("tPresseds" + idxElevs);
             layout.getChildren().add(tPresseds[idxElevs]);
 
@@ -268,33 +279,33 @@ public class eccGUI {
             for (int idxFloors = 0; idxFloors < nFloors; idxFloors++) {
                 cbNextPoses[idxElevs].getItems().add("" + (nFloors-1 - idxFloors));
             }
-            cbNextPoses[idxElevs].setLayoutX(xElevs + 400);
-            cbNextPoses[idxElevs].setLayoutY(yElevs + 12 + 30 * (idxElevs));
+            cbNextPoses[idxElevs].setLayoutX(xElevs + 300);
+            cbNextPoses[idxElevs].setLayoutY(yElevs + 15 + hElev * (idxElevs));
             cbNextPoses[idxElevs].setId("cbNextPoses" + idxElevs);
             cbNextPoses[idxElevs].setDisable(true);
             layout.getChildren().add(cbNextPoses[idxElevs]);
 
             tDirections[idxElevs] = new Text("up");
             tDirections[idxElevs].setLayoutX(xElevs + 500);
-            tDirections[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
+            tDirections[idxElevs].setLayoutY(yElevs + hElev * (idxElevs) + hOffEelev);
             tDirections[idxElevs].setId("tDirections" + idxElevs);
             layout.getChildren().add(tDirections[idxElevs]);
 
             tPayloads[idxElevs] = new Text("0");
             tPayloads[idxElevs].setLayoutX(xElevs + 600);
-            tPayloads[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
+            tPayloads[idxElevs].setLayoutY(yElevs + hElev * (idxElevs) + hOffEelev);
             tPayloads[idxElevs].setId("tPayloads" + idxElevs);
             layout.getChildren().add(tPayloads[idxElevs]);
 
             tSpeeds[idxElevs] = new Text("0");
             tSpeeds[idxElevs].setLayoutX(xElevs + 700);
-            tSpeeds[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
+            tSpeeds[idxElevs].setLayoutY(yElevs + hElev * (idxElevs ) + hOffEelev);
             tSpeeds[idxElevs].setId("tSpeeds" + idxElevs);
             layout.getChildren().add(tSpeeds[idxElevs]);
 
             tDoors[idxElevs] = new Text("-");
             tDoors[idxElevs].setLayoutX(xElevs + 800);
-            tDoors[idxElevs].setLayoutY(yElevs + 30 * (idxElevs + 1));
+            tDoors[idxElevs].setLayoutY(yElevs + hElev * (idxElevs) + hOffEelev);
             tDoors[idxElevs].setId("tDoors" + idxElevs);
             layout.getChildren().add(tDoors[idxElevs]);
 
@@ -320,13 +331,13 @@ public class eccGUI {
         for (int idxFloors = 0; idxFloors < nFloors; idxFloors++) {
             floorLabels[idxFloors] = new Text("" + (nFloors-1 - idxFloors));
             floorLabels[idxFloors].setLayoutX(xFloors);
-            floorLabels[idxFloors].setLayoutY(yFloors + idxFloors * 30);
+            floorLabels[idxFloors].setLayoutY(yFloors + idxFloors * hFloor);
             floorLabels[idxFloors].setId("floorLabels" + idxFloors);
             layout.getChildren().add(floorLabels[idxFloors]);
 
             floorUpArrows[idxFloors] = new Text("•");
             floorUpArrows[idxFloors].setLayoutX(xFloors + 40);
-            floorUpArrows[idxFloors].setLayoutY(yFloors + idxFloors * 30 + 5);
+            floorUpArrows[idxFloors].setLayoutY(yFloors + idxFloors * hFloor + 5);
             floorUpArrows[idxFloors].setStyle("-fx-font: 32 arial;");
             floorUpArrows[idxFloors].setFill(Color.RED);
             floorUpArrows[idxFloors].setId("floorUpArrows+idxFloors");
@@ -334,7 +345,7 @@ public class eccGUI {
 
             floorDownArrows[idxFloors] = new Text("•");
             floorDownArrows[idxFloors].setLayoutX(xFloors + 60);
-            floorDownArrows[idxFloors].setLayoutY(yFloors + idxFloors * 30 + 5);
+            floorDownArrows[idxFloors].setLayoutY(yFloors + idxFloors * hFloor + 5);
             floorDownArrows[idxFloors].setStyle("-fx-font: 32 arial;");
             floorDownArrows[idxFloors].setFill(Color.GREEN);
             floorDownArrows[idxFloors].setId("floorDownArrows+idxFloors");
@@ -357,11 +368,11 @@ public class eccGUI {
         tConn.setId("tConn");
         layout.getChildren().add(tConn);
 
-        tConnState.setStyle("-fx-font: 48 arial;");
-        tConnState.setFill(Color.GREEN);
+        // tConnState.setStyle("-fx-font: 48 arial;");
+        // tConnState.setFill(Color.GREEN);
         tConnState.setId("tConnState");
         tConnState.setLayoutX(xElevs + wElevs - 120);
-        tConnState.setLayoutY(yElevs + hElevs + 60);
+        tConnState.setLayoutY(yElevs + hElevs + 50);
         layout.getChildren().add(tConnState);
 
         layout.getChildren().add(label);
@@ -379,7 +390,9 @@ public class eccGUI {
      * */
     public void update() 
     {
+        /* GUI, General Elements */
 
+    	
     	/* GUI, Floor-wise Elements  */
         for(int idxFloors = 0; idxFloors< nFloors; idxFloors++)
        	{	Floor floor = elevatorCtrl.getFloors().get(idxFloors);
@@ -394,8 +407,6 @@ public class eccGUI {
         		floorUpArrows[idxFloors].setFill(Color.RED);
         	}
        	}
-    	
-    	
     	
         /* GUI, Elevator-wise Elements      */
         for(int idxElevs = 0; idxElevs < nElevators; idxElevs++)
@@ -480,8 +491,11 @@ public class eccGUI {
     
     public void setConnState(boolean connected) {
     	if(connected)
-    		tConnState.setFill(Color.GREEN);
-    	else
+    	{	tConnState.setFill(Color.GREEN);
+    		tConnState.setText("connected");
+    	}else {
     		tConnState.setFill(Color.RED);
+    		tConnState.setText("disconnected");
+    	}
     }
 }
