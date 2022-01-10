@@ -12,7 +12,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
 
-import org.mockito.junit.jupiter.MockitoExtension;
 import sqelevator.IElevator;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -25,7 +24,7 @@ import java.rmi.NotBoundException;
 /**
  * JavaFX App
  */
-@ExtendWith(MockitoExtension.class)
+
 public class App extends Application 
 {
     private eccGUI gui;

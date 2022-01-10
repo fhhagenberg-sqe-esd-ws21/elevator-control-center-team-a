@@ -1,7 +1,6 @@
 at\fhhagenberg\sqe\SystemInfo.class
 at\fhhagenberg\sqe\elevator\frontend\eccGUI.class
 sqelevator\ElevatorExample.class
-at\fhhagenberg\sqe\elevator\backend\MockInitialiser.class
 at\fhhagenberg\sqe\App.class
 at\fhhagenberg\sqe\elevator\model\Elevator.class
 sqelevator\IElevator.class
