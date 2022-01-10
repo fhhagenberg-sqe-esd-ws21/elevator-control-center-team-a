@@ -68,5 +68,11 @@ public class MockInitialiser {
         for(int i = 0; i < floors; i++)
             initMockFloor(i, false, false, 100);
     }
+    
+    public void exceptionMockSetup() throws RemoteException
+    {
+        when(elevatorMock.getElevatorAccel(0)).thenThrow(new RemoteException("Remote Error"));
+        when(elevatorMock.getElevatorNum()).thenThrow(new RemoteException("Remote Error"));
+    }
 
 }
