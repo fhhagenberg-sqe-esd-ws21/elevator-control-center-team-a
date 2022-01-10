@@ -13,7 +13,6 @@ import javafx.concurrent.Task;
 import javafx.stage.Stage;
 
 import sqelevator.IElevator;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.rmi.RemoteException;
 
