@@ -70,7 +70,7 @@ public class eccGUIMockTest {
         
     }
     
-    @Test
+    // @Test
     public void testDefaultGui(FxRobot robot) throws RemoteException
     {
         mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
@@ -82,7 +82,7 @@ public class eccGUIMockTest {
     	// https://www.programcreek.com/java-api-examples/?class=org.testfx.api.FxAssert&method=verifyThat
     }
 
-    @Test
+    // @Test
     public void testGuiDropDown(FxRobot robot) throws RemoteException
     {
         mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
