@@ -70,7 +70,7 @@ public class eccGUIMockTest {
         
     }
     
-    // @Test
+    @Test
     public void testDefaultGui(FxRobot robot) throws RemoteException
     {
         mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
@@ -82,7 +82,7 @@ public class eccGUIMockTest {
     	// https://www.programcreek.com/java-api-examples/?class=org.testfx.api.FxAssert&method=verifyThat
     }
 
-    // @Test
+    @Test
     public void testGuiDropDown(FxRobot robot) throws RemoteException
     {
         mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
@@ -106,14 +106,19 @@ public class eccGUIMockTest {
 
     }
     
-//    @Test
+    @Test
     public void testGuiFloorUP(FxRobot robot) throws RemoteException, InterruptedException 
     {	mockInit.initMockFloor(0, true, true, 0);
-    	robot.clickOn("#cbNextPoses0");
+		robot.clickOn("#bMode");
+		robot.clickOn("#bMode");
+
+
+		robot.clickOn("#cbNextPoses0");
     	robot.clickOn("#cbNextPoses1");
     	
-    	Thread.sleep(14);
-    	//FxAssert.verifyThat("#tNextPos", TextInputControlMatchers.hasText("next pos."));
+    	Thread.sleep(100);
+    	FxAssert.verifyThat("#tNextPos", TextMatchers.hasText("Next Pos."));
+    	FxAssert.verifyThat("#tNextPoses0", TextMatchers.hasText("4"));
     }
     
 //    @Test
