@@ -32,7 +32,8 @@ public class App extends Application
 
     private static IElevator elevator;
 
-    protected eccGUI createGUI()
+    
+    protected ElevatorWrapper createWrapper()
     {
     	try {
 			elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
@@ -42,8 +43,12 @@ public class App extends Application
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-    	eleWrap = new ElevatorWrapper(elevator);
-        elContr = new ElevatorControlCenter(eleWrap);
+    	return new ElevatorWrapper(elevator);
+    }
+    
+    protected eccGUI createGUI()
+    {
+        elContr = new ElevatorControlCenter(createWrapper());
 		try {
         elContr.update();
 		} catch(RuntimeException e){ e.printStackTrace(); }
@@ -70,8 +75,7 @@ public class App extends Application
                 		if(!connected) {
                 			Thread.sleep(3000);
                 			connected = true;
-							elevator = (IElevator) Naming.lookup("rmi://127.0.0.1/ElevatorSim");
-							elContr.setServer(new ElevatorWrapper(elevator));
+							elContr.setServer(createWrapper());
 							elContr.InitElevatorAndFloors();
                 			Platform.runLater(() -> {
 			                				gui.init();

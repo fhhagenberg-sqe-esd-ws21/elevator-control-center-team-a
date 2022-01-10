@@ -27,6 +27,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 import org.testfx.api.FxRobot;
@@ -43,7 +44,6 @@ public class eccGUIMockTest {
 
     //@Mock
     // private static ElevatorControlCenter mockedEcc = mock(ElevatorControlCenter.class);
-    @Mock
     private static MockInitialiser mockInit;
     
     @Start
@@ -60,11 +60,8 @@ public class eccGUIMockTest {
 
         var app = new App() {
         	@Override
-        	protected eccGUI createGUI() {
-
-                elContr = ecc;
-                elContr.update();
-        		return new eccGUI(ecc, 1280, 960);
+        	protected ElevatorWrapper createWrapper() {
+        		return wrappedElevator;
         	}
         };
 
@@ -119,13 +116,15 @@ public class eccGUIMockTest {
     	//FxAssert.verifyThat("#tNextPos", TextInputControlMatchers.hasText("next pos."));
     }
     
-    //@Test
-    public void testGuiThrowUp(FxRobot robot) throws RemoteException 
+//    @Test
+    public void testGuiThrowUp(FxRobot robot) throws RemoteException, RuntimeException 
     {
-        when(mockedIElevator.getElevatorAccel(0)).thenThrow(new RemoteException("Remote Error"));
+    	mockInit.exceptionMockSetup();
+
         mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
     	mockInit.initMockFloor(0, true, true, 0);
     	
+
     	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("•"));
         mockInit.defaultMockSetup();
     }
