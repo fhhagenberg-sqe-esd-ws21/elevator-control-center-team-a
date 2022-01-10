@@ -27,7 +27,7 @@ import java.rmi.NotBoundException;
 public class App extends Application 
 {
     private eccGUI gui;
-    private ElevatorControlCenter elContr;
+    protected ElevatorControlCenter elContr;
     private ElevatorWrapper eleWrap;
 
     private static IElevator elevator;
@@ -97,12 +97,15 @@ public class App extends Application
                 }
             }
         };
-        new Thread(task).start();
-    	gui.start(stage);
+
+		Thread thd = new Thread(task);
+		thd.setDaemon(true);
+		thd.start();
+
+		gui.start(stage);
     }
 
     public static void main(String[] args) {
-    	
         launch();
     }
 
