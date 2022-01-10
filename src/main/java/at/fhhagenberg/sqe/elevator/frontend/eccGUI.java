@@ -15,8 +15,6 @@ import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
 
 import java.util.ArrayList;
 
-import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
-import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
 import at.fhhagenberg.sqe.elevator.model.Floor;
 import at.fhhagenberg.sqe.elevator.model.Elevator;
 
@@ -35,18 +33,18 @@ public class eccGUI {
     private ElevatorControlCenter elevatorCtrl;
 
     // geometry data
-    private final int hScene;
-    private final int wScene;
+    private final double hScene;
+    private final double wScene;
 
-    private int xElevs;
-    private int yElevs;
-    private int hElevs;
-    private int wElevs;
+    private double xElevs;
+    private double yElevs;
+    private double hElevs;
+    private double wElevs;
 
-    private int xFloors;
-    private int yFloors;
-    private int wFloors;
-    private int hFloors;
+    private double xFloors;
+    private double yFloors;
+    private double wFloors;
+    private double hFloors;
 
     // General Elements 
     Label label;
@@ -117,12 +115,12 @@ public class eccGUI {
         // geometry data
         xElevs = 325;
         yElevs = 200;
-        hElevs = 90 + 30 * (nElevators) + 20;
+        hElevs = 90.0 + 30 * (nElevators) + 20;
         wElevs = 875;
         xFloors = 50;
         yFloors = 200;
         wFloors = 250;
-        hFloors = 90 + 30 * (nFloors);
+        hFloors = 90.0 + 30 * (nFloors);
 
         /* GUI, General Elements */
         label = new Label("Elevator Control Center");
@@ -381,11 +379,7 @@ public class eccGUI {
      * */
     public void update() 
     {
-        /* GUI, General Elements */
-    	// System.out.println("Update called");
-    	
-        // elevatorCtrl.getOpMode();
-    	
+
     	/* GUI, Floor-wise Elements  */
         for(int idxFloors = 0; idxFloors< nFloors; idxFloors++)
        	{	Floor floor = elevatorCtrl.getFloors().get(idxFloors);

@@ -11,8 +11,8 @@ public class ElevatorControlCenter {
 	private final List<Floor> floors;
 	private boolean operatingMode;
 	
-	public static boolean AUTO = true;
-	public static boolean MANUAL = false;
+	public static final boolean AUTO = true;
+	public static final boolean MANUAL = false;
 
 	/**
      * Constructor - creates new ElevatorControlCenter
@@ -23,8 +23,8 @@ public class ElevatorControlCenter {
 	{
 		elevatorServer = server;
 		operatingMode = AUTO;
-		elevators = new ArrayList<Elevator>();
-		floors = new ArrayList<Floor>();
+		elevators = new ArrayList<>();
+		floors = new ArrayList<>();
 	}
 	
 	public void setServer(ElevatorWrapper server)
@@ -106,7 +106,7 @@ public class ElevatorControlCenter {
      */
 	public void update()
 	{
-		if(elevators.size() <= 0) {
+		if(elevators.isEmpty()) {
 			InitElevatorAndFloors();
 			return;
 		}

@@ -1,51 +1,36 @@
 package at.fhhagenberg.sqe;
 
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
-import at.fhhagenberg.sqe.elevator.backend.MockInitialiser;
+
 import at.fhhagenberg.sqe.elevator.frontend.eccGUI;
 
-import at.fhhagenberg.sqe.elevator.model.Elevator;
+
 import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
-import at.fhhagenberg.sqe.elevator.model.Floor;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+
 import sqelevator.IElevator;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 
-
-//import static org.mockito.Mockito.mock;
-//import static org.mockito.Mockito.when;
-
 /**
  * JavaFX App
  */
-@ExtendWith(MockitoExtension.class)
+
 public class App extends Application 
 {
     private eccGUI gui;
-    private ElevatorControlCenter elContr;
+    protected ElevatorControlCenter elContr;
     private ElevatorWrapper eleWrap;
-//    private static ElevatorControlCenter elContr;
-//    private static ElevatorWrapper eleWrap;
-//
-//    private static ElevatorWrapper wrappedElevator;
-//    private static ElevatorControlCenter ecc;
-//
-//    @Mock
-    private static IElevator elevator;// = mock(IElevator.class);
-//
-//    private static MockInitialiser mockInit;
+
+    private static IElevator elevator;
 
     protected eccGUI createGUI()
     {
@@ -54,7 +39,6 @@ public class App extends Application
 	        
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			e.printStackTrace();
-            //throw(new RuntimeException("Error in createGui: " + e.getMessage()));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -64,9 +48,7 @@ public class App extends Application
         elContr.update();
 		} catch(RuntimeException e){ e.printStackTrace(); }
 
-
-    	
-    	return new eccGUI(elContr, 1280, 960); 
+    	return new eccGUI(elContr, 1280, 960);
     	
     }
     
@@ -115,20 +97,15 @@ public class App extends Application
                 }
             }
         };
-        new Thread(task).start();
-    	gui.start(stage);
+
+		Thread thd = new Thread(task);
+		thd.setDaemon(true);
+		thd.start();
+
+		gui.start(stage);
     }
 
     public static void main(String[] args) {
-//
-//        mockInit = new MockInitialiser(mockedIElevator);
-//        mockInit.defaultMockSetup();
-//
-//        eleWrap = new ElevatorWrapper(mockedIElevator);
-//        elContr = new ElevatorControlCenter(eleWrap);
-//    	gui = new eccGUI(elContr, 1280, 960);
-    	
-    	
         launch();
     }
 

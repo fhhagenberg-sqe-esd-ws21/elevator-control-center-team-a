@@ -1,7 +1,6 @@
 package at.fhhagenberg.sqe.elevator.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Elevator {
 	private int commitedDirection;
@@ -15,11 +14,11 @@ public class Elevator {
 	private int elevatorWeight;
 	private int elevatorTarget;
 
-	public static int OPEN = 1;
-	public static int CLOSED = 0;
-	public static int UP = 1;
-	public static int DOWN = 2;
-	public static int UNCOMMITTED = 3;
+	public static final int OPEN = 1;
+	public static final int CLOSED = 0;
+	public static final int UP = 1;
+	public static final int DOWN = 2;
+	public static final int UNCOMMITTED = 3;
 	
 	/**
      * Constructor - creates new Elevator
@@ -29,7 +28,7 @@ public class Elevator {
 	public Elevator(int num)
 	{
 		elevatorNum = num;
-		elevatorButtons = new ArrayList<Integer>();
+		elevatorButtons = new ArrayList<>();
 	}
 	
 	/**

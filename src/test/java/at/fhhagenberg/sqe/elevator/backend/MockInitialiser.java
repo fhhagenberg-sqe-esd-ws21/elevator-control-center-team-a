@@ -2,56 +2,55 @@ package at.fhhagenberg.sqe.elevator.backend;
 
 import at.fhhagenberg.sqe.elevator.model.Elevator;
 import at.fhhagenberg.sqe.elevator.model.Floor;
-import org.mockito.Mock;
 import sqelevator.IElevator;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.eq;
+
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 public class MockInitialiser {
 
-    private final IElevator _mockedIElevator;
+    private final IElevator elevatorMock;
 
     public MockInitialiser(IElevator mockedIElevator)
     {
-        _mockedIElevator = mockedIElevator;
+        elevatorMock = mockedIElevator;
     }
 
     public void initMockNums(int elevators, int floors) throws RemoteException {
-        when(_mockedIElevator.getElevatorNum()).thenReturn(elevators);
-        when(_mockedIElevator.getFloorNum()).thenReturn(floors);
+        when(elevatorMock.getElevatorNum()).thenReturn(elevators);
+        when(elevatorMock.getFloorNum()).thenReturn(floors);
     }
 
     public void initMockElevator(int elevator, int direction, int accel, int capacity, int doorStatus,
                                   int floor, int pos, int speed, int weight,
                                   int target, List<Integer> buttons) throws RemoteException {
-        when(_mockedIElevator.getCommittedDirection(elevator)).thenReturn(direction);
-        when(_mockedIElevator.getElevatorAccel(elevator)).thenReturn(accel);
-        when(_mockedIElevator.getElevatorCapacity(elevator)).thenReturn(capacity);
-        when(_mockedIElevator.getElevatorDoorStatus(elevator)).thenReturn(doorStatus);
-        when(_mockedIElevator.getElevatorFloor(elevator)).thenReturn(floor);
-        when(_mockedIElevator.getElevatorPosition(elevator)).thenReturn(pos);
-        when(_mockedIElevator.getElevatorSpeed(elevator)).thenReturn(speed);
-        when(_mockedIElevator.getElevatorWeight(elevator)).thenReturn(weight);
-        when(_mockedIElevator.getTarget(elevator)).thenReturn(target);
+        when(elevatorMock.getCommittedDirection(elevator)).thenReturn(direction);
+        when(elevatorMock.getElevatorAccel(elevator)).thenReturn(accel);
+        when(elevatorMock.getElevatorCapacity(elevator)).thenReturn(capacity);
+        when(elevatorMock.getElevatorDoorStatus(elevator)).thenReturn(doorStatus);
+        when(elevatorMock.getElevatorFloor(elevator)).thenReturn(floor);
+        when(elevatorMock.getElevatorPosition(elevator)).thenReturn(pos);
+        when(elevatorMock.getElevatorSpeed(elevator)).thenReturn(speed);
+        when(elevatorMock.getElevatorWeight(elevator)).thenReturn(weight);
+        when(elevatorMock.getTarget(elevator)).thenReturn(target);
         for(var button : buttons ) {
-            lenient().when(_mockedIElevator.getElevatorButton(elevator, button)).thenReturn(Floor.ON);
+            lenient().when(elevatorMock.getElevatorButton(elevator, button)).thenReturn(Floor.ON);
         }
     }
 
     public void initMockFloor(int floor, boolean buttonUp, boolean buttonDown, int height) throws RemoteException {
-        when(_mockedIElevator.getFloorButtonDown(floor)).thenReturn(buttonUp);
-        when(_mockedIElevator.getFloorButtonUp(floor)).thenReturn(buttonDown);
-        when(_mockedIElevator.getFloorHeight()).thenReturn(height);
+        when(elevatorMock.getFloorButtonDown(floor)).thenReturn(buttonUp);
+        when(elevatorMock.getFloorButtonUp(floor)).thenReturn(buttonDown);
+        when(elevatorMock.getFloorHeight()).thenReturn(height);
     }
 
     public List<Integer> setButton(int min, int max) {
-        ArrayList<Integer> buttons = new ArrayList();
+        ArrayList<Integer> buttons = new ArrayList<>();
         for(int i = min; i <= max; i++)
             buttons.add(i);
         return buttons;
