@@ -18,6 +18,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.base.NodeMatchers;
+import org.testfx.matcher.base.StyleableMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
 import org.testfx.matcher.control.TextMatchers;
 
@@ -70,18 +71,44 @@ public class eccGUIMockTextEx {
         
     }
     
-    @Test
-    public void testGuiThrowUp(FxRobot robot) throws RemoteException, RuntimeException 
+//    @Test
+    public void testGuiThrowRemoteEx(FxRobot robot) throws RemoteException, RuntimeException 
     {
     	mockInit.exceptionMockSetup();
 
         mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
     	
-		assertThrows(RemoteException.class, ()->{ robot.clickOn("#bMode"); 	 });
-  	
+	//	assertThrows(RemoteException.class, ()->{ robot.clickOn("#bMode"); 	 });
+    	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("disconnected"));
+    //	FxAssert.verifyThat("#tConnState", StyleableMatchers.hasStyle(null)); 
+		
         mockInit.defaultMockSetup();
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
