@@ -78,8 +78,8 @@ public class eccGUIMockTest {
     	robot.clickOn("#bMode");
     	robot.clickOn("#bMode");
 
-    	robot.clickOn("#cbNextPoses0");
     	robot.clickOn("#cbNextPoses1");
+    	robot.clickOn("#cbNextPoses3");
 
     	FxAssert.verifyThat("#cbNextPoses0",  NodeMatchers.isVisible());
     	FxAssert.verifyThat("#cbNextPoses1",  NodeMatchers.isVisible());
