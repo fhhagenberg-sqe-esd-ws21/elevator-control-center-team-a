@@ -37,14 +37,9 @@ mvn clean package
 The resulting archive (`.jar` file) is in the `target` directory.
 
 ### Marios Kommentare zur GUI
-	Geschosse: EK, 1, 2, 3 \
-	called Spalte: auf/ab - Anzeigen \
-	called Spalte zusätzlich per Lift \
 	LIFTE ~3 \
 	Stock ~10 \
 	Stop-request: im Lift, zeigt an wo ich hinfahren will \
 	gibt immer rauf/runter Knöpfe pro Stockwerk \
-	Target, Ziel-Stockwerk, gibts immer nur eines \
-	Interface zum Lift wird ein RMI-Interface \
 	Verbindung zu Steuerung kann abreissen, muss dem Benutzer gemeldet werden und die GUI muss überleben! \
 	
