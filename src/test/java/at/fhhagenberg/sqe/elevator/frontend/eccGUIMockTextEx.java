@@ -1,5 +1,6 @@
 package at.fhhagenberg.sqe.elevator.frontend;
 import at.fhhagenberg.sqe.App;
+import at.fhhagenberg.sqe.elevator.backend.ElevatorMock;
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 import at.fhhagenberg.sqe.elevator.backend.MockInitialiser;
 import at.fhhagenberg.sqe.elevator.model.Elevator;
@@ -37,23 +38,34 @@ import org.testfx.api.FxRobot;
 @ExtendWith(MockitoExtension.class)
 public class eccGUIMockTextEx {
 
-    private static ElevatorWrapper wrappedElevator;
-    private static ElevatorControlCenter ecc;
+    private ElevatorWrapper wrappedElevator;
+    private ElevatorControlCenter ecc;
 
-    @Mock
-    private static IElevator mockedIElevator = mock(IElevator.class);
+//    @Mock
+//    private static IElevator mockedIElevator = mock(IElevator.class);
+	private ElevatorMock mockedIElevator;
+
 
     //@Mock
     // private static ElevatorControlCenter mockedEcc = mock(ElevatorControlCenter.class);
-    private static MockInitialiser mockInit;
+    private MockInitialiser mockInit;
     
     @Start
     public void start(Stage stage) throws RemoteException{
-
+		
+    	mockedIElevator = new ElevatorMock(3, 12); 
+    	// {
+    	// 	@Override
+    	// 	public int getTarget(int elevatorNumber) throws RemoteException {
+    	// 		throw new RemoteException("Connection lost");
+    	// 		// return super.getTarget(elevatorNumber);
+    	// 	}
+    	// };
+    			
         mockInit = new MockInitialiser(mockedIElevator);
         mockInit.defaultMockSetup();
 
-        // doThrow(new RuntimeException("Connection lost")).when(mockedEcc).update();        
+        // doThrow(new RemoteException("Connection lost")).when(mockedEcc).update();        
         // https://www.baeldung.com/mockito-exceptions
 
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
@@ -71,18 +83,21 @@ public class eccGUIMockTextEx {
         
     }
     
-//    @Test
-    public void testGuiThrowRemoteEx(FxRobot robot) throws RemoteException, RuntimeException 
+    @Test
+    public void testGuiThrowRemoteEx(FxRobot robot) throws RemoteException, RuntimeException, InterruptedException 
     {
-    	mockInit.exceptionMockSetup();
-
-        mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
+    	mockInit.exceptionMockSetup(true);
+		
+    	
+        // mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
     	
 	//	assertThrows(RemoteException.class, ()->{ robot.clickOn("#bMode"); 	 });
     	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("disconnected"));
     //	FxAssert.verifyThat("#tConnState", StyleableMatchers.hasStyle(null)); 
+
+    	mockInit.exceptionMockSetup(false);
+    	Thread.sleep(5000);
 		
-        mockInit.defaultMockSetup();
     }
 
 }

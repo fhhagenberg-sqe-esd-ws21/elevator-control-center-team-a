@@ -371,6 +371,7 @@ public class eccGUI {
         // tConnState.setStyle("-fx-font: 48 arial;");
         // tConnState.setFill(Color.GREEN);
         tConnState.setId("tConnState");
+		tConnState.setFill(Color.RED);
         tConnState.setLayoutX(xElevs + wElevs - 120);
         tConnState.setLayoutY(yElevs + hElevs + 50);
         layout.getChildren().add(tConnState);
