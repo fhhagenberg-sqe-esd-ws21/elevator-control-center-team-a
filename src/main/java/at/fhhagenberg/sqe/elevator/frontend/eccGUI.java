@@ -99,7 +99,7 @@ public class eccGUI {
 
     public void init() {
         state = true; // true = Auto, false = manual
-        connected = false; // true = connected, false = disconnect 
+        connected = true; // true = connected, false = disconnect 
     	if(elevatorCtrl.getElevators() == null)
     		nElevators = 0;
     	else
@@ -134,6 +134,7 @@ public class eccGUI {
         tMode = new Text("Operational Mode: Automatic");
         tConn = new Text("Connection Status: ");
         tConnState = new Text("disconnected");    // https://unicode-table.com/de/2022/
+        this.setConnState(connected);
 
         label.setStyle("-fx-font: 28 arial;");
         label.setLayoutX(20);
@@ -371,7 +372,7 @@ public class eccGUI {
         // tConnState.setStyle("-fx-font: 48 arial;");
         // tConnState.setFill(Color.GREEN);
         tConnState.setId("tConnState");
-		tConnState.setFill(Color.RED);
+		//tConnState.setFill(Color.RED);
         tConnState.setLayoutX(xElevs + wElevs - 120);
         tConnState.setLayoutY(yElevs + hElevs + 50);
         layout.getChildren().add(tConnState);

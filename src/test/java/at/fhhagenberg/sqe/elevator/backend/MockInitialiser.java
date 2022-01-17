@@ -58,12 +58,12 @@ public class MockInitialiser {
     public void defaultMockSetup(/* int elevators, int floors */ ) throws RemoteException {
     	int elevators =elevatorMock.getElevatorNum();  
     	int floors = elevatorMock.getFloorNum() ;
-    	initMockNums(elevators, floors);
+    	//initMockNums(elevators, floors);
         // elevatorMock.setFloorNum(floors);
         // elevatorMock.setElevatorNum(elevators);
         for(int i = 0; i < elevators; i++)
             initMockElevator(i, Elevator.UP, 5, 101, Elevator.CLOSED, 1, 102,
-                    10, 103, 4, new boolean[] {true, false, false, true, true});
+                    10, 103, 4, new boolean[floors]);
         for(int i = 0; i < floors; i++)
             initMockFloor(i, false, false);
     }

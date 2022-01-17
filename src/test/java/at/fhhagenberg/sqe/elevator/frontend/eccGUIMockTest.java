@@ -43,17 +43,24 @@ public class eccGUIMockTest {
 	@Start
 	public void start(Stage stage) throws RemoteException {
 
+
+		// ecc = new ElevatorControlCenter(wrappedElevator);
 		mockedIElevator = new ElevatorMock(5, 5);
 		
 		mockInit = new MockInitialiser(mockedIElevator);
-		mockInit.defaultMockSetup();
+		try {
+			mockInit.defaultMockSetup();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		wrappedElevator = new ElevatorWrapper(mockedIElevator);
-		// ecc = new ElevatorControlCenter(wrappedElevator);
 
 		var app = new App() {
 			@Override
 			protected ElevatorWrapper createWrapper() {
+
 				return wrappedElevator;
 			}
 		};
@@ -88,10 +95,11 @@ public class eccGUIMockTest {
 	}
 
 	@Test
-	public void testGuiDropDown(FxRobot robot) throws RemoteException {
-		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8,
+	public void testGuiDropDown(FxRobot robot) throws RemoteException, InterruptedException {
+		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.CLOSED, 3, 3, 5, 16, 8,
 				new boolean[] {false, true, true, true, false});
 
+		Thread.sleep(3000);
 		robot.clickOn("#bMode");
 		robot.clickOn("#bMode");
 

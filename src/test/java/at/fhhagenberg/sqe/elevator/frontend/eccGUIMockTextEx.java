@@ -87,13 +87,11 @@ public class eccGUIMockTextEx {
     public void testGuiThrowRemoteEx(FxRobot robot) throws RemoteException, RuntimeException, InterruptedException 
     {
     	mockInit.exceptionMockSetup(true);
-		
     	
-        // mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8, mockInit.setButton(1, 3));
-    	
-	//	assertThrows(RemoteException.class, ()->{ robot.clickOn("#bMode"); 	 });
+    	// wait for disconnect text
+		Thread.sleep(100);
+
     	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("disconnected"));
-    //	FxAssert.verifyThat("#tConnState", StyleableMatchers.hasStyle(null)); 
 
     	mockInit.exceptionMockSetup(false);
     	Thread.sleep(5000);
