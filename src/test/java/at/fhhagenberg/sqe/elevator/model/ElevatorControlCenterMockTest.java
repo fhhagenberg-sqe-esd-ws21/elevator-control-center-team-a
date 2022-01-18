@@ -34,7 +34,7 @@ public class ElevatorControlCenterMockTest {
         ecc.update();
 
         verify(mockedIElevator).getElevatorNum();
-        assertEquals(0, ecc.getElevators().size());
+        assertEquals(num, ecc.getElevators().size());
     }
 
     @ParameterizedTest
@@ -47,7 +47,7 @@ public class ElevatorControlCenterMockTest {
         ecc.InitElevatorAndFloors();
 
         verify(mockedIElevator).getFloorNum();
-        assertEquals(0, ecc.getFloors().size());
+        assertEquals(num, ecc.getFloors().size());
     }
 
     @Test
