@@ -4,6 +4,8 @@ package at.fhhagenberg.sqe.elevator.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 
@@ -86,9 +88,9 @@ public class ElevatorTest
 	@Test
 	void elevatorButtonTest() 
 	{	Elevator e = new Elevator(eleTestNum	);
-	//		e.addElevatorButton(eleTestButton);
-	//		List<Integer> btnList = e.getElevatorButton();
-	//		assertEquals(eleTestButton, btnList.get(0)	);
+			e.addElevatorButton(eleTestButton);
+			ArrayList<Integer> btnList = (ArrayList<Integer>) e.getElevatorButton();
+			assertEquals(eleTestButton, btnList.get(0)	);
 	}
 	
 }

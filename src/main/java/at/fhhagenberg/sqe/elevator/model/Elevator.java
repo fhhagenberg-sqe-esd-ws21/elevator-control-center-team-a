@@ -1,6 +1,7 @@
 package at.fhhagenberg.sqe.elevator.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Elevator {
 	private int commitedDirection;
@@ -56,7 +57,7 @@ public class Elevator {
      *
      * @return List<Integer> - list of all pressed Buttons; empty List when no Button pressed
      */
-	public ArrayList<Integer> getElevatorButton()
+	public List<Integer> getElevatorButton()
 	{
 		return elevatorButtons;
 	}

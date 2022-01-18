@@ -418,7 +418,7 @@ public class eccGUI {
 	    
         	tNextPoses[idxElevs].setText("" + elev.getElevatorTarget());	// next target      	
         	
-        	ArrayList<Integer> lpressedBts = elev.getElevatorButton();		// next targets
+        	ArrayList<Integer> lpressedBts = (ArrayList<Integer>) elev.getElevatorButton();		// next targets
         	String pressedBts = "";
         	for(int idx = 0; idx < lpressedBts.size(); idx++)
         	{
