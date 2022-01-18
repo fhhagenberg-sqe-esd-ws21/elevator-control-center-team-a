@@ -76,21 +76,21 @@ public class eccGUIMockTest {
 		try {
 			mockInit.defaultMockSetup();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
 	@Test
-	public void testDefaultGui(FxRobot robot) throws RemoteException {
+	public void testDefaultGui(FxRobot robot) throws RemoteException, InterruptedException {
 		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8,
 				new boolean[] {false, true, true, true, false});
 
+		Thread.sleep(3000);
 		robot.clickOn("#bMode");
 		robot.clickOn("#bMode");
 
-		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Automatic"));
+		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Manual"));
 		// https://www.programcreek.com/java-api-examples/?class=org.testfx.api.FxAssert&method=verifyThat
 	}
 
