@@ -30,6 +30,7 @@ public class eccGUI {
 
     private ElevatorControlCenter elevatorCtrl;
 
+    private final String font = "-fx-font: 28 arial;";
     // geometry data
     private final double hScene;
     private final double wScene;
@@ -136,7 +137,7 @@ public class eccGUI {
         tConnState = new Text("disconnected");    // https://unicode-table.com/de/2022/
         this.setConnState(connected);
 
-        label.setStyle("-fx-font: 28 arial;");
+        label.setStyle(font);
         label.setLayoutX(20);
         label.setLayoutY(20);
         
@@ -181,6 +182,7 @@ public class eccGUI {
         layout.setStyle("-fx-border-color: black");
         var scene = new Scene(layout, wScene, hScene);
 
+
         // private ResourceBundle labels = ResourceBundle.getBundle("eccBundle");
         // Resource Bundle Manager
 
@@ -196,7 +198,7 @@ public class eccGUI {
         layout.getChildren().add(lElevatorsU);
 
         /*   Elevator-wise Elements      */
-        tElevators.setStyle("-fx-font: 28 arial;");
+        tElevators.setStyle(font);
         tElevators.setLayoutX(xElevs + 40);
         tElevators.setLayoutY(yElevs + 40);
         tElevators.setId("tElevators");
@@ -320,7 +322,7 @@ public class eccGUI {
 
         xFloors += 50;
         yFloors += 40;
-        tFloors.setStyle("-fx-font: 28 arial;");
+        tFloors.setStyle(font);
 
         tFloors.setLayoutX(xFloors);
         tFloors.setLayoutY(yFloors);
@@ -385,16 +387,8 @@ public class eccGUI {
         this.update();
     }
 
-    /*
-     * @brief updates all varying GUI elements with valid elevator-data
-     * 			from ecc-structure of recent valid states of elevators
-     *
-     * */
-    public void update() 
+    private void updateFloors()
     {
-        /* GUI, General Elements */
-
-    	
     	/* GUI, Floor-wise Elements  */
         for(int idxFloors = 0; idxFloors< nFloors; idxFloors++)
        	{	Floor floor = elevatorCtrl.getFloors().get(idxFloors);
@@ -409,7 +403,10 @@ public class eccGUI {
         		floorUpArrows[idxFloors].setFill(Color.RED);
         	}
        	}
-    	
+    }
+    
+    private void updateElevators()
+    {
         /* GUI, Elevator-wise Elements      */
         for(int idxElevs = 0; idxElevs < nElevators; idxElevs++)
        	{	Elevator elev = elevatorCtrl.getElevators().get(idxElevs);		// Elev-Number
@@ -442,6 +439,21 @@ public class eccGUI {
 	        else if(elev.getElevatorDoorStatus() == Elevator.OPEN)
 	        	tDoors [idxElevs].setText( "open" );
        	}
+    }
+    
+    /*
+     * @brief updates all varying GUI elements with valid elevator-data
+     * 			from ecc-structure of recent valid states of elevators
+     *
+     * */
+    public void update() 
+    {
+        /* GUI, General Elements */
+
+    	
+    	updateFloors();
+    	updateElevators();
+
     }
 
     /*
