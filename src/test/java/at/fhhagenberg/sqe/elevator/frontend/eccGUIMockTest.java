@@ -82,7 +82,7 @@ public class eccGUIMockTest {
 
 	}
 
-	@Test
+//	@Test
 	public void testDefaultGui(FxRobot robot) throws RemoteException {
 		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8,
 				new boolean[] {false, true, true, true, false});
@@ -94,7 +94,7 @@ public class eccGUIMockTest {
 		// https://www.programcreek.com/java-api-examples/?class=org.testfx.api.FxAssert&method=verifyThat
 	}
 
-	@Test
+//	@Test
 	public void testGuiDropDown(FxRobot robot) throws RemoteException, InterruptedException {
 		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.CLOSED, 3, 3, 5, 16, 8,
 				new boolean[] {false, true, true, true, false});
@@ -111,7 +111,7 @@ public class eccGUIMockTest {
 
 	}
 
-	@Test
+//	@Test
 	public void testGuiUpdate(FxRobot robot) throws RemoteException {
 		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8,
 				new boolean[] {false, true, true, true, false});
@@ -119,7 +119,7 @@ public class eccGUIMockTest {
 		
 	}
 
-	@Test
+//	@Test
 	public void testGuiFloorUP(FxRobot robot) throws RemoteException, InterruptedException {
 		mockInit.initMockFloor(0, true, true);
 		robot.clickOn("#bMode");
@@ -133,7 +133,7 @@ public class eccGUIMockTest {
 		FxAssert.verifyThat("#tNextPoses0", TextMatchers.hasText("3"));
 	}
 
-	@Test
+//	@Test
 	public void testGuiManualAuto(FxRobot robot) throws RemoteException {
 		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8,
 				new boolean[] {false, true, true, true, false});
@@ -146,7 +146,7 @@ public class eccGUIMockTest {
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Manual"));
 
 	}
-    @Test
+//    @Test
     public void testGuiThrowRemoteEx(FxRobot robot) throws RemoteException, RuntimeException, InterruptedException 
     {
 
