@@ -2,7 +2,7 @@ package at.fhhagenberg.sqe;
 
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 
-import at.fhhagenberg.sqe.elevator.frontend.eccGUI;
+import at.fhhagenberg.sqe.elevator.frontend.EccGUI;
 
 
 import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
@@ -25,7 +25,7 @@ import java.rmi.NotBoundException;
  */
 
 public class App extends Application {
-    private eccGUI gui;
+    private EccGUI gui;
     protected ElevatorControlCenter elContr;
     private Boolean threadTerminate = false;
     private IElevator elevator;
@@ -40,7 +40,7 @@ public class App extends Application {
         return new ElevatorWrapper(elevator);
     }
 
-    protected eccGUI createGUI() {
+    protected EccGUI createGUI() {
         elContr = new ElevatorControlCenter(createWrapper());
         try {
             elContr.update();
@@ -48,7 +48,7 @@ public class App extends Application {
             e.printStackTrace();
         }
 
-        return new eccGUI(elContr, 1280, 960);
+        return new EccGUI(elContr, 1280, 960);
 
     }
 

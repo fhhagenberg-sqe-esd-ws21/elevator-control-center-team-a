@@ -36,7 +36,7 @@ import org.testfx.api.FxRobot;
 
 @ExtendWith(ApplicationExtension.class)
 @ExtendWith(MockitoExtension.class)
-public class eccGUIMockTest {
+public class EccGUIMockTest {
 
 	private static ElevatorWrapper wrappedElevator;
 	private static ElevatorMock mockedIElevator;
