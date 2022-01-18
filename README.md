@@ -31,7 +31,7 @@ mvn clean package ... to build standalone JAR-Files into the target-folder
 
 
 ## GUI
-The ECC-GUI contains a section for Floors and a section for the Elevators. Upon connection with the ElevatorSimulator the GUI is filled with the gathered Data. Floors give their Button status with green(pressed) and red(not pressed). The Elevators are organised in a list. The manual mode gives the opportunity to control the elevators with the corresponding drop down menu. For each Elevator the current position, the next position as well as other parameters like payload or speed are displayed.
+The ECC-GUI contains a section for Floors and a section for the Elevators. Upon connection with the ElevatorSimulator the GUI is filled with the gathered Data. Floors give their Button status with green(pressed) and red(not pressed). The Elevators are organised in a list. The manual mode gives the opportunity to control the elevators with the corresponding drop down menu. For each Elevator the current position, the next position as well as other parameters like payload or speed are displayed. The button is for switching between Automatic/and Manual mode. NOTE: The automatic mode is not implemented yet and therefore fulfills no purpouse.
 
 ![Screenshot](doc/GUI.png)
 
