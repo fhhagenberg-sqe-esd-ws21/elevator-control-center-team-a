@@ -23,14 +23,14 @@ public class MockInitialiser {
         elevatorMock = mockedIElevator;
     }
 
-    public void initMockNums(int elevators, int floors) throws RemoteException {
+    public void initMockNums(int elevators, int floors) {
     //    when(elevatorMock.getElevatorNum()).thenReturn(elevators);
     //    when(elevatorMock.getFloorNum()).thenReturn(floors);
     }
 
     public void initMockElevator(int elevator, int direction, int accel, int capacity, int doorStatus,
                                   int floor, int pos, int speed, int weight,
-                                  int target, boolean[] buttons) throws RemoteException {
+                                  int target, boolean[] buttons) {
     	//  when(elevatorMock.getCommittedDirection(elevator)).thenReturn(direction); erstetzen durch ->
     	elevatorMock.setCommittedDirection(elevator, direction);
         // elevatorMock.getElevatorAccel(elevator)	
@@ -45,30 +45,30 @@ public class MockInitialiser {
         elevatorMock.setElevatorButton(elevator, buttons );
     }
 
-    public void initMockFloor(int floor, boolean buttonUp, boolean buttonDown) throws RemoteException {
+    public void initMockFloor(int floor, boolean buttonUp, boolean buttonDown) {
         elevatorMock.setFloorButtonDown(floor, buttonUp);
         elevatorMock.setFloorButtonUp(floor, buttonDown);
     }
 
+    public void defaultMockSetup(/* int elevators, int floors */ ) {
+    	int elevators;
+    	int floors;
 
-    // public void defaultMockSetup() throws RemoteException {
-    //     defaultMockSetup(5,8);
-    // }
+		try {
+			elevators = elevatorMock.getElevatorNum();
+			floors = elevatorMock.getFloorNum();
+	        for(int i = 0; i < elevators; i++)
+	            initMockElevator(i, Elevator.UP, 5, 101, Elevator.CLOSED, 1, 102,
+	                    10, 103, 4, new boolean[floors]);
+	        for(int i = 0; i < floors; i++)
+	            initMockFloor(i, false, false);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}  
 
-    public void defaultMockSetup(/* int elevators, int floors */ ) throws RemoteException {
-    	int elevators =elevatorMock.getElevatorNum();  
-    	int floors = elevatorMock.getFloorNum() ;
-    	//initMockNums(elevators, floors);
-        // elevatorMock.setFloorNum(floors);
-        // elevatorMock.setElevatorNum(elevators);
-        for(int i = 0; i < elevators; i++)
-            initMockElevator(i, Elevator.UP, 5, 101, Elevator.CLOSED, 1, 102,
-                    10, 103, 4, new boolean[floors]);
-        for(int i = 0; i < floors; i++)
-            initMockFloor(i, false, false);
     }
     
-    public void exceptionMockSetup( boolean error ) throws RemoteException
+    public void exceptionMockSetup( boolean error )
     {
         elevatorMock.setErrorStatus(error);
         

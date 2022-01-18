@@ -5,11 +5,15 @@ import at.fhhagenberg.sqe.elevator.backend.ElevatorMock;
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 import at.fhhagenberg.sqe.elevator.backend.MockInitialiser;
 import at.fhhagenberg.sqe.elevator.model.Elevator;
+import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,6 +22,9 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.TextMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
+import org.testfx.matcher.control.ComboBoxMatchers;
+import org.testfx.service.query.NodeQuery;
 
 import sqelevator.IElevator;
 
@@ -32,28 +39,16 @@ import org.testfx.api.FxRobot;
 public class eccGUIMockTest {
 
 	private static ElevatorWrapper wrappedElevator;
-	// private static ElevatorControlCenter ecc;
-
-//	@Mock
-//	private static IElevator mockedIElevator = mock(IElevator.class);
 	private static ElevatorMock mockedIElevator;
-
 	private static MockInitialiser mockInit;
 
 	@Start
 	public void start(Stage stage) throws RemoteException {
 
-
-		// ecc = new ElevatorControlCenter(wrappedElevator);
 		mockedIElevator = new ElevatorMock(5, 5);
 		
 		mockInit = new MockInitialiser(mockedIElevator);
-		try {
-			mockInit.defaultMockSetup();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		mockInit.defaultMockSetup();
 
 		wrappedElevator = new ElevatorWrapper(mockedIElevator);
 
@@ -65,20 +60,13 @@ public class eccGUIMockTest {
 			}
 		};
 
-		// App.launch();
 		app.start(stage);
 
 	}
 
 	@BeforeEach
 	public void beforeEach() {
-
-		try {
-			mockInit.defaultMockSetup();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-
+		mockInit.defaultMockSetup();
 	}
 
 
@@ -96,19 +84,16 @@ public class eccGUIMockTest {
 		FxAssert.verifyThat("#tDoor", TextMatchers.hasText("Door"));
 		checkDefaultElevatorFloors(mockedIElevator.getElevatorNum(), mockedIElevator.getFloorNum());
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Automatic"));
-		//FxAssert.verifyThat("#bMode", TextMatchers.hasText("set to Manual"));
+		FxAssert.verifyThat("#bMode", LabeledMatchers.hasText("set to Manual"));
 		FxAssert.verifyThat("#tConn", TextMatchers.hasText("Connection Status: "));
 		FxAssert.verifyThat("#tConnState", TextMatchers.hasText("connected"));
 
 		// https://www.programcreek.com/java-api-examples/?class=org.testfx.api.FxAssert&method=verifyThat
 	}
 
-//	@Test
-	public void testGuiDropDown(FxRobot robot) throws RemoteException, InterruptedException {
-		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.CLOSED, 3, 3, 5, 16, 8,
-				new boolean[] {false, true, true, true, false});
+	@Test
+	public void testGuiDropDown(FxRobot robot) throws InterruptedException {
 
-		Thread.sleep(3000);
 		robot.clickOn("#bMode");
 		robot.clickOn("#bMode");
 
@@ -120,32 +105,41 @@ public class eccGUIMockTest {
 
 	}
 
-//	@Test
-	public void testGuiUpdate(FxRobot robot) throws RemoteException {
-		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8,
-				new boolean[] {false, true, true, true, false});
-		;
+	@Test
+	public void testGuiUpdate(FxRobot robot) throws InterruptedException {
+		mockInit.initMockElevator(0, Elevator.DOWN, 3, 3, Elevator.OPEN, 3, 3, 3, 3, 3,
+				new boolean[] {true, true, true, true, true});
 		
-	}
-
-//	@Test
-	public void testGuiFloorUP(FxRobot robot) throws RemoteException, InterruptedException {
-		mockInit.initMockFloor(0, true, true);
-		robot.clickOn("#bMode");
-		robot.clickOn("#bMode");
-
-		robot.clickOn("#cbNextPoses0");
-		robot.clickOn("#cbNextPoses1");
-
 		Thread.sleep(100);
-		FxAssert.verifyThat("#tNextPos", TextMatchers.hasText("Next Pos."));
+		
+		FxAssert.verifyThat("#tNumbers0", TextMatchers.hasText("0"));
+		FxAssert.verifyThat("#tPositions0", TextMatchers.hasText("3"));
 		FxAssert.verifyThat("#tNextPoses0", TextMatchers.hasText("3"));
+		FxAssert.verifyThat("#tPresseds0", TextMatchers.hasText("0, 1, 2, 3, 4, "));
+		FxAssert.verifyThat("#tDirections0", TextMatchers.hasText("down"));
+		FxAssert.verifyThat("#tPayloads0", TextMatchers.hasText("3"));
+		FxAssert.verifyThat("#tSpeeds0", TextMatchers.hasText("3"));
+		FxAssert.verifyThat("#tDoors0", TextMatchers.hasText("open"));
 	}
 
-//	@Test
-	public void testGuiManualAuto(FxRobot robot) throws RemoteException {
-		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8,
-				new boolean[] {false, true, true, true, false});
+	@Test
+	public void testGuiFloorUPDown(FxRobot robot) throws InterruptedException {
+		NodeQuery nodeUp = robot.lookup("#floorUpArrows0");
+		Text up = nodeUp.query();
+		NodeQuery nodeDown = robot.lookup("#floorDownArrows0");
+		Text down = nodeDown.query();
+		assertEquals(up.getFill(), Color.RED);
+		assertEquals(down.getFill(), Color.RED);
+		
+		mockInit.initMockFloor(0, true, true);
+		Thread.sleep(100);
+		
+		assertEquals(up.getFill(), Color.GREEN);
+		assertEquals(down.getFill(), Color.GREEN);
+	}
+
+	@Test
+	public void testGuiManualAuto(FxRobot robot) {
 		FxAssert.verifyThat("#tMode", NodeMatchers.isVisible());
 
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Automatic"));
@@ -155,8 +149,9 @@ public class eccGUIMockTest {
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Manual"));
 
 	}
-//    @Test
-    public void testGuiThrowRemoteEx(FxRobot robot) throws RemoteException, RuntimeException, InterruptedException 
+	
+    @Test
+    public void testGuiThrowRemoteEx(FxRobot robot) throws InterruptedException 
     {
 
     	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("connected"));
@@ -169,7 +164,7 @@ public class eccGUIMockTest {
     	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("disconnected"));
 		
     }
-    
+
     private void checkDefaultElevatorFloors(int elevatorNum, int floorNum)
     {
 		for(int i = 0; i < elevatorNum; i++) {
@@ -177,7 +172,6 @@ public class eccGUIMockTest {
 			FxAssert.verifyThat("#tPositions" + String.valueOf(i), TextMatchers.hasText("1"));
 			FxAssert.verifyThat("#tNextPoses" + String.valueOf(i), TextMatchers.hasText("4"));
 			FxAssert.verifyThat("#tPresseds" + String.valueOf(i), TextMatchers.hasText(""));
-			//FxAssert.verifyThat("#cbNextPoses" + String.valueOf(i), TextMatchers.hasText(String.valueOf(i)));
 			FxAssert.verifyThat("#tDirections" + String.valueOf(i), TextMatchers.hasText("up"));
 			FxAssert.verifyThat("#tPayloads" + String.valueOf(i), TextMatchers.hasText("103"));
 			FxAssert.verifyThat("#tSpeeds" + String.valueOf(i), TextMatchers.hasText("102"));

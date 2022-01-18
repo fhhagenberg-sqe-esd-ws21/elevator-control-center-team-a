@@ -59,7 +59,7 @@ public class ElevatorMock implements IElevator
 		return acceleration[elevatorNumber];
 	}
 	
-	public synchronized void setElevatorAccel(int elevatorNumber, int acceleration) throws RemoteException {
+	public synchronized void setElevatorAccel(int elevatorNumber, int acceleration) {
 		this.acceleration[elevatorNumber] = acceleration;
 	}
 	
@@ -69,7 +69,7 @@ public class ElevatorMock implements IElevator
 		return button[elevatorNumber][floor];
 	}
 
-	public synchronized void setElevatorButton(int elevatorNumber, boolean[] button) throws RemoteException {
+	public synchronized void setElevatorButton(int elevatorNumber, boolean[] button){
 		this.button[elevatorNumber] = button;
 	}
 
@@ -79,7 +79,7 @@ public class ElevatorMock implements IElevator
 		return this.doorStatus[elevatorNumber];
 	}
 
-	public synchronized void setElevatorDoorStatus(int elevatorNumber, int doorStatus) throws RemoteException {
+	public synchronized void setElevatorDoorStatus(int elevatorNumber, int doorStatus) {
 		this.doorStatus[elevatorNumber] = doorStatus;
 	}
 	
@@ -89,7 +89,7 @@ public class ElevatorMock implements IElevator
 		return floor[elevatorNumber];
 	}
 
-	public synchronized void setElevatorFloor(int elevatorNumber, int floor ) throws RemoteException {
+	public synchronized void setElevatorFloor(int elevatorNumber, int floor ) {
 		this.floor[elevatorNumber] = floor;
 	}
 
@@ -98,7 +98,7 @@ public class ElevatorMock implements IElevator
 		if(error) throw new RemoteException("Connection failed");
 		return this.nElevs;
 	}
-	public synchronized void setElevatorNum(int nElevs) throws RemoteException {
+	public synchronized void setElevatorNum(int nElevs){
 		this.nElevs = nElevs;
 	}
 
@@ -108,7 +108,7 @@ public class ElevatorMock implements IElevator
 		return position[elevatorNumber];
 	}
 
-	public synchronized void setElevatorPosition(int elevatorNumber, int position) throws RemoteException {
+	public synchronized void setElevatorPosition(int elevatorNumber, int position) {
 		this.position[elevatorNumber] = position;
 	}
 
@@ -118,7 +118,7 @@ public class ElevatorMock implements IElevator
 		return speed[elevatorNumber];
 	}
 
-	public synchronized void setElevatorSpeed(int elevatorNumber, int speed) throws RemoteException {
+	public synchronized void setElevatorSpeed(int elevatorNumber, int speed) {
 		this.speed[elevatorNumber] = speed;
 	}
 
@@ -127,7 +127,7 @@ public class ElevatorMock implements IElevator
 		if(error) throw new RemoteException("Connection failed");
 		return weight[elevatorNumber];
 	}
-	public synchronized void setElevatorWeight(int elevatorNumber, int weight) throws RemoteException {
+	public synchronized void setElevatorWeight(int elevatorNumber, int weight) {
 		this.weight[elevatorNumber] = weight;
 	}
 
@@ -137,7 +137,7 @@ public class ElevatorMock implements IElevator
 		return capacity[elevatorNumber];
 	}
 
-	public synchronized void setElevatorCapacity(int elevatorNumber, int capacity) throws RemoteException {
+	public synchronized void setElevatorCapacity(int elevatorNumber, int capacity){
 		this.capacity[elevatorNumber] = capacity;
 	}
 
@@ -147,7 +147,7 @@ public class ElevatorMock implements IElevator
 		return this.buttonDown[floor];
 	}
 
-	public synchronized void setFloorButtonDown(int floor, boolean down) throws RemoteException {
+	public synchronized void setFloorButtonDown(int floor, boolean down) {
 		this.buttonDown[floor] =down;
 	}
 
@@ -157,7 +157,7 @@ public class ElevatorMock implements IElevator
 		return this.buttonUp[floor];
 	}
 
-	public synchronized void setFloorButtonUp(int floor, boolean up) throws RemoteException {
+	public synchronized void setFloorButtonUp(int floor, boolean up) {
 		this.buttonUp[floor] = up;
 	}
 
@@ -173,7 +173,7 @@ public class ElevatorMock implements IElevator
 		return this.nFloors;
 	}
 
-	public synchronized void setFloorNum(int nFloors) throws RemoteException {
+	public synchronized void setFloorNum(int nFloors) {
 		this.nFloors = nFloors;
 	}
 
@@ -190,17 +190,17 @@ public class ElevatorMock implements IElevator
 	}
 
 	@Override
-	public synchronized void setTarget(int elevatorNumber, int target) throws RemoteException {
+	public synchronized void setTarget(int elevatorNumber, int target) {
 		this.target[elevatorNumber] = target;
 	}
 
 	@Override
-	public synchronized void setCommittedDirection(int elevatorNumber, int direction) throws RemoteException {
+	public synchronized void setCommittedDirection(int elevatorNumber, int direction) {
 		committedDirection[elevatorNumber] = direction;		
 	}
 
 	@Override
-	public synchronized void setServicesFloors(int elevatorNumber, int floor, boolean service) throws RemoteException {
+	public synchronized void setServicesFloors(int elevatorNumber, int floor, boolean service){
 	}
 
 	@Override
