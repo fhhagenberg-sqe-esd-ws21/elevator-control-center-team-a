@@ -83,15 +83,23 @@ public class eccGUIMockTest {
 
 
 	@Test
-	public void testDefaultGui(FxRobot robot) throws RemoteException, InterruptedException {
-		mockInit.initMockElevator(0, Elevator.UNCOMMITTED, 5, 10, Elevator.OPEN, 3, 3, 5, 16, 8,
-				new boolean[] {false, true, true, true, false});
+	public void testDefaultGui(FxRobot robot) throws RemoteException {
 
-		Thread.sleep(3000);
-		robot.clickOn("#bMode");
-		robot.clickOn("#bMode");
+		FxAssert.verifyThat("#tElevators", TextMatchers.hasText("Elevators"));
+		FxAssert.verifyThat("#tNumber", TextMatchers.hasText("Nr"));
+		FxAssert.verifyThat("#tPosition", TextMatchers.hasText("Position"));
+		FxAssert.verifyThat("#tNextPos", TextMatchers.hasText("Next Pos."));
+		FxAssert.verifyThat("#tPressed", TextMatchers.hasText("pressed Btns"));
+		FxAssert.verifyThat("#tDirection", TextMatchers.hasText("Direction"));
+		FxAssert.verifyThat("#tPayload", TextMatchers.hasText("Payload"));
+		FxAssert.verifyThat("#tSpeed", TextMatchers.hasText("Speed"));
+		FxAssert.verifyThat("#tDoor", TextMatchers.hasText("Door"));
+		checkDefaultElevatorFloors(mockedIElevator.getElevatorNum(), mockedIElevator.getFloorNum());
+		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Automatic"));
+		//FxAssert.verifyThat("#bMode", TextMatchers.hasText("set to Manual"));
+		FxAssert.verifyThat("#tConn", TextMatchers.hasText("Connection Status: "));
+		FxAssert.verifyThat("#tConnState", TextMatchers.hasText("connected"));
 
-		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Manual"));
 		// https://www.programcreek.com/java-api-examples/?class=org.testfx.api.FxAssert&method=verifyThat
 	}
 
@@ -162,9 +170,24 @@ public class eccGUIMockTest {
 		
     }
     
-    // TODO check values
-    //@Test
-    //public void testGuiDisplayedValues(FxRobot robot) throws RemoteException, RuntimeException, InterruptedException 
-    //{
-//    }
+    private void checkDefaultElevatorFloors(int elevatorNum, int floorNum)
+    {
+		for(int i = 0; i < elevatorNum; i++) {
+			FxAssert.verifyThat("#tNumbers" + String.valueOf(i), TextMatchers.hasText(String.valueOf(i)));
+			FxAssert.verifyThat("#tPositions" + String.valueOf(i), TextMatchers.hasText("1"));
+			FxAssert.verifyThat("#tNextPoses" + String.valueOf(i), TextMatchers.hasText("4"));
+			FxAssert.verifyThat("#tPresseds" + String.valueOf(i), TextMatchers.hasText(""));
+			//FxAssert.verifyThat("#cbNextPoses" + String.valueOf(i), TextMatchers.hasText(String.valueOf(i)));
+			FxAssert.verifyThat("#tDirections" + String.valueOf(i), TextMatchers.hasText("up"));
+			FxAssert.verifyThat("#tPayloads" + String.valueOf(i), TextMatchers.hasText("103"));
+			FxAssert.verifyThat("#tSpeeds" + String.valueOf(i), TextMatchers.hasText("102"));
+			FxAssert.verifyThat("#tDoors" + String.valueOf(i), TextMatchers.hasText("closed"));
+		}
+		FxAssert.verifyThat("#tFloors", TextMatchers.hasText("Floors"));
+		for(int i = 0; i < floorNum; i++) {
+			FxAssert.verifyThat("#floorLabels" + String.valueOf(i), TextMatchers.hasText(String.valueOf(floorNum - i - 1)));
+			FxAssert.verifyThat("#floorUpArrows" + String.valueOf(i), TextMatchers.hasText("•"));
+			FxAssert.verifyThat("#floorDownArrows" + String.valueOf(i), TextMatchers.hasText("•"));
+		}
+    }
 }

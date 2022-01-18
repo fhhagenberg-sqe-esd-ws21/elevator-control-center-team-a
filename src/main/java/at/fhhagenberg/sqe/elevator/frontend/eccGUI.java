@@ -341,7 +341,7 @@ public class eccGUI {
             floorUpArrows[idxFloors].setLayoutY(yFloors + idxFloors * hFloor + 5);
             floorUpArrows[idxFloors].setStyle("-fx-font: 32 arial;");
             floorUpArrows[idxFloors].setFill(Color.RED);
-            floorUpArrows[idxFloors].setId("floorUpArrows+idxFloors");
+            floorUpArrows[idxFloors].setId("floorUpArrows"+idxFloors);
             layout.getChildren().add(floorUpArrows[idxFloors]);
 
             floorDownArrows[idxFloors] = new Text("•");
@@ -349,7 +349,7 @@ public class eccGUI {
             floorDownArrows[idxFloors].setLayoutY(yFloors + idxFloors * hFloor + 5);
             floorDownArrows[idxFloors].setStyle("-fx-font: 32 arial;");
             floorDownArrows[idxFloors].setFill(Color.GREEN);
-            floorDownArrows[idxFloors].setId("floorDownArrows+idxFloors");
+            floorDownArrows[idxFloors].setId("floorDownArrows"+idxFloors);
             layout.getChildren().add(floorDownArrows[idxFloors]);
         }
 
