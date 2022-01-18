@@ -131,7 +131,7 @@ fabric.properties
 hs_err_pid*
 
 ### Maven ###
-!*.jar
+!target/*.jar
 target/
 pom.xml.tag
 pom.xml.releaseBackup
