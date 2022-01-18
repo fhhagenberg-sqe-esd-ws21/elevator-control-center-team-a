@@ -139,13 +139,18 @@ public class eccGUIMockTest {
 	}
 
 	@Test
-	public void testGuiManualAuto(FxRobot robot) {
+	public void testGuiManualAuto(FxRobot robot) throws InterruptedException {
 		FxAssert.verifyThat("#tMode", NodeMatchers.isVisible());
 
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Automatic"));
+		
+		Thread.sleep(1000);
+
 		robot.clickOn("#bMode");
 		robot.clickOn("#bMode");
 
+		Thread.sleep(1000);
+		
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Manual"));
 
 	}
