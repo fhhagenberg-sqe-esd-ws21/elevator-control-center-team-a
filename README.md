@@ -1,6 +1,6 @@
 # Elevator Control Center
 
-[<img src="https://s.keepmeme.com/files/en_posts/20200823/e672a8e92b6291e79f66bfab87d8addbman-in-elevator-meme-keep-scrolling-i-want-to-go-up.jpg">]
+<img src="https://s.keepmeme.com/files/en_posts/20200823/e672a8e92b6291e79f66bfab87d8addbman-in-elevator-meme-keep-scrolling-i-want-to-go-up.jpg">
 
 ## SonarCloud Status
 
@@ -10,11 +10,16 @@
 
 ## Download
 
-## How To Use It
+### Prerequisites
+
+https://github.com/winterer/elevator
+
+### Execute
 
 JRE v16.0 or higher
 
-java -cp target\ecc-team-a-0.0.1-SNAPSHOT-shaded.jar at.fhhagenberg.sqe.Main
+java -jar target\ecc-team-a-0.0.1-SNAPSHOT-shaded.jar
+(located in the release page)
 
 ## How to build it
 
@@ -26,4 +31,12 @@ mvn clean package ... to build standalone JAR-Files into the target-folder
 
 
 ## GUI
+The ECC-GUI contains a section for Floors and a section for the Elevators. Upon connection with the ElevatorSimulator the GUI is filled with the gathered Data. Floors give their Button status with green(pressed) and red(not pressed). The Elevators are organised in a list. The manual mode gives the opportunity to control the elevators with the corresponding drop down menu. For each Elevator the current position, the next position as well as other parameters like payload or speed are displayed.
 
+![Screenshot](doc/GUI.png)
+
+## Architecture
+
+The following image shows the software-architecture of the elevator control center
+
+![Screenshot](doc/classDiag.png)
