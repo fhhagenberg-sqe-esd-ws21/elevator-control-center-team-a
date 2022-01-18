@@ -30,7 +30,7 @@ public class EccGUI {
 
     private ElevatorControlCenter elevatorCtrl;
 
-    private final String font = "-fx-font: 28 arial;";
+    private static final String font = "-fx-font: 28 arial;";
     // geometry data
     private final double hScene;
     private final double wScene;
