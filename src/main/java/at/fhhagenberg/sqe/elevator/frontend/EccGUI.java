@@ -30,7 +30,7 @@ public class EccGUI {
 
     private ElevatorControlCenter elevatorCtrl;
 
-    private static final String font = "-fx-font: 28 arial;";
+    private static final String FONT = "-fx-font: 28 arial;";
     // geometry data
     private final double hScene;
     private final double wScene;
@@ -131,7 +131,7 @@ public class EccGUI {
         tConnState = new Text("disconnected");    // https://unicode-table.com/de/2022/
         this.setConnState(connected);
 
-        label.setStyle(font);
+        label.setStyle(FONT);
         label.setLayoutX(20);
         label.setLayoutY(20);
         
@@ -191,7 +191,7 @@ public class EccGUI {
         layout.getChildren().add(lElevatorsU);
 
         /*   Elevator-wise Elements      */
-        tElevators.setStyle(font);
+        tElevators.setStyle(FONT);
         tElevators.setLayoutX(xElevs + 40);
         tElevators.setLayoutY(yElevs + 40);
         tElevators.setId("tElevators");
@@ -315,7 +315,7 @@ public class EccGUI {
 
         xFloors += 50;
         yFloors += 40;
-        tFloors.setStyle(font);
+        tFloors.setStyle(FONT);
 
         tFloors.setLayoutX(xFloors);
         tFloors.setLayoutY(yFloors);
