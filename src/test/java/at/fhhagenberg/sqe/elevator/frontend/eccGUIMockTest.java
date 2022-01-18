@@ -128,14 +128,14 @@ public class eccGUIMockTest {
 		Text up = nodeUp.query();
 		NodeQuery nodeDown = robot.lookup("#floorDownArrows0");
 		Text down = nodeDown.query();
-		assertEquals(up.getFill(), Color.RED);
-		assertEquals(down.getFill(), Color.RED);
+		assertEquals(Color.RED, up.getFill());
+		assertEquals(Color.RED, down.getFill());
 		
 		mockInit.initMockFloor(0, true, true);
 		Thread.sleep(100);
 		
-		assertEquals(up.getFill(), Color.GREEN);
-		assertEquals(down.getFill(), Color.GREEN);
+		assertEquals(Color.GREEN, up.getFill());
+		assertEquals(Color.GREEN, down.getFill());
 	}
 
 	@Test
