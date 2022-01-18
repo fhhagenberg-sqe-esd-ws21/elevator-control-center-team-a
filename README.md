@@ -37,6 +37,6 @@ The ECC-GUI contains a section for Floors and a section for the Elevators. Upon 
 
 ## Architecture
 
-The following image shows the software-architecture of the elevator control center
+The following image shows the software-architecture of the elevator control center (only constructors are displayed in the classes)
 
 ![Screenshot](doc/classDiag.png)
