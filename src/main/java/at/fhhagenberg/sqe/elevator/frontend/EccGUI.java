@@ -19,7 +19,7 @@ import at.fhhagenberg.sqe.elevator.model.Floor;
 import at.fhhagenberg.sqe.elevator.model.Elevator;
 
 
-public class eccGUI {
+public class EccGUI {
 
 
     private int nElevators;
@@ -92,7 +92,7 @@ public class eccGUI {
      * @param width  width of scene
      * @param heigth height of scene
      */
-    public eccGUI(ElevatorControlCenter ecc, int width, int heigth) 
+    public EccGUI(ElevatorControlCenter ecc, int width, int heigth) 
     {    elevatorCtrl = ecc;
 	    wScene = width;
 	    hScene = heigth;
