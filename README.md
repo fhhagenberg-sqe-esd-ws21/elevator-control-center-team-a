@@ -12,6 +12,10 @@
 
 ## How To Use It
 
+JRE v16.0 or higher
+
+java -cp target\ecc-team-a-0.0.1-SNAPSHOT-shaded.jar at.fhhagenberg.sqe.Main
+
 ## How to build it
 
 mvn clean javafx:run ... to run Apllication from within your IDE
