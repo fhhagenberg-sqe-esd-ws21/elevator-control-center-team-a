@@ -4,6 +4,8 @@ import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import sqelevator.IElevator;
@@ -22,10 +24,11 @@ public class ElevatorControlCenterMockTest {
     @Mock
     private static IElevator mockedIElevator = mock(IElevator.class);
 
-    @Test
-    public void testGetElevatorNumEmpty() throws RemoteException {
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 10})
+    public void testGetElevatorNum(int num) throws RemoteException {
 
-        when(mockedIElevator.getElevatorNum()).thenReturn(0);
+        when(mockedIElevator.getElevatorNum()).thenReturn(num);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
         ecc.update();
@@ -34,64 +37,17 @@ public class ElevatorControlCenterMockTest {
         assertEquals(0, ecc.getElevators().size());
     }
 
-    @Test
-    public void testGetElevatorNumOneEntry() throws RemoteException {
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 10})
+    public void testGetFloorNumEmpty(int num) throws RemoteException {
 
-        when(mockedIElevator.getElevatorNum()).thenReturn(1);
-        wrappedElevator = new ElevatorWrapper(mockedIElevator);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
-        ecc.InitElevatorAndFloors();
-
-        verify(mockedIElevator).getElevatorNum();
-        assertEquals(1, ecc.getElevators().size());
-    }
-
-    @Test
-    public void testGetElevatorNumTenEntries() throws RemoteException {
-
-        when(mockedIElevator.getElevatorNum()).thenReturn(10);
-        wrappedElevator = new ElevatorWrapper(mockedIElevator);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
-        ecc.InitElevatorAndFloors();
-
-        verify(mockedIElevator).getElevatorNum();
-        assertEquals(10, ecc.getElevators().size());
-    }
-
-    @Test
-    public void testGetFloorNumEmpty() throws RemoteException {
-
-        when(mockedIElevator.getFloorNum()).thenReturn(0);
+        when(mockedIElevator.getFloorNum()).thenReturn(num);
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
         ecc.InitElevatorAndFloors();
 
         verify(mockedIElevator).getFloorNum();
         assertEquals(0, ecc.getFloors().size());
-    }
-
-    @Test
-    public void testGetFloorNumOneEntry() throws RemoteException {
-
-        when(mockedIElevator.getFloorNum()).thenReturn(1);
-        wrappedElevator = new ElevatorWrapper(mockedIElevator);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
-        ecc.InitElevatorAndFloors();
-
-        verify(mockedIElevator).getFloorNum();
-        assertEquals(1, ecc.getFloors().size());
-    }
-
-    @Test
-    public void testGetFloorNumTenEntries() throws RemoteException {
-
-        when(mockedIElevator.getFloorNum()).thenReturn(10);
-        wrappedElevator = new ElevatorWrapper(mockedIElevator);
-        ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
-        ecc.InitElevatorAndFloors();
-        
-        verify(mockedIElevator).getFloorNum();
-        assertEquals(10, ecc.getFloors().size());
     }
 
     @Test

@@ -110,12 +110,6 @@ public class eccGUI {
     	else
     		nFloors = elevatorCtrl.getFloors().size();
 
-        // var tA = new Text(labels.getString("tA") );
-        // var tB = new Text(labels.getString("tB"));
-        // var tC = new Text(labels.getString("tC"));
-        // var tfPeri = new TextField();
-        // var tfArea = new TextField();
-
         // geometry data
         xElevs = 325;
         yElevs = 100;
@@ -183,7 +177,6 @@ public class eccGUI {
         var scene = new Scene(layout, wScene, hScene);
 
 
-        // private ResourceBundle labels = ResourceBundle.getBundle("eccBundle");
         // Resource Bundle Manager
 
         label.setId("label");        // export ID so, controls can be detected by the TestApp
@@ -277,8 +270,8 @@ public class eccGUI {
             tPresseds[idxElevs].setId("tPresseds" + idxElevs);
             layout.getChildren().add(tPresseds[idxElevs]);
 
-            cbNextPoses[idxElevs] = new ChoiceBox();
-            cbNextPoses[idxElevs].setOnAction(action -> actionNextPos(-1));
+            cbNextPoses[idxElevs] = new ChoiceBox<Object>();
+            cbNextPoses[idxElevs].setOnAction(action -> actionNextPos());
             for (int idxFloors = 0; idxFloors < nFloors; idxFloors++) {
                 cbNextPoses[idxElevs].getItems().add("" + (nFloors-1 - idxFloors));
             }
@@ -371,10 +364,7 @@ public class eccGUI {
         tConn.setId("tConn");
         layout.getChildren().add(tConn);
 
-        // tConnState.setStyle("-fx-font: 48 arial;");
-        // tConnState.setFill(Color.GREEN);
         tConnState.setId("tConnState");
-		//tConnState.setFill(Color.RED);
         tConnState.setLayoutX(xElevs + wElevs - 120);
         tConnState.setLayoutY(yElevs + hElevs + 50);
         layout.getChildren().add(tConnState);
@@ -491,7 +481,7 @@ public class eccGUI {
      * brief callback for the NextPos-Dropdown
      * reads every elevators chosen next-position and sends it to console/God-Object
      * */
-    public void actionNextPos(int cbNextPosID) 
+    public void actionNextPos() 
     {   for (int idxElevs = 0; idxElevs < nElevators; idxElevs++) 
     	{   String buff = (String) cbNextPoses[idxElevs].getValue();
             if (cbNextPoses[idxElevs].getValue() != null) 

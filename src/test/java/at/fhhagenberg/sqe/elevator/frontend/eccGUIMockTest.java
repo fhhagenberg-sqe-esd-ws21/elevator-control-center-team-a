@@ -87,8 +87,6 @@ public class eccGUIMockTest {
 		FxAssert.verifyThat("#bMode", LabeledMatchers.hasText("set to Manual"));
 		FxAssert.verifyThat("#tConn", TextMatchers.hasText("Connection Status: "));
 		FxAssert.verifyThat("#tConnState", TextMatchers.hasText("connected"));
-
-		// https://www.programcreek.com/java-api-examples/?class=org.testfx.api.FxAssert&method=verifyThat
 	}
 
 	@Test
@@ -110,7 +108,7 @@ public class eccGUIMockTest {
 		mockInit.initMockElevator(0, Elevator.DOWN, 3, 3, Elevator.OPEN, 3, 3, 3, 3, 3,
 				new boolean[] {true, true, true, true, true});
 		
-		Thread.sleep(100);
+		robot.sleep(100);
 		
 		FxAssert.verifyThat("#tNumbers0", TextMatchers.hasText("0"));
 		FxAssert.verifyThat("#tPositions0", TextMatchers.hasText("3"));
@@ -132,7 +130,7 @@ public class eccGUIMockTest {
 		assertEquals(Color.RED, down.getFill());
 		
 		mockInit.initMockFloor(0, true, true);
-		Thread.sleep(100);
+		robot.sleep(100);
 		
 		assertEquals(Color.GREEN, up.getFill());
 		assertEquals(Color.GREEN, down.getFill());
@@ -144,19 +142,19 @@ public class eccGUIMockTest {
 
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Automatic"));
 		
-		Thread.sleep(1000);
+		robot.sleep(1000);
 
 		robot.clickOn("#bMode");
 		robot.clickOn("#bMode");
 
-		Thread.sleep(1000);
+		robot.sleep(1000);
 		
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Manual"));
 
 	}
 	
     @Test
-    public void testGuiThrowRemoteEx(FxRobot robot) throws InterruptedException 
+    public void testGuiThrowRemoteEx(FxRobot robot) 
     {
 
     	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("connected"));
@@ -164,7 +162,7 @@ public class eccGUIMockTest {
     	mockInit.exceptionMockSetup(true);
     	
     	// wait for disconnect text
-		Thread.sleep(100);
+		robot.sleep(100);
 
     	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("disconnected"));
 		
