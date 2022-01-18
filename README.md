@@ -12,5 +12,14 @@
 
 ## How To Use It
 
+## How to build it
+
+mvn clean javafx:run ... to run Apllication from within your IDE
+
+mvn clean test ...  to run TestCases from within your IDE
+
+mvn clean package ... to build standalone JAR-Files into the target-folder
+
+
 ## GUI
 

@@ -90,7 +90,7 @@ public class eccGUIMockTest {
 		robot.clickOn("#bMode");
 		robot.clickOn("#bMode");
 
-		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Manual"));
+		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Automatic"));
 		// https://www.programcreek.com/java-api-examples/?class=org.testfx.api.FxAssert&method=verifyThat
 	}
 
