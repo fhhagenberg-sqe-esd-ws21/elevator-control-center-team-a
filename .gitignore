@@ -135,6 +135,13 @@ hs_err_pid*
 # !target/*.jar
 # target/
 # /target/
+target/classes/
+target/jacoco.exec
+target/maven-archiver/
+target/maven-status/
+target/site/jacoco/
+target/surefire-reports/
+target/test-classes/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
