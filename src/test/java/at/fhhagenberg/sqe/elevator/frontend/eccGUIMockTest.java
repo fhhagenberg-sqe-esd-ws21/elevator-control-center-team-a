@@ -146,5 +146,24 @@ public class eccGUIMockTest {
 		FxAssert.verifyThat("#tMode", TextMatchers.hasText("Operational Mode: Manual"));
 
 	}
+    @Test
+    public void testGuiThrowRemoteEx(FxRobot robot) throws RemoteException, RuntimeException, InterruptedException 
+    {
 
+    	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("connected"));
+    	
+    	mockInit.exceptionMockSetup(true);
+    	
+    	// wait for disconnect text
+		Thread.sleep(100);
+
+    	FxAssert.verifyThat("#tConnState", TextMatchers.hasText("disconnected"));
+		
+    }
+    
+    // TODO check values
+    //@Test
+    //public void testGuiDisplayedValues(FxRobot robot) throws RemoteException, RuntimeException, InterruptedException 
+    //{
+//    }
 }
