@@ -18,7 +18,7 @@ https://github.com/winterer/elevator
 
 JRE v16.0 or higher
 
-java -jar target\ecc-team-a-0.0.1-SNAPSHOT-shaded.jar
+java -jar target\ecc-team-a.jar
 (located in the release page)
 
 ## How to build it
