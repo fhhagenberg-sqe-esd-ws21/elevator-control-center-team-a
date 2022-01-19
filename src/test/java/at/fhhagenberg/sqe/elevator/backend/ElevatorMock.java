@@ -5,11 +5,7 @@ import java.rmi.RemoteException;
 import sqelevator.IElevator;
 
 public class ElevatorMock implements IElevator
-{
-	
-	// TODO setElevatorAccel und alle, die noch keine setter haben, ALLE synchronized 
-	
-	private int nElevs;
+{	private int nElevs;
 	private int nFloors;
 	private int height;
 	private boolean error;

@@ -1,38 +1,31 @@
 package at.fhhagenberg.sqe.elevator.frontend;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.rmi.RemoteException;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.testfx.api.FxAssert;
+import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.base.NodeMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
+import org.testfx.matcher.control.TextMatchers;
+import org.testfx.service.query.NodeQuery;
+
+
 import at.fhhagenberg.sqe.App;
 import at.fhhagenberg.sqe.elevator.backend.ElevatorMock;
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 import at.fhhagenberg.sqe.elevator.backend.MockInitialiser;
 import at.fhhagenberg.sqe.elevator.model.Elevator;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.testfx.api.FxAssert;
-import org.testfx.framework.junit5.ApplicationExtension;
-import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.matcher.control.TextMatchers;
-import org.testfx.matcher.control.LabeledMatchers;
-import org.testfx.matcher.control.ComboBoxMatchers;
-import org.testfx.service.query.NodeQuery;
-
-import sqelevator.IElevator;
-
-import java.rmi.RemoteException;
-
-import static org.mockito.Mockito.*;
-
-import org.testfx.api.FxRobot;
 
 @ExtendWith(ApplicationExtension.class)
 @ExtendWith(MockitoExtension.class)

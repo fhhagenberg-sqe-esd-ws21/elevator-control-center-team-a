@@ -1,5 +1,10 @@
 package at.fhhagenberg.sqe.elevator.frontend;
 
+import java.util.ArrayList;
+
+import at.fhhagenberg.sqe.elevator.model.Elevator;
+import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
+import at.fhhagenberg.sqe.elevator.model.Floor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -10,13 +15,6 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
-
-import java.util.ArrayList;
-
-import at.fhhagenberg.sqe.elevator.model.Floor;
-import at.fhhagenberg.sqe.elevator.model.Elevator;
 
 
 public class EccGUI {

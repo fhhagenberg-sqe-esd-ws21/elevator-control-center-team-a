@@ -1,24 +1,18 @@
 package at.fhhagenberg.sqe;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
 import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
-
 import at.fhhagenberg.sqe.elevator.frontend.EccGUI;
-
-
 import at.fhhagenberg.sqe.elevator.model.ElevatorControlCenter;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
-
 import sqelevator.IElevator;
-
-import java.rmi.RemoteException;
-
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
 
 /**
  * JavaFX App

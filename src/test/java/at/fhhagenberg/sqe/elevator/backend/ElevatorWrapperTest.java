@@ -1,17 +1,20 @@
 package at.fhhagenberg.sqe.elevator.backend;
 
 
-import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.rmi.RemoteException;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import sqelevator.IElevator;
-
-import java.rmi.RemoteException;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ElevatorWrapperTest

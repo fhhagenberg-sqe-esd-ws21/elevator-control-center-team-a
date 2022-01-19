@@ -1,20 +1,23 @@
 package at.fhhagenberg.sqe.elevator.model;
 
-import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
-import org.junit.jupiter.api.Disabled;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.rmi.RemoteException;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import at.fhhagenberg.sqe.elevator.backend.ElevatorWrapper;
 import sqelevator.IElevator;
-
-import java.rmi.RemoteException;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ElevatorControlCenterMockTest {
@@ -172,7 +175,7 @@ public class ElevatorControlCenterMockTest {
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
         ecc.InitElevatorAndFloors();
-        ecc.setAuto(ecc.MANUAL);
+        ecc.setAuto(ElevatorControlCenter.MANUAL);
         ecc.setNext(0, 2);
         List<Elevator> elevators = ecc.getElevators();
         verify(mockedIElevator).setTarget(0, 2);
@@ -191,7 +194,7 @@ public class ElevatorControlCenterMockTest {
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
         ecc.InitElevatorAndFloors();
-        ecc.setAuto(ecc.AUTO);
+        ecc.setAuto(ElevatorControlCenter.AUTO);
         ecc.setNext(0, 2);
         verify(mockedIElevator, never()).setTarget(0, 2);
     }
@@ -205,7 +208,7 @@ public class ElevatorControlCenterMockTest {
         wrappedElevator = new ElevatorWrapper(mockedIElevator);
         ElevatorControlCenter ecc = new ElevatorControlCenter(wrappedElevator);
         ecc.InitElevatorAndFloors();
-        ecc.setAuto(ecc.MANUAL);
+        ecc.setAuto(ElevatorControlCenter.MANUAL);
         ecc.setNext(1, 2);
         verify(mockedIElevator, never()).setTarget(0, 2);
     }

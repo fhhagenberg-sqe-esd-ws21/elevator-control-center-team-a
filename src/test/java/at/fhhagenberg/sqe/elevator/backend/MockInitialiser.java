@@ -1,18 +1,8 @@
 package at.fhhagenberg.sqe.elevator.backend;
 
-import at.fhhagenberg.sqe.elevator.model.Elevator;
-import at.fhhagenberg.sqe.elevator.model.Floor;
-import sqelevator.IElevator;
-
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-import org.assertj.core.api.IntArrayAssert;
-
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
+import at.fhhagenberg.sqe.elevator.model.Elevator;
 
 public class MockInitialiser {
 
@@ -50,7 +40,7 @@ public class MockInitialiser {
         elevatorMock.setFloorButtonUp(floor, buttonDown);
     }
 
-    public void defaultMockSetup(/* int elevators, int floors */ ) {
+    public void defaultMockSetup() {
     	int elevators;
     	int floors;
 
